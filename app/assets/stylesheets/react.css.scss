@@ -1,3 +1,16 @@
+$primary: #FF9800;
+$secondary: #0091EA;
+$bg: #F8F8FF;
+
+
 body {
-    background-color: red;
+    background-color: $bg;
+    #react-app {
+        #toolbar {
+            background-color: $primary;
+            .page-button > .focused {
+                border-bottom-color: $secondary;
+            }
+        }
+    }
 }
