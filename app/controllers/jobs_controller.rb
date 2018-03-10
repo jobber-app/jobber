@@ -1,16 +1,17 @@
 class JobsController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :show]
-  before_action :correct_user, only: [:edit, :update, :show]
+  before_action :logged_in_user, only: [:create, :edit, :update, :show, :destroy]
+  before_action :correct_user, only: [:edit, :update, :show, :destroy]
   
   def show
     @job = Job.find(params[:id])
   end
   
   def new
-      
+    
   end
 
   def create
+    @job = Job.new(params[:job])
   end
 
   def edit
