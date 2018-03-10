@@ -7,7 +7,7 @@ class User < ApplicationRecord
                     uniqueness: true
 
   has_secure_password
-  validates :password, presence: true, length: {minimum: 8}
+  validates :password, presence: true, length: {minimum: 8}, allow_nil: false
 
 
   def User.digest(string)
