@@ -9,7 +9,7 @@ module.exports = {
     target: "web",
     entry: ["./main.js"],
     output: {
-        filename: "application.js",
+        filename: "react.js",
         path: path.join(__dirname, "app/assets/javascripts/")
     },
     module: {
