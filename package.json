@@ -1,7 +1,19 @@
 {
   "name": "jobber",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11",
+    "webpack-node-externals": "^1.6.0"
+  },
   "description": "An application tracker for job seekers. Separates jobs into stages and allows users to check them at a glance by stage and filter by title and progress.",
   "version": "1.0.0",
   "main": "index.js",
@@ -10,7 +22,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch --hot"
   },
   "repository": {
     "type": "git",
@@ -21,5 +34,6 @@
   "bugs": {
     "url": "https://github.com/andmikey/jobber/issues"
   },
-  "homepage": "https://github.com/andmikey/jobber#readme"
+  "homepage": "https://github.com/andmikey/jobber#readme",
+  "devDependencies": {}
 }
