@@ -3,16 +3,14 @@ if (!debug) console.log("production mode enabled.");
 var webpack = require("webpack");
 var path = require("path");
 
-defaultConfig = {
-    devtool: debug ? "inline-sourcemap" : false,
-}
 module.exports = {
+    devtool: debug ? "inline-sourcemap" : false,
     context: path.join(__dirname, "app/react/"),
     target: "web",
     entry: ["./main.js"],
     output: {
-        filename: "react.js",
-        path: path.join(__dirname, "app/assets/")
+        filename: "application.js",
+        path: path.join(__dirname, "app/assets/javascripts/")
     },
     module: {
         rules: [
