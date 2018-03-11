@@ -1,27 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
+
+import store from "./store";
 
 import List from "./List";
+import Details from "./Details";
+import Summary from "./Summary";
 
 export default class Layout extends React.Component {
     constructor () {
         super()
     }
 
-    get appsActive () { return this.props.location.pathname === "/applications" }
+    get appsActive () { return this.props.location.pathname === "/jobs" }
     get cvsActive  () { return this.props.location.pathname === "/cvs" }
 
     render () {
-        console.log(this.props.location, this.props.location.pathname === "/applications");
         return (
 <div className="container-fluid no-gutters">
     <div className="row" id="toolbar">
-        <div className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="applications"><Link to="/applications">Applications</Link></div>
-        <div className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs"><Link to="/cvs">CVs</Link></div>
+        <Link to="/jobs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
+        <Link to="/cvs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
     <div className="row" id="page">
-        <div className="col-2" id="list">a</div>
-        <div className="col" id="details">b</div>
+        <div className="col-3 m-1 p-0" id="list"><List /></div>
+        <div className="col m-2" id="details">
+            <Switch>
+                <Route path="/jobs/:id" component={ Details }/>
+                <Route path="/jobs" component={ Summary }/>
+            </Switch>
+        </div>
     </div>
 </div>
         );

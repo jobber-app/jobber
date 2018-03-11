@@ -2,6 +2,13 @@ $primary: #FF9800;
 $secondary: #0091EA;
 $bg: #F8F8FF;
 
+a {
+    outline: none;
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+}
+
 body {
     background-color: $bg;
     #react-app {
