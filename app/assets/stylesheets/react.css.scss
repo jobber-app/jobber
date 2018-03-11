@@ -8,9 +8,11 @@ body {
         #toolbar {
             background-color: $primary;
             .page-button {
+                border-bottom-width: 5px;
                 &:hover { background-color: #EF6C00; }
                 &:active { background-color: #F57C00; }
-                &.focused {
+                &.active {
+                    background-color: #F57C00;
                     border-bottom-color: $secondary;
                 }
             }
