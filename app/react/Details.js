@@ -36,6 +36,7 @@ export default @observer class Details extends React.Component {
     }
 
     render () {
+        document.title = "Jobber | " + this.job.title.get().substring(0,20);
         return (
             <div>
 <EditableInput title={<h5 className="m-0 mr-2">Position:</h5>} large={ true } data={ this.job.title } editing={ this.state.editing.title } changeEditing={ this.setEditing.bind(this, "title") } onSave={ newValue => { this.job.title.set(newValue) } }/>
