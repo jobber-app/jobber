@@ -49,7 +49,7 @@ import store from "./store";
 
 @observer class JobItem extends React.Component {
     render () {
-        return <Link to={ "/jobs/" + this.props.data.id } className="list-group-item"><h5>{ this.props.data.title.value }</h5><h6>{ this.props.data.employer.value }</h6></Link>
+        return <Link to={ "/jobs/" + this.props.data.id.get() } className={ "text-left d-flex flex-column justify-content-center m-1 btn alert-" + this.props.data.colour }><h5>{ this.props.data.title.get() }</h5><h6>{ this.props.data.employer.get() }</h6></Link>
     }
 }
 

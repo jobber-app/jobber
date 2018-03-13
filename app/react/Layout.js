@@ -25,10 +25,12 @@ export default class Layout extends React.Component {
     <div className="row" id="page">
         <div className="col-3 m-1 p-0" id="list"><List /></div>
         <div className="col m-2" id="details">
-            <Switch>
-                <Route path="/jobs/:id" component={ Details }/>
-                <Route path="/jobs" component={ Summary }/>
-            </Switch>
+            <div class="container-fluid no-gutters">
+                <Switch>
+                    <Route path="/jobs/:id" component={ Details }/>
+                    <Route path="/jobs" component={ Summary }/>
+                </Switch>
+            </div>
         </div>
     </div>
 </div>
