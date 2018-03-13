@@ -31,7 +31,6 @@ export default @observer class Details extends React.Component {
 
     // gets the current job. Due to MobX observable, this will update when the this.props.match.params.id changes
     get job () {
-        console.log("id: ", this.props.match.params.id);
         return store.getJobById(parseInt(this.props.match.params.id));
     }
 

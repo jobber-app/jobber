@@ -21,7 +21,6 @@ class Store {
 
     getJobById (id) {
         for (var ii in this.jobs) {
-            console.log(this.jobs, this.jobs[ii].id.get());
             if (this.jobs[ii].id.get() === id) return this.jobs[ii];
         }
     }
