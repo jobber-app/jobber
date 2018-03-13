@@ -17,15 +17,15 @@ export default class Layout extends React.Component {
 
     render () {
         return (
-<div className="container-fluid no-gutters">
-    <div className="row" id="toolbar">
+<div className="container-fluid no-gutters d-flex flex-column h-100">
+    <div className="row" id="toolbar" style={{ flex: "0 0 auto" }}>
         <Link to="/jobs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
         <Link to="/cvs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
     <div className="row" id="page">
-        <div className="col-3 m-1 p-0" id="list"><List /></div>
-        <div className="col m-2" id="details">
-            <div class="container-fluid no-gutters">
+        <div className="col-3 p-1" id="list"><List /></div>
+        <div className="col p-2 h-100" id="details">
+            <div class="container-fluid no-gutters h-100">
                 <Switch>
                     <Route path="/jobs/:id" component={ Details }/>
                     <Route path="/jobs" component={ Summary }/>

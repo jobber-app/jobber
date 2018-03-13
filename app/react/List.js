@@ -24,7 +24,7 @@ import store from "./store";
             items.push(<JobItem data={ store.jobs[ii] } />);
         }
         return (
-<div className="d-flex flex-column">   
+<div className="d-flex flex-column h-100">   
     <div id="filter">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Filter by Name" id="search"/>
