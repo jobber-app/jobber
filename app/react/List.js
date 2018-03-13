@@ -32,7 +32,7 @@ import store from "./store";
                 <button class="btn btn-primary">Search</button>
             </div>
         </div>
-        <div className="pt-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }}><a onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</a></div>
+        <div className="pt-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">
             <input type="checkbox" checked="true"/><label class="form-check-label">Planning Stage</label><br/>
             <input type="checkbox" checked="true"/><label class="form-check-label">Application Stage</label><br/>
