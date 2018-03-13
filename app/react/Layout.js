@@ -12,8 +12,8 @@ export default class Layout extends React.Component {
         super()
     }
 
-    get appsActive () { return this.props.location.pathname === "/jobs" }
-    get cvsActive  () { return this.props.location.pathname === "/cvs" }
+    get appsActive () { return this.props.location.pathname.match(/^\/jobs/); }
+    get cvsActive () { return this.props.location.pathname.match(/^\/cvs/); }
 
     render () {
         return (

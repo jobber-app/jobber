@@ -52,7 +52,7 @@ var mockStoreData = {
         { id: 12, title: "Analyst",         employer: "Beare's Boys", description: "Analyze for us!" },
         { id: 93, title: "Central Manager", employer: "Derek and Sons", description: "Manage things!" },
         { id: 54, title: "Etherium Expert", employer: "Fully Loaded Inc.", description: "Give us blockchain." },
-        { id: 54, title: "Gardening Guru",  employer: "Happy Records", description: "Demanding shrubberies!" },
+        { id: 51, title: "Gardening Guru",  employer: "Happy Records", description: "Demanding shrubberies!" },
     ]
 }
 var store = new Store(mockStoreData);

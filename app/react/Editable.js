@@ -14,7 +14,7 @@ import { observer } from "mobx-react";
     componentWillMount () {
         console.log("mounting, ", this.inline);
         this.inline = this.inline || this.props.inline;
-        autorun(() => console.log("data has changed", this.props.data.get()));
+        autorun(() => this.setLocalData(this.props.data.get()));
     }
 
     setLocalData (newData) {
@@ -57,7 +57,7 @@ import { observer } from "mobx-react";
         return (
 <div class={ "editableItem " + (this.inline ? "inline" : "") }>
     { this.props.title !== undefined ? (<div className="title">{ this.props.title }</div>) : "" }
-    { this.editor }
+    { this.editor() }
     { !this.props.editing ? (
         <div className="controls ml-1">
             <button class="btn btn-success w-100 btn-sm" onClick={ this.edit.bind(this) }>Edit</button>
@@ -78,7 +78,7 @@ import { observer } from "mobx-react";
 @observer class EditableInput extends Editable {
     inline = true;
 
-    get editor () {
+    editor () {
         return this.props.editing ? (
             <input ref={ input => this.input = input } type="text" class={ "form-control " + (this.props.large ? "form-control-lg" : "") } value={ this.state.data } onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => this.setLocalData(e.target.value) } />
         ) : (
@@ -90,11 +90,11 @@ import { observer } from "mobx-react";
 @observer class EditableTextarea extends Editable {
     inline = false;
 
-    get editor () {
+    editor () {
         return this.props.editing ? (
-            <textarea ref={ input => this.input = input } type="text" class="form-control" onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => this.setLocalData(e.target.value) }>{ this.state.data }</textarea>
+            <textarea ref={ input => this.input = input } type="text" class="form-control" onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => this.setLocalData(e.target.innerHTML) } value={ this.state.data }></textarea>
         ) : (
-            <textarea ref={ input => this.input = input } type="text" class="form-control form-control-plaintext" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } }>{ this.props.data.get() }</textarea>
+            <textarea ref={ input => this.input = input } type="text" class="form-control form-control-plaintext" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } } value={ this.props.data }></textarea>
         )
     }
 }
