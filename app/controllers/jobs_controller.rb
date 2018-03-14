@@ -28,6 +28,7 @@ class JobsController < ApplicationController
       redirect_to @job
     else
       render 'edit'
+    end
   end
 
   def destroy
