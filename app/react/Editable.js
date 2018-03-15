@@ -72,7 +72,7 @@ import { observer } from "mobx-react";
         <div className="controls ml-1">
             <div className="btn-group w-100">
                 <button class="btn btn-success w-50 btn-sm" onClick={ this.save.bind(this) }>Save</button>
-                <button class="btn btn-danger w-50 btn-sm" onClick={ this.cancel.bind(this) }>Undo</button>
+                <button class="btn btn-danger w-50 btn-sm" onClick={ this.cancel.bind(this) }>Reset</button>
             </div>
         </div>
     ) }
@@ -104,9 +104,9 @@ import { observer } from "mobx-react";
 
     editor () {
         return (this.props.editing ? (
-            <textarea ref={ input => this.input = input } type="text" class="form-control" onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => { this.setLocalData(e.target.value) } } value={ this.state.data }></textarea>
+            <textarea ref={ input => this.input = input } type="text" style={{ height: 200, resize: "none" }} class="form-control" onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => { this.setLocalData(e.target.value) } } value={ this.state.data }></textarea>
         ) : (
-            <textarea ref={ input => this.input = input } type="text" class="form-control form-control-plaintext" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } } value={ this.props.data.get() }></textarea>
+            <textarea ref={ input => this.input = input } type="text" style={{ height: 200, resize: "none" }} class="form-control form-control-plaintext" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } } value={ this.props.data.get() }></textarea>
         ))
     }
 }
