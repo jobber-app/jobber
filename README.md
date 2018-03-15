@@ -1,4 +1,15 @@
 # Jobber
 An application tracker for job seekers. Separates jobs into stages and allows users to check them at a glance by stage and filter by title and progress.
 
-Made for HackTheBurgh 2018
+Originally made for HackTheBurgh 2018
+
+## Development
+This utility requires npm and bundler.
+First, clone into the development directory.
+```bundler install```
+```npm install```
+This sets up all of the associated development tools.  
+Those tools of particular importance are the rails server and webpack.  
+```npm run dev```
+runs a configured script in package.json for running webpack with our webpack config and hot module swapping.  
+```rails server``` sets up the rails server that serves our assets to 0.0.0.0:3000
