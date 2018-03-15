@@ -49,7 +49,6 @@ export default @observer class Details extends React.Component {
     }
 
     render () {
-        document.title = "Jobber | " + this.job.title.get().substring(0,20);
         return (
             <div>
 { this.createEditable("title",          "input",    "Position:",    true ) }

@@ -5,7 +5,6 @@ import store from "./store";
 
 export default @observer class Summary extends React.Component {
     render () {
-        document.title = "Jobber | Overview";
         return (
 <div>
     <h4>Your Overview:</h4>

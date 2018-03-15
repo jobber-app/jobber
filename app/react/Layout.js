@@ -6,6 +6,7 @@ import store from "./store";
 import { JobsList, CVsList } from "./List";
 import Details from "./Details";
 import Summary from "./Summary";
+import Title from "./Title";
 
 export default class Layout extends React.Component {
     constructor () {
@@ -18,6 +19,7 @@ export default class Layout extends React.Component {
     render () {
         return (
 <div className="container-fluid no-gutters d-flex flex-column h-100">
+    <Title />
     <div className="row" id="toolbar" style={{ flex: "0 0 auto" }}>
         <Link to="/jobs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
         <Link to="/cvs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
