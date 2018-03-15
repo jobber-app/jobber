@@ -52,9 +52,9 @@ export default @observer class Details extends React.Component {
         document.title = "Jobber | " + this.job.title.get().substring(0,20);
         return (
             <div>
-{ this.createEditable("title", "input", "Position:", true) }
-{ this.createEditable("employer", "input", "Employer:") }
-{ this.createEditable("description", "textarea", "Description:") }
+{ this.createEditable("title",          "input",    "Position:",    true ) }
+{ this.createEditable("employer",       "input",    "Employer:",    false) }
+{ this.createEditable("description",    "textarea", "Description:", false) }
             </div>
         )
     }

@@ -37,21 +37,21 @@ class Job {
     }
     @computed get colour () {
         switch (this.status) {
-            case 0:  return "danger"; break;
-            case 1:  return "warning"; break;
-            case 2:  return "info"; break;
-            case 3:  return "success"; break;
-            default: return "danger"; break;
+            case 0:  return "danger";   break;
+            case 1:  return "warning";  break;
+            case 2:  return "info";     break;
+            case 3:  return "success";  break;
+            default: return "";         break;
         }
     }
 }
 
 var mockStoreData = {
     jobs: [
-        { id: 12, title: "Analyst",         employer: "Beare's Boys", description: "Analyze for us!" },
-        { id: 93, title: "Central Manager", employer: "Derek and Sons", description: "Manage things!" },
-        { id: 54, title: "Etherium Expert", employer: "Fully Loaded Inc.", description: "Give us blockchain." },
-        { id: 51, title: "Gardening Guru",  employer: "Happy Records", description: "Demanding shrubberies!" },
+        { id: 12, title: "Analyst",         status: 0, employer: "Beare's Boys", description: "Analyze for us!" },
+        { id: 93, title: "Central Manager", status: 0, employer: "Derek and Sons", description: "Manage things!" },
+        { id: 54, title: "Etherium Expert", status: 0, employer: "Fully Loaded Inc.", description: "Give us blockchain." },
+        { id: 51, title: "Gardening Guru",  status: 0, employer: "Happy Records", description: "Demanding shrubberies!" },
     ]
 }
 var store = new Store(mockStoreData);
