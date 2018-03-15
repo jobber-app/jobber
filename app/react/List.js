@@ -8,7 +8,8 @@ import store from "./store";
         super()
         this.state = {
             advanced: false,
-            filters: new Set()
+            filters: new Set(),
+            interfaces: {},
         }
     }
 
@@ -30,9 +31,9 @@ import store from "./store";
         this.setState(newState);
     }
 
-    filterer (items) {
+    isValid (item) {
         var filtersArray = [...this.state.filters.values()] // Convert filters.values from iterable to Array, that way we can use .every
-        return items.filter(item => filtersArray.every(f => f(item)));
+        return filtersArray.every(f => f(item));
     }
 
     render () {
@@ -45,27 +46,46 @@ import store from "./store";
                 <button class="btn btn-primary">Search</button>
             </div>
         </div>
-        <div className="pt-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
+        <div className="p-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
     </div>
-    <ul id="listItems" className="list-group active">{ this.filterer(this.items).map(this.itemToEl) }</ul>
+    <ul id="listItems" className="list-group active">{ this.items.filter(this.isValid.bind(this)).map(this.itemToEl.bind(this)) }</ul>
 </div>
         )
     }
 }
 
 @observer class JobsList extends List {
+    constructor () {
+        super()
+        var checkboxes = ["planning", "application", "interviews", "offer"];
+        this.statusFilters = {};
+        for (var ii = 0; ii < checkboxes.length; ii++) {
+            var name = checkboxes[ii];
+            this.state.interfaces[name] = true;
+            let status = ii;
+            this.statusFilters[name] = item => { return item.status.get() !== status };
+        }
+    }
     items = store.jobs;
     itemToEl (a) {
         return <JobItem data={ a }/>
     }
+    toggleFilter = (id, f) => () => {
+        var newState = Object.assign({}, this.state);
+        newState.interfaces[id] = !newState.interfaces[id];
+        if (newState.filters.has(f)) newState.filters.delete(f);
+        else                         newState.filters.add(f);
+        this.setState(newState);
+    }
+
     advancedSearch () {
         return (
             <div>
-                <input type="checkbox" checked="true"/><label class="form-check-label">Planning Stage</label><br/>
-                <input type="checkbox" checked="true"/><label class="form-check-label">Application Stage</label><br/>
-                <input type="checkbox" checked="true"/><label class="form-check-label">Interviews Stage</label><br/>
-                <input type="checkbox" checked="true"/><label class="form-check-label">Offer Stage</label><br/>
+                <input type="checkbox" checked={ this.state.interfaces["planning"] } onChange={ this.toggleFilter("planning", this.statusFilters["planning"]) }/><label class="form-check-label">Planning Stage</label><br/>
+                <input type="checkbox" checked={ this.state.interfaces["application"] } onChange={ this.toggleFilter("application", this.statusFilters["application"]) }/><label class="form-check-label">Application Stage</label><br/>
+                <input type="checkbox" checked={ this.state.interfaces["interviews"] } onChange={ this.toggleFilter("interviews", this.statusFilters["interviews"]) }/><label class="form-check-label">Interviews Stage</label><br/>
+                <input type="checkbox" checked={ this.state.interfaces["offer"] } onChange={ this.toggleFilter("offer", this.statusFilters["offer"]) }/><label class="form-check-label">Offer Stage</label><br/>
                 <input type="checkbox" checked="true"/><label class="form-check-label">Archived</label><br/>
             </div>
         );
@@ -74,7 +94,7 @@ import store from "./store";
 
 @observer class CVsList extends List {
     items = [];
-    itemToEl = a => a;
+    itemToEl = a => a.toString();
     advancedSearch () {
         return (
             <div>No advanced features for cvs</div>
