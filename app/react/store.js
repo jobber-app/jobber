@@ -36,7 +36,7 @@ class Job {
         for (var index in fields) this[index] = observable(fields[index]);
     }
     @computed get colour () {
-        switch (this.status) {
+        switch (this.status.get()) {
             case 0:  return "danger";   break;
             case 1:  return "warning";  break;
             case 2:  return "info";     break;
@@ -49,9 +49,9 @@ class Job {
 var mockStoreData = {
     jobs: [
         { id: 12, title: "Analyst",         status: 0, employer: "Beare's Boys", description: "Analyze for us!" },
-        { id: 93, title: "Central Manager", status: 0, employer: "Derek and Sons", description: "Manage things!" },
-        { id: 54, title: "Etherium Expert", status: 0, employer: "Fully Loaded Inc.", description: "Give us blockchain." },
-        { id: 51, title: "Gardening Guru",  status: 0, employer: "Happy Records", description: "Demanding shrubberies!" },
+        { id: 93, title: "Central Manager", status: 1, employer: "Derek and Sons", description: "Manage things!" },
+        { id: 54, title: "Etherium Expert", status: 2, employer: "Fully Loaded Inc.", description: "Give us blockchain." },
+        { id: 51, title: "Gardening Guru",  status: 1, employer: "Happy Records", description: "Demanding shrubberies!" },
     ]
 }
 var store = new Store(mockStoreData);
