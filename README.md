@@ -6,10 +6,12 @@ Originally made for HackTheBurgh 2018
 ## Development
 This utility requires npm and bundler.
 First, clone into the development directory.
-```bundler install```
-```npm install```
-This sets up all of the associated development tools.  
+Then install associated files.
+
+```bundler install``` sets up rails for us.  
+```npm install``` sets up all of the associated ReactJS development tools.  
+
 Those tools of particular importance are the rails server and webpack.  
-```npm run dev```
-runs a configured script in package.json for running webpack with our webpack config and hot module swapping.  
+
+```npm run dev``` runs a configured script in package.json for running our webpack config in dev mode.  
 ```rails server``` sets up the rails server that serves our assets to 0.0.0.0:3000
