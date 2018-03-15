@@ -87,7 +87,7 @@ import { observer } from "mobx-react";
 
     editor () {
         return (this.props.editing ? (
-            <input ref={ input => this.input = input } type="text" class={ "form-control " + (this.props.large ? "form-control-lg" : "") } value={ this.state.data } onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => this.setLocalData(e.target.value) } />
+            <input ref={ input => this.input = input } type="text" class={ "form-control " + (this.props.large ? "form-control-lg" : "") } value={ this.state.data } onBlur={ this.cancel.bind(this) } onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => this.setLocalData(e.target.value) } />
         ) : (
             <input ref={ input => this.input = input } type="text" class={ "form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") }  value={ this.props.data } onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } }/>
         ))
@@ -105,7 +105,7 @@ import { observer } from "mobx-react";
 
     editor () {
         return (this.props.editing ? (
-            <textarea ref={ input => this.input = input } type="text" style={{ height: 200, resize: "none" }} class="form-control" onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => { this.setLocalData(e.target.value) } } value={ this.state.data }></textarea>
+            <textarea ref={ input => this.input = input } type="text" style={{ height: 200, resize: "none" }} class="form-control" onBlur={ this.cancel.bind(this) } onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => { this.setLocalData(e.target.value) } } value={ this.state.data }></textarea>
         ) : (
             <textarea ref={ input => this.input = input } type="text" style={{ height: 200, resize: "none" }} class="form-control form-control-plaintext" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } } value={ this.props.data.get() }></textarea>
         ))
