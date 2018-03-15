@@ -8,7 +8,7 @@ import store from "./store";
         super()
         this.state = {
             advanced: false,
-            search: ""
+            filters: new Set()
         }
     }
 
@@ -18,11 +18,24 @@ import store from "./store";
         this.setState(newState);
     }
 
+    addFilter (f) {
+        var newState = Object.assign({}, this.state);
+        newState.filters.add(f);
+        this.setState(newState);
+    }
+
+    deleteFilter (f) {
+        var newState = Object.assign({}, this.state);
+        newState.filters.delete(f);
+        this.setState(newState);
+    }
+
+    filterer (items) {
+        var filtersArray = [...this.state.filters.values()] // Convert filters.values from iterable to Array, that way we can use .every
+        return items.filter(item => filtersArray.every(f => f(item)));
+    }
+
     render () {
-        var items = [];
-        for (var ii in store.jobs) {
-            items.push(<JobItem data={ store.jobs[ii] } />);
-        }
         return (
 <div className="d-flex flex-column h-100">   
     <div id="filter">
@@ -33,17 +46,39 @@ import store from "./store";
             </div>
         </div>
         <div className="pt-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
-        <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">
-            <input type="checkbox" checked="true"/><label class="form-check-label">Planning Stage</label><br/>
-            <input type="checkbox" checked="true"/><label class="form-check-label">Application Stage</label><br/>
-            <input type="checkbox" checked="true"/><label class="form-check-label">Interviews Stage</label><br/>
-            <input type="checkbox" checked="true"/><label class="form-check-label">Offer Stage</label><br/>
-            <input type="checkbox" checked="true"/><label class="form-check-label">Archived</label><br/>
-        </div>
+        <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
     </div>
-    <ul id="listItems" className="list-group active">{ items }</ul>
+    <ul id="listItems" className="list-group active">{ this.filterer(this.items).map(this.itemToEl) }</ul>
 </div>
         )
+    }
+}
+
+@observer class JobsList extends List {
+    items = store.jobs;
+    itemToEl (a) {
+        return <JobItem data={ a }/>
+    }
+    advancedSearch () {
+        return (
+            <div>
+                <input type="checkbox" checked="true"/><label class="form-check-label">Planning Stage</label><br/>
+                <input type="checkbox" checked="true"/><label class="form-check-label">Application Stage</label><br/>
+                <input type="checkbox" checked="true"/><label class="form-check-label">Interviews Stage</label><br/>
+                <input type="checkbox" checked="true"/><label class="form-check-label">Offer Stage</label><br/>
+                <input type="checkbox" checked="true"/><label class="form-check-label">Archived</label><br/>
+            </div>
+        );
+    }
+}
+
+@observer class CVsList extends List {
+    items = [];
+    itemToEl = a => a;
+    advancedSearch () {
+        return (
+            <div>No advanced features for cvs</div>
+        );
     }
 }
 
@@ -53,4 +88,4 @@ import store from "./store";
     }
 }
 
-export default List;
+export { JobsList, CVsList };

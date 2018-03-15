@@ -3,7 +3,7 @@ import { Link, Switch, Route } from "react-router-dom";
 
 import store from "./store";
 
-import List from "./List";
+import { JobsList, CVsList } from "./List";
 import Details from "./Details";
 import Summary from "./Summary";
 
@@ -23,7 +23,12 @@ export default class Layout extends React.Component {
         <Link to="/cvs" className={ "col-2 rounded-0 page-button btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
     <div className="row" id="page">
-        <div className="col-3 p-1" id="list"><List /></div>
+        <div className="col-3 p-1" id="list">
+            <Switch>
+                <Route path="/jobs" component={ JobsList }/>
+                <Route path="/cvs" component={ CVsList }/>
+            </Switch>
+        </div>
         <div className="col p-2 h-100" id="details">
             <div class="container-fluid no-gutters h-100">
                 <Switch>
