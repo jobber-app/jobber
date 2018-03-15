@@ -60,9 +60,10 @@ import { observer } from "mobx-react";
     }
 
     render () {
+        var titleEl = this.props.large ? <h5 className="m-0 mr-2">{ this.props.title }</h5> : <h6 className="m-0">{ this.props.title }</h6>
         return (
 <div class={ "editableItem " + (this.inline ? "inline" : "") }>
-    { this.props.title !== undefined ? (<div className="title">{ this.props.title }</div>) : "" }
+    { this.props.title !== undefined ? (<div className="title">{ titleEl }</div>) : "" }
     { this.editor() }
     { !this.props.editing ? (
         <div className="controls ml-1">

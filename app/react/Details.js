@@ -34,13 +34,27 @@ export default @observer class Details extends React.Component {
         return store.getJobById(parseInt(this.props.match.params.id));
     }
 
+    // creates an editable for a job property with the specific type and size, and automatically binds correct props
+    createEditable (propertyName, type = "input", title, large = false) {
+        var Type = type === "textarea" ? EditableTextarea : EditableInput;
+        return (
+            <Type title={ title }
+                  large={ large }
+                  data={ this.job[propertyName] }
+                  editing={ this.state.editing[propertyName] }
+                  changeEditing={ this.setEditing.bind(this, propertyName) }
+                  onSave={ newValue => this.job[propertyName].set(newValue) }
+            />
+        );
+    }
+
     render () {
         document.title = "Jobber | " + this.job.title.get().substring(0,20);
         return (
             <div>
-<EditableInput title={<h5 className="m-0 mr-2">Position:</h5>} large={ true } data={ this.job.title } editing={ this.state.editing.title } changeEditing={ this.setEditing.bind(this, "title") } onSave={ newValue => { this.job.title.set(newValue) } }/>
-<EditableInput title={<h6 className="m-0">Employer:</h6>} data={ this.job.employer } editing={ this.state.editing.employer } changeEditing={ this.setEditing.bind(this, "employer") } onSave={ newValue => { this.job.employer.set(newValue) } }/>
-<EditableTextarea title={<h6 className="m-0">Description:</h6>} data={ this.job.description } editing={ this.state.editing.description } changeEditing={ this.setEditing.bind(this, "description") } onSave={ newValue => { this.job.description.set(newValue) } }/>
+{ this.createEditable("title", "input", "Position:", true) }
+{ this.createEditable("employer", "input", "Employer:") }
+{ this.createEditable("description", "textarea", "Description:") }
             </div>
         )
     }
