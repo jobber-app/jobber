@@ -8,9 +8,25 @@ import store from "./store";
         super()
         this.state = {
             advanced: false,
-            filters: new Set(),
-            interfaces: {},
+            filters: new Set().add(this.matchTextSearch.bind(this)),
+            interfaces: {
+                "text": ""
+            },
         }
+    }
+
+    matchTextSearch (item) {
+        var regexp = new RegExp(this.state.interfaces["text"], "i");
+        for (var prop in item) {
+            if (regexp.test(item[prop])) return true;
+        }
+        return false;
+    }
+
+    updateTextSearch (newValue) {
+        var newState = Object.assign({}, this.state);
+        newState.interfaces["text"] = newValue;
+        this.setState(newState);
     }
 
     toggleAdvanced () {
@@ -41,10 +57,7 @@ import store from "./store";
 <div className="d-flex flex-column h-100">   
     <div id="filter">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Filter by Name" id="search"/>
-            <div className="input-group-append">
-                <button class="btn btn-primary">Search</button>
-            </div>
+            <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder="Search by Job Contents" id="search"/>
         </div>
         <div className="p-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
