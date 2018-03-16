@@ -17,6 +17,7 @@ class JobsController < ApplicationController
       redirect_to @job
     else
       render 'new'
+    end
   end
 
   def edit
