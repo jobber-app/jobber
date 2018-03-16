@@ -80,10 +80,10 @@ import store from "./store";
             this.statusFilters[name] = item => { return item.status.get() !== status };
         }
     }
-    items = store.jobs;
     itemToEl (a) {
         return <JobItem data={ a }/>
     }
+    get items () { return store.jobs; }
     toggleFilter = (id, f) => () => {
         var newState = Object.assign({}, this.state);
         newState.interfaces[id] = !newState.interfaces[id];
