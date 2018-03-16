@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  salary: MyString
+  benefits: MyText
+  acceptby: 2018-03-16 09:59:51
+
+two:
+  salary: MyString
+  benefits: MyText
+  acceptby: 2018-03-16 09:59:51
