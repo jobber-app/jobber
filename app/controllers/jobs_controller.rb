@@ -53,7 +53,7 @@ class JobsController < ApplicationController
 
   def correct_user
     @job = current_user.jobs.find_by(id: params[:id])
-    redirect_to root_url if @micropost.nil?
+    redirect_to root_url if @job.nil?
   end
   
 end

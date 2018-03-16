@@ -42,5 +42,16 @@ class InterviewController < ApplicationController
   def interview_params
     params.require(:interview).permit(:date, :notes)
   end
-    
+
+    def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in"
+      redirect_to login_url unless current_user?(@user)
+    end
+  end
+
+  def correct_user
+    @interview = current_user.interviews.find_by(id: params[:id])
+    redirect_to root_url if @interview.nil?
+  end
 end
