@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :jobs, dependent: destroy
+  has_many :jobs, dependent: :destroy
   
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
