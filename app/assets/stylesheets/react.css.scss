@@ -64,6 +64,11 @@ body {
                 justify-content: center;
                 padding-top: 5px;
             }
+            textarea.editor {
+                height: 50px;
+                transition: height 0.25s;
+                &.editing { height: 200px; }
+            }
         }
     }
 }

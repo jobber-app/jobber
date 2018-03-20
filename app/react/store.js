@@ -5,6 +5,8 @@ class Store {
         var apiJobs = apiData.jobs;
         for (var ii in apiJobs) this.rawJobs.push(apiJobs[ii]);
     }
+
+    /* User Jobs */
     focusedJobId = observable(-1);
     @computed get focusedJob () {
         return this.getJobById(this.focusedJobId.get());
@@ -29,6 +31,11 @@ class Store {
     @action.bound createJob () {}
     @action.bound updateJob () {}
     @action.bound deleteJob () {}
+
+    /* User Settings */
+    settings = observable({
+        splittable: false, // Whether or not job view has splittable tabs
+    });
 }
 
 class Job {
