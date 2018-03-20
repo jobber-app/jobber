@@ -107,7 +107,7 @@ import { observer } from "mobx-react";
         return (this.props.editing ? (
             <textarea ref={ input => this.input = input } type="text" style={{ height: 200, resize: "none" }} class="form-control editor editing" onBlur={ this.cancel.bind(this) } onKeyDown={ this.escapeOrEnter.bind(this) } onChange={ e => { this.setLocalData(e.target.value) } } value={ this.state.data }></textarea>
         ) : (
-            <textarea ref={ input => this.input = input } type="text" class="form-control form-control-plaintext editor" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } } value={ this.props.data.get() }></textarea>
+            <textarea ref={ input => this.input = input } type="text" style={{ overflow: "hidden" }} class="form-control form-control-plaintext editor" onClick={ this.edit.bind(this) } onChange={ () => { /*readOnly gives default bootstrap styling */ } } value={ this.props.data.get() }></textarea>
         ))
     }
 }
