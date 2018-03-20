@@ -59,7 +59,7 @@ import store from "./store";
         <div class="input-group">
             <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder="Search by Job Contents" id="search"/>
         </div>
-        <div className="p-1 btn-light w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
+        <div className="p-1 w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
     </div>
     <ul id="listItems" className="list-group active">{ this.items.filter(this.isValid.bind(this)).map(this.itemToEl.bind(this)) }</ul>
@@ -81,7 +81,7 @@ import store from "./store";
         }
     }
     itemToEl (a) {
-        return <JobItem data={ a }/>
+        return <JobItem data={ a } focused={ parseInt(this.props.match.params.id) === a.id.get() }/>
     }
     get items () { return store.jobs; }
     toggleFilter = (id, f) => () => {
@@ -117,7 +117,17 @@ import store from "./store";
 
 @observer class JobItem extends React.Component {
     render () {
-        return <Link to={ "/jobs/" + this.props.data.id.get() } className={ "text-left d-flex flex-column justify-content-center m-1 btn alert-" + this.props.data.colour }><h5>{ this.props.data.title.get() }</h5><h6>{ this.props.data.employer.get() }</h6></Link>
+        return <Link to={ "/jobs/" + this.props.data.id.get() } style={{ "border-left": "5px solid " + this.props.data.rawColour }} className={ "job-list-item text-left d-flex flex-column justify-content-center m-1 themed-button themed-button-right btn " + (this.props.focused ? "active" : "") }>
+            <h5>{ this.props.data.title.get() }</h5>
+            <h6>{ this.props.data.employer.get() }</h6>
+            {/*<div style={{ "margin-left": "-5px", "width": "100%", "overflow": "wrap" }}>
+                <span class="badge badge-pill badge-success">Info</span>
+                <span class="badge badge-pill badge-success">App</span>
+                <span class="badge badge-pill badge-success">Interview</span>
+                <span class="badge badge-pill badge-success">Offers</span>
+            </div>*/}
+            <span><small><b>Stage: </b></small><span class={ "badge badge-pill badge-" + this.props.data.colour }>{ this.props.data.stage }</span></span>
+        </Link>
     }
 }
 

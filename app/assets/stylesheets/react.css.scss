@@ -1,6 +1,22 @@
+/*
 $primary: #FF9800;
+$primary-hover: #EF6C00;
+$primary-active: #F57C00;
 $secondary: #0091EA;
-$bg: #F8F8FF;
+*/
+/*
+$primary: #4CAF50;
+$primary-hover: #2E7D32;
+$primary-active: #388E3C;
+$secondary: #0091EA;
+*/
+/* $bg: #F8F8FF; */
+$primary: #3F51B5;
+$primary-font: rgba(255,255,255,0.87);
+$primary-hover: #283593;
+$primary-active: #303F9F;
+$secondary: #8C9EFF;
+$bg: #E8EAF6;
 
 a {
     outline: none;
@@ -9,24 +25,32 @@ a {
     color: inherit;
 }
 
+.btn {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 body {
     background-color: $bg;
     height: 100vh;
     overflow: hidden;
+    .themed-button {
+        background-color: $primary;
+        color: $primary-font !important;
+        border-width: 0;
+        border-bottom-width: 5px;
+        &:hover { background-color: $primary-hover; }
+        &:active { background-color: $primary-active; }
+        &.active {
+            background-color: $primary-active;
+            border-color: $secondary;
+        }
+    }
     #react-app {
         height: 100%;
         #toolbar {
             flex: 0 0 auto;
             background-color: $primary;
-            .page-button {
-                border-bottom-width: 5px;
-                &:hover { background-color: #EF6C00; }
-                &:active { background-color: #F57C00; }
-                &.active {
-                    background-color: #F57C00;
-                    border-bottom-color: $secondary;
-                }
-            }
         }
         #page {
             height: 0;
@@ -37,6 +61,12 @@ body {
                 #listItems {
                     flex: 1 1 auto;
                     overflow-y: scroll;
+                    > .job-list-item {
+                        border-bottom: 0;
+                        &.active {
+                            border-right-width: 10px !important;
+                        }
+                    }
                 }
             }
             > #details {

@@ -79,11 +79,11 @@ export default @observer class Details extends React.Component {
     render () {
         return (
 <div class="d-flex flex-column h-100">
-    <div class="row">
-        <a class={ "col-3 rounded-0 page-button btn btn-light " + (this.state.sections[0] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 0) }>{ this.sectionNames[0] }</a>
-        <a class={ "col-3 rounded-0 page-button btn btn-light " + (this.state.sections[1] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 1) }>{ this.sectionNames[1] }</a>
-        <a class={ "col-3 rounded-0 page-button btn btn-light " + (this.state.sections[2] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 2) }>{ this.sectionNames[2] }</a>
-        <a class={ "col-3 rounded-0 page-button btn btn-light " + (this.state.sections[3] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 3) }>{ this.sectionNames[3] }</a>
+    <div class="row rounded-top" style={{ overflow: "hidden" }}>
+        <a class={ "col-3 rounded-0 themed-button btn " + (this.state.sections[0] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 0) }>{ this.sectionNames[0] }</a>
+        <a class={ "col-3 rounded-0 themed-button btn " + (this.state.sections[1] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 1) }>{ this.sectionNames[1] }</a>
+        <a class={ "col-3 rounded-0 themed-button btn " + (this.state.sections[2] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 2) }>{ this.sectionNames[2] }</a>
+        <a class={ "col-3 rounded-0 themed-button btn " + (this.state.sections[3] ? "font-weight-bold active" : "") } onClick={ this.toggleSection.bind(this, 3) }>{ this.sectionNames[3] }</a>
     </div>
     <div class="row d-flex flex-column" style={{ flex: "1 1 auto", height: 0 }}>
         <Section open={ this.state.sections[0] }>
@@ -113,7 +113,7 @@ export default @observer class Details extends React.Component {
 
     render () {
         return (
-<div class="fluid-container" style={{ "overflow-y": "scroll",  flex: "1 1 auto", height: 0, display: this.props.open ? "initial" : "none" }}>
+<div class="fluid-container" style={{ "overflow-y": "scroll", padding: "5px", flex: "1 1 auto", height: 0, display: this.props.open ? "initial" : "none" }}>
     { this.props.children }
 </div>
         )
