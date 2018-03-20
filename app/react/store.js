@@ -4,6 +4,21 @@ class Store {
     constructor (apiData) {
         var apiJobs = apiData.jobs;
         for (var ii in apiJobs) this.rawJobs.push(apiJobs[ii]);
+        var apiCVs = apiData.cvs;
+        for (var ii in apiCVs) this.rawCVs.push(apiCVs[ii]);
+    }
+
+    /* User CVs */
+    @observable rawCVs = [];
+    @computed get cvs () {
+        var cvs = this.rawCVs.map(cv => new CV(cv));
+        return cvs;
+    }
+
+    getCVById (id) {
+        for (var ii in this.cvs) {
+            if (this.cvs[ii].id.get() === id) return this.cvs[ii];
+        }
     }
 
     /* User Jobs */
@@ -71,12 +86,23 @@ class Job {
     }
 }
 
+class CV {
+    constructor (fields) {
+        for (var index in fields) this[index] = observable(fields[index]);
+    }
+}
+
 var mockStoreData = {
     jobs: [
-        { id: 12, title: "Analyst",         status: 0, employer: "Beare's Boys", description: "Analyze for us!" },
-        { id: 93, title: "Central Manager", status: 1, employer: "Derek and Sons", description: "Manage things!" },
-        { id: 54, title: "Etherium Expert", status: 2, employer: "Fully Loaded Inc.", description: "Give us blockchain." },
-        { id: 51, title: "Gardening Guru",  status: 1, employer: "Happy Records", description: "Demanding shrubberies!" },
+        { id: 12, title: "Analyst",         status: 0, employer: "Beare's Boys",      cv: 13,   description: "Analyze for us!" },
+        { id: 93, title: "Central Manager", status: 1, employer: "Derek and Sons",    cv: 93,   description: "Manage things!" },
+        { id: 54, title: "Etherium Expert", status: 2, employer: "Fully Loaded Inc.", cv: 11,   description: "Give us blockchain." },
+        { id: 51, title: "Gardening Guru",  status: 1, employer: "Happy Records",     cv: null, description: "Demanding shrubberies!" },
+    ],
+    cvs: [
+        { id: 13, name: "Web Dev 1", description: "My first web dev cv." },
+        { id: 93, name: "Web Dev 2", description: "My second web dev cv, with React experience!" },
+        { id: 11, name: "Manager", description: "For applying to juicy management positions." },
     ]
 }
 var store = new Store(mockStoreData);

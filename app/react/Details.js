@@ -2,7 +2,10 @@ import React from "react";
 import { observer } from "mobx-react";
 import { autorun } from "mobx";
 import store from "./store";
-import { EditableInput, EditableTextarea } from "./Editable.js";
+import { EditableCVPicker, EditableInput, EditableTextarea } from "./Editable";
+import Modal from "./Modal";
+import { CVsList } from "./List";
+import $ from "jquery";
 
 // Details component handles viewing and editing details of a given Job.
 export default @observer class Details extends React.Component {
@@ -36,7 +39,6 @@ export default @observer class Details extends React.Component {
     }
 
     toggleSection (sectionIndex) {
-        console.log(sectionIndex);
         if (this.state.sections[sectionIndex] === true) return this.closeSection(sectionIndex);
         else                                        return this.openSection(sectionIndex);
     }
@@ -63,8 +65,8 @@ export default @observer class Details extends React.Component {
     }
 
     // creates an editable for a job property with the specific type and size, and automatically binds correct props
-    createEditable (propertyName, type = "input", title, large = false) {
-        var Type = type === "textarea" ? EditableTextarea : EditableInput;
+    createEditable (propertyName, type = "input", title, large = false, editor) {
+        var Type = type === "cv-picker" ? EditableCVPicker : type === "textarea" ? EditableTextarea : EditableInput;
         return (
             <Type title={ title }
                   large={ large }
@@ -72,6 +74,7 @@ export default @observer class Details extends React.Component {
                   editing={ this.state.editing[propertyName] }
                   changeEditing={ this.setEditing.bind(this, propertyName) }
                   onSave={ newValue => this.job[propertyName].set(newValue) }
+                  editor={ editor }
             />
         );
     }
@@ -87,9 +90,10 @@ export default @observer class Details extends React.Component {
     </div>
     <div class="row d-flex flex-column" style={{ flex: "1 1 auto", height: 0 }}>
         <Section open={ this.state.sections[0] }>
-            { this.createEditable("title",          "input",    "Position:",    true ) }
-            { this.createEditable("employer",       "input",    "Employer:",    false) }
-            { this.createEditable("description",    "textarea", "Description:", false) }
+            { this.createEditable("title",          "input",     "Position:",    true ) }
+            { this.createEditable("employer",       "input",     "Employer:",    false) }
+            { this.createEditable("description",    "textarea",  "Description:", false) }
+            { this.createEditable("cv",             "cv-picker", "CV:",          false) }
         </Section>
         <Section open={ this.state.sections[1] }>
             App

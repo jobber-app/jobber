@@ -1,28 +1,25 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-export default @observer class Selector extends React.Component {
-    itemToEl (item) {
-        return item;
+export default @observer class Modal extends React.Component {
+    componentWillMount () {
+        this.closeHandler = this.props.onClose;
+        if (this.closeHandler === undefined) this.closeHandler = () => {}
     }
-    elToListItem (item) {
-        return <a class="list-group-item" data-dismiss={ "#" + this.props.name } onClick={ this.props.onResult }>{ item }</a>
-    }
+
     render () {
         return (
-        <div class="modal fade" id={ this.props.name } tabindex="-1">
+        <div ref={ el => this.el = el } class="modal fade" id={ this.props.name } tabindex="-1" data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{ this.props.title }</h5>
-                        <button type="button" class="close" data-dismiss="modal">
+                        <button type="button" class="close" data-dismiss="modal" onClick={ this.closeHandler }>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body" style={{ "max-height": "60vh", "overflow-y": "scroll" }}>
-                        <div class="list-group h-100">
-                            this.props.items.map(this.itemToEl).map(this.elToListItem);
-                        </div>
+                        { this.props.children }
                     </div>
                 </div>
             </div>

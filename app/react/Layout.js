@@ -7,6 +7,7 @@ import { JobsList, CVsList } from "./List";
 import Details from "./Details";
 import Summary from "./Summary";
 import Title from "./Title";
+import bootstrap from "bootstrap";
 
 export default class Layout extends React.Component {
     constructor () {

@@ -2,6 +2,9 @@ import React from "react";
 import store from "./store";
 import { autorun, reaction } from "mobx";
 import { observer } from "mobx-react";
+import Modal from "./Modal";
+import { CVsList } from "./List";
+import $ from "jquery";
 
 @observer class Editable extends React.Component {
     constructor () {
@@ -16,27 +19,28 @@ import { observer } from "mobx-react";
         reaction(() => this.props.data.get(), data => this.setLocalData(data));
     }
 
-    setLocalData (newData) {
+    setLocalData (newData, autoSave) {
         var newState = Object.assign({}, this.state);
         newState.data = newData;
-        this.setState(newState);
+        this.setState(newState, autoSave ? this.save : () => {});
     }
 
     edit () {
         this.setLocalData(this.props.data.get());
-        this.input.focus();
+        if (this.input) this.input.focus();
+        if (this.customEdit) this.customEdit();
         this.props.changeEditing(true);
     }
 
     save () {
         this.props.onSave(this.state.data);
-        this.input.blur();
+        if (this.input) this.input.blur();
         this.props.changeEditing(false);
     }
 
     cancel () {
         this.setLocalData(this.props.data.get());
-        this.input.blur();
+        if (this.input) this.input.blur();
         this.props.changeEditing(false);
     }
 
@@ -63,7 +67,7 @@ import { observer } from "mobx-react";
         var titleEl = this.props.large ? <h5 className="m-0 mr-2">{ this.props.title }</h5> : <h6 className="m-0">{ this.props.title }</h6>
         return (
 <div class={ "editableItem " + (this.inline ? "inline" : "") }>
-    { this.props.title !== undefined ? (<div className="title">{ titleEl }</div>) : "" }
+    { this.props.title != undefined ? (<div className="title">{ titleEl }</div>) : "" }
     { this.editor() }
     { !this.props.editing ? (
         <div className="controls ml-1">
@@ -112,4 +116,30 @@ import { observer } from "mobx-react";
     }
 }
 
-export { EditableInput, EditableTextarea };
+@observer class EditableCVPicker extends Editable {
+    inline = true;
+
+    customEdit () {
+        $("#cv-picker").modal("show");
+    }
+
+    editor () {
+        var cv = (this.props.editing ? (
+            store.getCVById(this.state.data)
+        ) : (
+            store.getCVById(this.props.data.get())
+        ))
+        return (
+            <div class="w-100">
+                <input onClick={ this.edit.bind(this) } class={ "form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
+                <Modal name="cv-picker" title="Pick a CV" onClose={ this.cancel.bind(this) }>
+                    <CVsList onSelect={ newId => {
+                        this.setLocalData(newId, true);
+                        $("#cv-picker").modal("hide");
+                    } }/>
+                </Modal>
+            </div>
+        )
+    }
+}
+export { EditableInput, EditableTextarea, EditableCVPicker };
