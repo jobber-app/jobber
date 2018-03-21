@@ -15,3 +15,6 @@ Those tools of particular importance are the rails server and webpack.
 
 ```npm run dev``` runs a configured script in package.json for running our webpack config in dev mode.  
 ```rails server``` sets up the rails server that serves our assets to 0.0.0.0:3000
+
+To populate the database with test data:
+```rake db:seed```
