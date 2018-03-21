@@ -17,7 +17,7 @@ export default @observer class Details extends React.Component {
         };
         this.state.sections[0] = true;
     }
-    sectionNames = ["Information", "Application", "Interviews", "Offer"]
+    sectionNames = ["Information", "Application", "Interviews", "Offers"]
 
     openSection (sectionIndex) {
         var newState = Object.assign({}, this.state);
@@ -98,17 +98,21 @@ export default @observer class Details extends React.Component {
     <div class="row rounded-top" style={{ overflow: "hidden" }}>{ this.createTabs() }</div>
     <div class="row d-flex flex-column" style={{ flex: "1 1 auto", height: 0 }}>
         <Section open={ this.state.sections[0] }>
+            <p class="text-center">Preliminary information about the job obtained from its listing before you apply.</p>
             { this.createEditable("title",          "input",     "Position:",    true ) }
             { this.createEditable("employer",       "input",     "Employer:",    false) }
             { this.createEditable("description",    "textarea",  "Description:", false) }
         </Section>
         <Section open={ this.state.sections[1] }>
+            <p class="text-center">Items relevant to the initial application process, such as your CV and cover letter.</p>
             { this.createEditable("cv",             "cv-picker", "CV:",          false) }
         </Section>
         <Section open={ this.state.sections[2] }>
+            <p class="text-center">Interviews for the position, such as date/time and subject matter.</p>
             Int
         </Section>
         <Section open={ this.state.sections[3] }>
+            <p class="text-center">The offer(s) you received for the application, and whether or not you took them.</p>
             Off
         </Section>
     </div>
