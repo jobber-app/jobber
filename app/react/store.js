@@ -58,15 +58,6 @@ class Job {
         for (var index in fields) this[index] = observable(fields[index]);
         this.key = this.id.get();
     }
-    @computed get rawColour () {
-        switch (this.status.get()) {
-            case 0:  return "#dc3545";  break;
-            case 1:  return "#ffc107";  break;
-            case 2:  return "#17a2b8";  break;
-            case 3:  return "#28a745";  break;
-            default: return "";         break;
-        }
-    }
     @computed get colour () {
         switch (this.status.get()) {
             case 0:  return "danger";   break;

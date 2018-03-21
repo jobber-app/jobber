@@ -59,7 +59,7 @@ import store from "./store";
         <div class="input-group">
             <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder="Search by Contents" id="search"/>
         </div>
-        <div class="p-1 w-100 text-center" style={{ "fontSize": "10px", "fontFamily": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
+        <div class="btn-mini w-100" onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
     </div>
     <ul id="listItems" className="list-group active">{ this.items.filter(this.isValid.bind(this)).map(this.itemToEl.bind(this)) }</ul>
@@ -83,8 +83,7 @@ import store from "./store";
     itemToEl (data) {
         var focused = parseInt(this.props.match.params.id) === data.id.get();
         return <Link to={ "/jobs/" + data.id.get() } 
-                     style={{ "borderLeft": "5px solid " + data.rawColour }} 
-                     class={ "job-list-item text-left d-flex flex-column justify-content-center m-1 themed-button btn " + (focused ? "active" : "") }
+                     class={ "list-item list-item-" + (data.colour) + " text-left " + (focused ? "active" : "") }
                      key={ data.id.get() }>
             <h5>{ data.title.get() }</h5>
             <h6>{ data.employer.get() }</h6>
@@ -122,7 +121,7 @@ import store from "./store";
     get items () { return store.cvs; }
     itemToEl (cv) {
         return (
-        <div class="themed-button btn m-1" key={ cv.key } onClick={ this.onSelect.bind(this, cv.id.get()) }>
+        <div class="list-item" key={ cv.key } onClick={ this.onSelect.bind(this, cv.id.get()) }>
             { cv.name.get() }
         </div>
         );

@@ -21,9 +21,9 @@ export default class Layout extends React.Component {
         return (
 <div className="container-fluid no-gutters d-flex flex-column h-100">
     <Title />
-    <div className="row" id="toolbar" style={{ flex: "0 0 auto" }}>
-        <Link to="/jobs" className={ "col-2 rounded-0 themed-button btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
-        <Link to="/cvs" className={ "col-2 rounded-0 themed-button btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
+    <div className="row no-flex" id="toolbar">
+        <Link to="/jobs" className={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
+        <Link to="/cvs" className={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
     <div className="row" id="page">
         <div className="col-3 p-1" id="list">
