@@ -8,6 +8,7 @@ end
 #BOOTSTRAP
 # Get gemfile for bootstrap
 gem 'bootstrap', '~> 4.0.0'
+gem 'sprockets-rails', '>= 2.3.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'

@@ -82,9 +82,8 @@ export default @observer class Details extends React.Component {
     createTabs () {
         var tabs = [];
         for (var ii in this.sectionNames) {
-            var isActive = this.state.sections[ii];
-            var activeClass = isActive ? "font-weight-bold active" : "";
-            tabs[ii] = <a class={ "col-3 rounded-0 themed-button btn " + activeClass } 
+            var isActive = this.state.sections[ii] ? "active" : "";
+            tabs[ii] = <a class={ "col-3 rounded-0 btn-themed " + isActive } 
                           onClick={ this.toggleSection.bind(this, ii) }
                           key={ ii }>
                            { this.sectionNames[ii] }
@@ -96,8 +95,8 @@ export default @observer class Details extends React.Component {
     render () {
         return (
 <div class="d-flex flex-column h-100">
-    <div class="row rounded-top" style={{ overflow: "hidden" }}>{ this.createTabs() }</div>
-    <div class="row d-flex flex-column" style={{ flex: "1 1 auto", height: 0 }}>
+    <div class="row rounded-top hide-overflow">{ this.createTabs() }</div>
+    <div class="row d-flex flex-column yes-flex">
         <Section open={ this.state.sections[0] }>
             <p class="text-center">Preliminary information about the job obtained from its listing before you apply.</p>
             { this.createEditable("title",          "input",     "Position:",    true ) }
@@ -129,7 +128,7 @@ export default @observer class Details extends React.Component {
 
     render () {
         return (
-<div class="fluid-container" style={{ "overflowY": "scroll", padding: "5px", flex: "1 1 auto", height: 0, display: this.props.open ? "initial" : "none" }}>
+<div class={ "section " + (this.props.open ? "open" : "closed") }>
     { this.props.children }
 </div>
         )
