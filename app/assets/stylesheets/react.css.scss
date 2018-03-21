@@ -74,25 +74,25 @@ body {
     #page {
         height: 0;
         flex: 1 1 auto;
-        > #list {
+        > .list {
             height: 100%;
             margin-bottom: 5px;
-            #listItems {
-                flex: 1 1 auto;
-                overflow-y: auto;
-                > .list-item {
-                    display: flex;
-                    flex-direction: column; 
-                    justify-content: center;
-                    @extend .btn-themed, .m-1;
-                    border-bottom: 0;
-                    border-left-width: 5px !important;
-                    &.list-item-warning { border-left-color: $warning !important; }
-                    &.list-item-success { border-left-color: $success !important; }
-                    &.list-item-danger  { border-left-color: $danger  !important; }
-                    &.list-item-info    { border-left-color: $info    !important; }
-                    &.active { border-right-width: 10px !important; }
-                }
+        }
+        .listItems {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            > .list-item {
+                display: flex;
+                flex-direction: column; 
+                justify-content: center;
+                @extend .btn-themed, .m-1;
+                border-bottom: 0;
+                border-left-width: 5px !important;
+                &.list-item-warning { border-left-color: $warning !important; }
+                &.list-item-success { border-left-color: $success !important; }
+                &.list-item-danger  { border-left-color: $danger  !important; }
+                &.list-item-info    { border-left-color: $info    !important; }
+                &.active { border-right-width: 10px !important; }
             }
         }
         > #details {
