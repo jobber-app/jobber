@@ -56,6 +56,7 @@ class Store {
 class Job {
     constructor (fields) {
         for (var index in fields) this[index] = observable(fields[index]);
+        this.key = this.id.get();
     }
     @computed get rawColour () {
         switch (this.status.get()) {
@@ -89,6 +90,7 @@ class Job {
 class CV {
     constructor (fields) {
         for (var index in fields) this[index] = observable(fields[index]);
+        this.key = this.id.get();
     }
 }
 

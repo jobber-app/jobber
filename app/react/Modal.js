@@ -9,7 +9,7 @@ export default @observer class Modal extends React.Component {
 
     render () {
         return (
-        <div ref={ el => this.el = el } class="modal fade" id={ this.props.name } tabindex="-1" data-keyboard="false">
+        <div ref={ el => this.el = el } class="modal fade" id={ this.props.name } tabIndex="-1" data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -18,7 +18,7 @@ export default @observer class Modal extends React.Component {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" style={{ "max-height": "60vh", "overflow-y": "scroll" }}>
+                    <div class="modal-body" style={{ "maxHeight": "60vh", "overflowY": "scroll" }}>
                         { this.props.children }
                     </div>
                 </div>

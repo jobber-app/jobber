@@ -9,18 +9,18 @@ var addTitle = title => { document.title += " | " + title; return null; }
 
 export default class Title extends React.Component {
     render () {
-        return ([
-                <Route path="/" render={ () => setTitle("Jobber") }/>
-                ,
-                <Switch>
-                    <Route path="/cvs"  render={ () => addTitle("CVs") }/>
-                    <Route path="/jobs" render={ () => addTitle("Jobs") }/>
-                </Switch>
-                ,
-                <Switch>
-                    <Route path="/cvs/:id"  render={ props => addTitle("<CV_ID>") }/>
-                    <Route path="/jobs/:id"  render={ props => addTitle(store.getJobById(parseInt(props.match.params.id)).title) }/>
-                </Switch>
-        ]);
+        return (
+        <div>
+            <Route path="/" render={ () => setTitle("Jobber") }/>
+            <Switch>
+                <Route path="/cvs"  render={ () => addTitle("CVs") }/>
+                <Route path="/jobs" render={ () => addTitle("Jobs") }/>
+            </Switch>
+            <Switch>
+                <Route path="/cvs/:id"  render={ props => addTitle("<CV_ID>") }/>
+                <Route path="/jobs/:id"  render={ props => addTitle(store.getJobById(parseInt(props.match.params.id)).title) }/>
+            </Switch>
+        </div>
+        );
     }
 }

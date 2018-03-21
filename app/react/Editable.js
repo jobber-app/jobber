@@ -131,7 +131,7 @@ import $ from "jquery";
         ))
         return (
             <div class="w-100">
-                <input onClick={ this.edit.bind(this) } class={ "form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
+                <input readOnly="true" onClick={ this.edit.bind(this) } class={ "form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
                 <Modal name="cv-picker" title="Pick a CV" onClose={ this.cancel.bind(this) }>
                     <CVsList onSelect={ newId => {
                         this.setLocalData(newId, true);

@@ -46,5 +46,7 @@
     "url": "https://github.com/andmikey/jobber/issues"
   },
   "homepage": "https://github.com/andmikey/jobber#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-plugin-react-html-attrs": "^2.1.0"
+  }
 }

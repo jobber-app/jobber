@@ -85,7 +85,8 @@ export default @observer class Details extends React.Component {
             var isActive = this.state.sections[ii];
             var activeClass = isActive ? "font-weight-bold active" : "";
             tabs[ii] = <a class={ "col-3 rounded-0 themed-button btn " + activeClass } 
-                          onClick={ this.toggleSection.bind(this, ii) }>
+                          onClick={ this.toggleSection.bind(this, ii) }
+                          key={ ii }>
                            { this.sectionNames[ii] }
                        </a>
         }
@@ -128,7 +129,7 @@ export default @observer class Details extends React.Component {
 
     render () {
         return (
-<div class="fluid-container" style={{ "overflow-y": "scroll", padding: "5px", flex: "1 1 auto", height: 0, display: this.props.open ? "initial" : "none" }}>
+<div class="fluid-container" style={{ "overflowY": "scroll", padding: "5px", flex: "1 1 auto", height: 0, display: this.props.open ? "initial" : "none" }}>
     { this.props.children }
 </div>
         )

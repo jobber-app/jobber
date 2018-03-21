@@ -59,7 +59,7 @@ import store from "./store";
         <div class="input-group">
             <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder="Search by Contents" id="search"/>
         </div>
-        <div className="p-1 w-100 text-center" style={{ "font-size": "10px", "font-family": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
+        <div class="p-1 w-100 text-center" style={{ "fontSize": "10px", "fontFamily": "monospace", "cursor": "pointer" }} onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
     </div>
     <ul id="listItems" className="list-group active">{ this.items.filter(this.isValid.bind(this)).map(this.itemToEl.bind(this)) }</ul>
@@ -82,7 +82,10 @@ import store from "./store";
     }
     itemToEl (data) {
         var focused = parseInt(this.props.match.params.id) === data.id.get();
-        return <Link to={ "/jobs/" + data.id.get() } style={{ "border-left": "5px solid " + data.rawColour }} className={ "job-list-item text-left d-flex flex-column justify-content-center m-1 themed-button btn " + (focused ? "active" : "") }>
+        return <Link to={ "/jobs/" + data.id.get() } 
+                     style={{ "borderLeft": "5px solid " + data.rawColour }} 
+                     class={ "job-list-item text-left d-flex flex-column justify-content-center m-1 themed-button btn " + (focused ? "active" : "") }
+                     key={ data.id.get() }>
             <h5>{ data.title.get() }</h5>
             <h6>{ data.employer.get() }</h6>
             <span><small><b>Stage: </b></small><span class={ "badge badge-pill badge-" + data.colour }>{ data.stage }</span></span>
@@ -104,7 +107,7 @@ import store from "./store";
                 <input type="checkbox" checked={ this.state.interfaces["application"] } onChange={ this.toggleFilter("application", this.statusFilters["application"]) }/><label class="form-check-label">Application Stage</label><br/>
                 <input type="checkbox" checked={ this.state.interfaces["interviews"] } onChange={ this.toggleFilter("interviews", this.statusFilters["interviews"]) }/><label class="form-check-label">Interviews Stage</label><br/>
                 <input type="checkbox" checked={ this.state.interfaces["offer"] } onChange={ this.toggleFilter("offer", this.statusFilters["offer"]) }/><label class="form-check-label">Offer Stage</label><br/>
-                <input type="checkbox" checked="true"/><label class="form-check-label">Archived</label><br/>
+                {/*<input type="checkbox" checked="true"/><label class="form-check-label">Archived</label><br/>*/}
             </div>
         );
     }
@@ -119,7 +122,7 @@ import store from "./store";
     get items () { return store.cvs; }
     itemToEl (cv) {
         return (
-        <div class="themed-button btn m-1" onClick={ this.onSelect.bind(this, cv.id.get()) }>
+        <div class="themed-button btn m-1" key={ cv.key } onClick={ this.onSelect.bind(this, cv.id.get()) }>
             { cv.name.get() }
         </div>
         );
