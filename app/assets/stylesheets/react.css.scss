@@ -10,6 +10,10 @@ $primary: #4CAF50;
 $primary-hover: #2E7D32;
 $primary-active: #388E3C;
 $secondary: #0091EA;
+            case 0:  return "#dc3545";  break;
+            case 1:  return "#ffc107";  break;
+            case 2:  return "#17a2b8";  break;
+            case 3:  return "#28a745";  break;
 */
 /* $bg: #F8F8FF; */
 $primary: #3F51B5;
@@ -70,25 +74,25 @@ body {
     #page {
         height: 0;
         flex: 1 1 auto;
-        > #list {
+        > .list {
             height: 100%;
             margin-bottom: 5px;
-            #listItems {
-                flex: 1 1 auto;
-                overflow-y: auto;
-                > .list-item {
-                    display: flex;
-                    flex-direction: column; 
-                    justify-content: center;
-                    @extend .btn-themed, .m-1;
-                    border-bottom: 0;
-                    border-left-width: 5px !important;
-                    &.list-item-warning { border-left-color: $warning !important; }
-                    &.list-item-success { border-left-color: $success !important; }
-                    &.list-item-danger  { border-left-color: $danger  !important; }
-                    &.list-item-info    { border-left-color: $info    !important; }
-                    &.active { border-right-width: 10px !important; }
-                }
+        }
+        .listItems {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            > .list-item {
+                display: flex;
+                flex-direction: column; 
+                justify-content: center;
+                @extend .btn-themed, .m-1;
+                border-bottom: 0;
+                border-left-width: 5px !important;
+                &.list-item-warning { border-left-color: $warning !important; }
+                &.list-item-success { border-left-color: $success !important; }
+                &.list-item-danger  { border-left-color: $danger  !important; }
+                &.list-item-info    { border-left-color: $info    !important; }
+                &.active { border-right-width: 10px !important; }
             }
         }
         > #details {

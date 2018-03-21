@@ -26,7 +26,7 @@ export default class Layout extends React.Component {
         <Link to="/cvs" className={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
     <div className="row" id="page">
-        <div className="col-3 p-1" id="list">
+        <div class="col-3 p-1 list">
             <Switch>
                 <Route path="/jobs/:id" component={ JobsList }/>
                 <Route path="/jobs" component={ JobsList }/>
