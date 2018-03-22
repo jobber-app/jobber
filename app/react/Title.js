@@ -13,8 +13,8 @@ export default class Title extends React.Component {
         <div>
             <Route path="/" render={ () => setTitle("Jobber") }/>
             <Switch>
-                <Route path="/cvs"  render={ () => addTitle("CVs") }/>
-                <Route path="/jobs" render={ () => addTitle("Jobs") }/>
+                <Route path="/cvs"  render={ () => setTitle("CVs") }/>
+                <Route path="/jobs" render={ () => setTitle("Jobs") }/>
             </Switch>
             <Switch>
                 <Route path="/cvs/:id"  render={ props => addTitle("<CV_ID>") }/>
