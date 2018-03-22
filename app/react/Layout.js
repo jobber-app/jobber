@@ -19,13 +19,13 @@ export default class Layout extends React.Component {
 
     render () {
         return (
-<div className="container-fluid no-gutters d-flex flex-column h-100">
+<div class="container-fluid no-gutters d-flex flex-column h-100">
     <Title />
-    <div className="row no-flex" id="toolbar">
-        <Link to="/jobs" className={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
-        <Link to="/cvs" className={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
+    <div class="row no-flex" id="toolbar">
+        <Link to="/jobs" class={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
+        <Link to="/cvs" class={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
-    <div className="row" id="page">
+    <div class="row" id="page">
         <div class="col-3 p-1 list">
             <Switch>
                 <Route path="/jobs/:id" component={ JobsList }/>
@@ -33,7 +33,7 @@ export default class Layout extends React.Component {
                 <Route path="/cvs" component={ CVsList }/>
             </Switch>
         </div>
-        <div className="col p-2 h-100" id="details">
+        <div class="col p-2 h-100" id="details">
             <div class="container-fluid no-gutters h-100">
                 <Switch>
                     <Route path="/jobs/:id" component={ Details }/>

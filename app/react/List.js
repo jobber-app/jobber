@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
+import Modal from "./Modal";
 import store from "./store";
 
 @observer class List extends React.Component {
@@ -52,12 +53,16 @@ import store from "./store";
         return filtersArray.every(f => f(item));
     }
 
+    subject () { return ""; }
+    get addons () { return null; }
+
     render () {
         return (
-<div className="d-flex flex-column h-100">   
+<div class="d-flex flex-column h-100">   
+    { this.addons }
     <div id="filter">
         <div class="input-group">
-            <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder="Search by Contents" id="search"/>
+            <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder={ "Search Your " + this.subject(true) } id="search"/>
         </div>
         <div class="btn-mini w-100" onClick={ this.toggleAdvanced.bind(this) }>Advanced Search { this.state.advanced ? "[-]" : "[+]" }</div>
         <div class={ "collapse pb-1 " + (this.state.advanced ? "show" : "") } id="advanced-search">{ this.advancedSearch() }</div>
@@ -80,6 +85,11 @@ import store from "./store";
             this.statusFilters[name] = item => { return item.status.get() !== status };
         }
     }
+    subject (pluralize) { return "Job" + (pluralize ? "s" : ""); }
+    get addons () {
+        return <div class="btn btn-success m-1">Create New { this.subject() }</div>
+    }
+
     itemToEl (data) {
         var focused = parseInt(this.props.match.params.id) === data.id.get();
         return <Link to={ "/jobs/" + data.id.get() } 
@@ -116,6 +126,10 @@ import store from "./store";
     componentWillMount () {
         this.onSelect = this.props.onSelect;
         if (this.onSelect === undefined) this.onSelect = () => {}
+    }
+    subject (pluralize) { return "CV" + (pluralize ? "s" : ""); }
+    get addons () {
+        return <div class="btn btn-success m-1">Upload New { this.subject() }</div>
     }
 
     get items () { return store.cvs; }

@@ -64,18 +64,18 @@ import $ from "jquery";
     }
 
     render () {
-        var titleEl = this.props.large ? <h5 className="m-0 mr-2">{ this.props.title }</h5> : <h6 className="m-0">{ this.props.title }</h6>
+        var titleEl = this.props.large ? <h5 class="m-0 mr-2">{ this.props.title }</h5> : <h6 class="m-0">{ this.props.title }</h6>
         return (
 <div class={ "editableItem " + (this.inline ? "inline" : "") }>
-    { this.props.title != undefined ? (<div className="title">{ titleEl }</div>) : "" }
+    { this.props.title != undefined ? (<div class="title">{ titleEl }</div>) : "" }
     { this.editor() }
     { !this.props.editing ? (
-        <div className="controls ml-1">
+        <div class="controls ml-1">
             <button class="btn btn-success w-100 btn-sm" onClick={ this.edit.bind(this) }>Edit</button>
         </div>
     ) : (
-        <div className="controls ml-1">
-            <div className="btn-group w-100">
+        <div class="controls ml-1">
+            <div class="btn-group w-100">
                 <button class="btn btn-success w-50 btn-sm" onClick={ this.save.bind(this) }>Save</button>
                 <button class="btn btn-danger w-50 btn-sm" onClick={ this.cancel.bind(this) }>Reset</button>
             </div>
