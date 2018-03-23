@@ -16,6 +16,16 @@ import store from "./store";
         }
     }
 
+    componentWillMount () {
+        if (this.props.onSelect === undefined) this.onSelect = () => {}
+        else {
+            this.onSelect = function (id, e) {
+                e.preventDefault();
+                this.props.onSelect(id);
+            }
+        }
+    }
+
     matchTextSearch (item) {
         var regexp = new RegExp(this.state.interfaces["text"], "i");
         for (var prop in item) {
@@ -90,7 +100,9 @@ import store from "./store";
         var focused = parseInt(this.props.match.params.id) === data.id.get();
         return <Link to={ "/jobs/" + data.id.get() } 
                      class={ "list-item list-item-" + (data.colour) + " text-left " + (focused ? "active" : "") }
-                     key={ data.id.get() }>
+                     key={ data.id.get() }
+                     onClick={ this.onSelect.bind(this, data.id.get()) }
+                     >
             <h5>{ data.title.get() }</h5>
             <h6>{ data.employer.get() }</h6>
             <span><small><b>Stage: </b></small><span class={ "badge badge-pill badge-" + data.colour }>{ data.stage }</span></span>
@@ -122,9 +134,12 @@ import store from "./store";
     get items () { return store.cvs; }
     itemToEl (cv) {
         return (
-        <div class="list-item" key={ cv.key } onClick={ this.props.onSelect.bind(this, cv.id.get()) }>
+        <Link to={ "/cvs/" + cv.id.get() }
+              class="list-item"
+              key={ cv.key }
+              onClick={ this.onSelect.bind(this, cv.id.get()) }>
             { cv.name.get() }
-        </div>
+        </Link>
         );
     }
     advancedSearch () {
