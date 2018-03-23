@@ -28,7 +28,7 @@ export default @observer class ResourceCreator extends React.Component {
     }
 
     finishCreating () {
-        this.onFinishCreate(this.props.parseContents.call(this));
+        this.onFinishCreate(this.props.parser.call(this));
         this.setCreating(false);
     }
 
@@ -40,11 +40,15 @@ export default @observer class ResourceCreator extends React.Component {
     render () {
         return (
 <span class={ this.props.className }>
-    <div class="btn btn-success m-1" onClick={ this.startCreating.bind(this) }>Create New { this.props.subject }</div>
-    <Modal name={ "creator-" + this.props.subject.toLowerCase() } showing={ this.state.creating } onClose={ this.cancelCreating.bind(this) }>
-        { this.children }
-        <div class="btn btn-danger mr-2" onClick={ this.cancelCreating.bind(this) }>Cancel</div>
-        <button type="submit" class="btn btn-success" onClick={ this.finishCreating.bind(this) } >Continue</button>
+    <div class={ "btn btn-success m-1 " + (this.props.small ? "btn-sm" : "") } onClick={ this.startCreating.bind(this) }>Create New { this.props.subject }</div>
+    <Modal title={ "Create a New " + this.props.subject } name={ "creator-" + this.props.subject.toLowerCase() } showing={ this.state.creating } onClose={ this.cancelCreating.bind(this) }>
+        <form onSubmit={ this.finishCreating.bind(this) }>
+            { this.props.children }
+            <div class="w-100 d-flex justify-content-center">
+                <div class="btn btn-danger mr-2" onClick={ this.cancelCreating.bind(this) }>Cancel</div>
+                <button type="submit" class="btn btn-success">Continue</button>
+            </div>
+        </form>
     </Modal>
 </span>
         )

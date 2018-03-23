@@ -3,6 +3,7 @@ import store from "./store";
 import { autorun, reaction } from "mobx";
 import { observer } from "mobx-react";
 import Modal from "./Modal";
+import ResourceCreator from "./ResourceCreator";
 import { CVsList } from "./List";
 
 @observer class Editable extends React.Component {
@@ -146,8 +147,13 @@ import { CVsList } from "./List";
             store.getCVById(this.props.data.get())
         ))
         return (
-            <div class="w-100">
-                <input readOnly="true" onClick={ this.edit.bind(this) } class={ "form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
+            <div class="w-100 d-flex">
+                <input readOnly="true" onClick={ this.edit.bind(this) } class={ "yes-flex h-100 form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
+                <ResourceCreator small={ true } subject="CV" onFinishCreate={ newId => this.setLocalData(newId, true) } parser={ _ => 93}>
+                    <input class="form-control" name="cv[name]" type="text" placeholder="CV Name" required="true"/>
+                    <p class="mt-3 mb-1">Choose CV PDF to upload...</p>
+                    <input class="w-100 mb-2" name="cv[file]" type="file" placeholder="" required="true"/>
+                </ResourceCreator>
                 <Modal name="cv-picker" title="Pick a CV" showing={ this.state.modalOpen } onClose={ this.cancel.bind(this) }>
                     <CVsList onSelect={ newId => this.setLocalData(newId, true) }
                              />
