@@ -54,12 +54,10 @@ import store from "./store";
     }
 
     subject () { return ""; }
-    get addons () { return null; }
 
     render () {
         return (
-<div class="d-flex flex-column h-100">   
-    { this.addons }
+<div class="d-flex flex-column h-100">
     <div id="filter">
         <div class="input-group">
             <input type="text" class="form-control" onChange={ e => this.updateTextSearch(e.target.value) } placeholder={ "Search Your " + this.subject(true) } id="search"/>
@@ -85,10 +83,8 @@ import store from "./store";
             this.statusFilters[name] = item => { return item.status.get() !== status };
         }
     }
+
     subject (pluralize) { return "Job" + (pluralize ? "s" : ""); }
-    get addons () {
-        return <div class="btn btn-success m-1">Create New { this.subject() }</div>
-    }
 
     itemToEl (data) {
         var focused = parseInt(this.props.match.params.id) === data.id.get();
@@ -123,19 +119,10 @@ import store from "./store";
 }
 
 @observer class CVsList extends List {
-    componentWillMount () {
-        this.onSelect = this.props.onSelect;
-        if (this.onSelect === undefined) this.onSelect = () => {}
-    }
-    subject (pluralize) { return "CV" + (pluralize ? "s" : ""); }
-    get addons () {
-        return <div class="btn btn-success m-1">Upload New { this.subject() }</div>
-    }
-
     get items () { return store.cvs; }
     itemToEl (cv) {
         return (
-        <div class="list-item" key={ cv.key } onClick={ this.onSelect.bind(this, cv.id.get()) }>
+        <div class="list-item" key={ cv.key } onClick={ this.props.onSelect.bind(this, cv.id.get()) }>
             { cv.name.get() }
         </div>
         );

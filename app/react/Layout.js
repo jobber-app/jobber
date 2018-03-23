@@ -7,7 +7,7 @@ import { JobsList, CVsList } from "./List";
 import Details from "./Details";
 import Summary from "./Summary";
 import Title from "./Title";
-import bootstrap from "bootstrap";
+import ResourceCreator from "./ResourceCreator";
 
 export default class Layout extends React.Component {
     constructor () {
@@ -26,10 +26,10 @@ export default class Layout extends React.Component {
         <Link to="/cvs" class={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
     </div>
     <div class="row" id="page">
-        <div class="col-3 p-1 list">
+        <div class="col-3 p-1 h-100 list">
+            <ResourceCreator subject="Job" />
             <Switch>
-                <Route path="/jobs/:id" component={ JobsList }/>
-                <Route path="/jobs" component={ JobsList }/>
+                <Route path="/jobs/:id?" component={ JobsList }/>
                 <Route path="/cvs" component={ CVsList }/>
             </Switch>
         </div>

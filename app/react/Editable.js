@@ -4,7 +4,6 @@ import { autorun, reaction } from "mobx";
 import { observer } from "mobx-react";
 import Modal from "./Modal";
 import { CVsList } from "./List";
-import $ from "jquery";
 
 @observer class Editable extends React.Component {
     constructor () {
@@ -35,12 +34,14 @@ import $ from "jquery";
     save () {
         this.props.onSave(this.state.data);
         if (this.input) this.input.blur();
+        if (this.customSave) this.customSave();
         this.props.changeEditing(false);
     }
 
     cancel () {
         this.setLocalData(this.props.data.get());
         if (this.input) this.input.blur();
+        if (this.customCancel) this.customCancel();
         this.props.changeEditing(false);
     }
 
@@ -117,11 +118,26 @@ import $ from "jquery";
 }
 
 @observer class EditableCVPicker extends Editable {
+    constructor () {
+        super();
+        this.state.modalOpen = false;
+    }
+
+    setModalOpen (value) {
+        var newState = Object.assign({}, this.state);
+        newState.modalOpen = value;
+        this.setState(newState);
+    }
+
+    openModal   () { this.setModalOpen(true); }
+    closeModal  () { this.setModalOpen(false); }
+    toggleModal () { this.setModalOpen(!this.state.modalOpen); }
+
     inline = true;
 
-    customEdit () {
-        $("#cv-picker").modal("show");
-    }
+    customEdit   () { this.openModal(); }
+    customCancel () { this.closeModal(); }
+    customSave   () { this.closeModal(); }
 
     editor () {
         var cv = (this.props.editing ? (
@@ -132,11 +148,9 @@ import $ from "jquery";
         return (
             <div class="w-100">
                 <input readOnly="true" onClick={ this.edit.bind(this) } class={ "form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
-                <Modal name="cv-picker" title="Pick a CV" onClose={ this.cancel.bind(this) }>
-                    <CVsList onSelect={ newId => {
-                        this.setLocalData(newId, true);
-                        $("#cv-picker").modal("hide");
-                    } }/>
+                <Modal name="cv-picker" title="Pick a CV" showing={ this.state.modalOpen } onClose={ this.cancel.bind(this) }>
+                    <CVsList onSelect={ newId => this.setLocalData(newId, true) }
+                             />
                 </Modal>
             </div>
         )
