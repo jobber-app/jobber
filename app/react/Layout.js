@@ -10,10 +10,6 @@ import Title from "./Title";
 import ResourceCreator from "./ResourceCreator";
 
 export default class Layout extends React.Component {
-    constructor () {
-        super()
-    }
-
     get appsActive () { return this.props.location.pathname.match(/^\/jobs/); }
     get cvsActive () { return this.props.location.pathname.match(/^\/cvs/); }
 
@@ -27,7 +23,7 @@ export default class Layout extends React.Component {
     </div>
     <div class="row" id="page">
         <div class="col-3 p-1 h-100 list">
-            <ResourceCreator subject="Job" />
+            <ResourceCreator class="w-100 d-flex flex-direction-row justify-content-center" subject="Job" />
             <Switch>
                 <Route path="/jobs/:id?" component={ JobsList }/>
                 <Route path="/cvs" component={ CVsList }/>

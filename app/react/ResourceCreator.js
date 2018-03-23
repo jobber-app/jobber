@@ -28,7 +28,7 @@ export default @observer class ResourceCreator extends React.Component {
     }
 
     finishCreating () {
-        this.onFinishCreate();
+        this.onFinishCreate(this.props.parseContents.call(this));
         this.setCreating(false);
     }
 
@@ -39,8 +39,8 @@ export default @observer class ResourceCreator extends React.Component {
 
     render () {
         return (
-<span>
-    <div class="btn btn-success btn-lg m-1" onClick={ this.startCreating.bind(this) }>Create New { this.props.subject }</div>
+<span class={ this.props.className }>
+    <div class="btn btn-success m-1" onClick={ this.startCreating.bind(this) }>Create New { this.props.subject }</div>
     <Modal name={ "creator-" + this.props.subject.toLowerCase() } showing={ this.state.creating } onClose={ this.cancelCreating.bind(this) }>
         { this.children }
         <div class="btn btn-danger mr-2" onClick={ this.cancelCreating.bind(this) }>Cancel</div>

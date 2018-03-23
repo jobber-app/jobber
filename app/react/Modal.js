@@ -2,6 +2,7 @@ import React from "react";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
 import $ from "jquery";
+import bootstrap from "bootstrap";
 
 export default @observer class Modal extends React.Component {
     componentWillMount () {
@@ -9,7 +10,6 @@ export default @observer class Modal extends React.Component {
             if (this.props.showing) this.open();
             else this.close();
         });
-        $("#" + this.props.name).on("hide.bs.modal", this.props.onClose);
     }
 
     open () {
@@ -21,7 +21,7 @@ export default @observer class Modal extends React.Component {
 
     render () {
         return (
-        <div id={ this.props.name } class="modal fade" tabIndex="-1" data-keyboard="false">
+        <div id={ this.props.name } class="modal fade" tabIndex="-1" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
