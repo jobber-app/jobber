@@ -65,24 +65,36 @@ import { CVsList } from "./List";
         this.escape(e);
     }
 
+    get editText () {
+        return this.props.editText || "Edit";
+    }
+
+    editButtons () {
+        if (this.props.editing) {
+            return (
+                <div class="controls ml-1">
+                    <div class="btn-group w-100">
+                        <button class="btn btn-success w-50 btn-sm" onClick={ this.save.bind(this) }>Save</button>
+                        <button class="btn btn-danger w-50 btn-sm" onClick={ this.cancel.bind(this) }>Reset</button>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div class="controls ml-1">
+                    <button class="btn btn-success w-100 btn-sm" onClick={ this.edit.bind(this) }>{ this.editText }</button>
+                </div>
+            )
+        }
+    }
+
     render () {
         var titleEl = this.props.large ? <h5 class="m-0 mr-2">{ this.props.title }</h5> : <h6 class="m-0">{ this.props.title }</h6>
         return (
 <div class={ "editableItem " + (this.inline ? "inline" : "") }>
     { this.props.title != undefined ? (<div class="title">{ titleEl }</div>) : "" }
     { this.editor() }
-    { !this.props.editing ? (
-        <div class="controls ml-1">
-            <button class="btn btn-success w-100 btn-sm" onClick={ this.edit.bind(this) }>Edit</button>
-        </div>
-    ) : (
-        <div class="controls ml-1">
-            <div class="btn-group w-100">
-                <button class="btn btn-success w-50 btn-sm" onClick={ this.save.bind(this) }>Save</button>
-                <button class="btn btn-danger w-50 btn-sm" onClick={ this.cancel.bind(this) }>Reset</button>
-            </div>
-        </div>
-    ) }
+    { this.editButtons() }
 </div>
         );
     }
@@ -140,6 +152,16 @@ import { CVsList } from "./List";
     customCancel () { this.closeModal(); }
     customSave   () { this.closeModal(); }
 
+    editButtons () {
+        return (
+            <ResourceCreator small={ true } subject="CV" onFinishCreate={ newId => this.setLocalData(newId, true) } parser={ _ => 93}>
+                <input class="form-control" name="cv[name]" type="text" placeholder="CV Name" required="true"/>
+                <p class="mt-3 mb-1">Choose CV PDF to upload...</p>
+                <input class="w-100 mb-2" name="cv[file]" type="file" placeholder="" required="true"/>
+            </ResourceCreator>
+        )
+    }
+
     editor () {
         var cv = (this.props.editing ? (
             store.getCVById(this.state.data)
@@ -147,16 +169,13 @@ import { CVsList } from "./List";
             store.getCVById(this.props.data.get())
         ))
         return (
-            <div class="w-100 d-flex">
-                <input readOnly="true" onClick={ this.edit.bind(this) } class={ "yes-flex h-100 form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") } value={ cv !== undefined ? cv.name.get() : "No CV selected" }/>
-                <ResourceCreator small={ true } subject="CV" onFinishCreate={ newId => this.setLocalData(newId, true) } parser={ _ => 93}>
-                    <input class="form-control" name="cv[name]" type="text" placeholder="CV Name" required="true"/>
-                    <p class="mt-3 mb-1">Choose CV PDF to upload...</p>
-                    <input class="w-100 mb-2" name="cv[file]" type="file" placeholder="" required="true"/>
-                </ResourceCreator>
+            <div class="w-100 d-flex align-items-center">
+                <div class={ "yes-flex h-100 form-control form-control-plaintext " + (this.props.large ? "form-control-lg" : "") }>{ cv !== undefined ? cv.name.get() : "No CV selected" }</div>
+                <div class="controls ml-1">
+                    <button class="btn btn-success w-100 btn-sm" onClick={ this.edit.bind(this) }>{ "Select Existing CV" }</button>
+                </div>
                 <Modal name="cv-picker" title="Pick a CV" showing={ this.state.modalOpen } onClose={ this.cancel.bind(this) }>
-                    <CVsList onSelect={ newId => this.setLocalData(newId, true) }
-                             />
+                    <CVsList onSelect={ newId => this.setLocalData(newId, true) }/>
                 </Modal>
             </div>
         )
