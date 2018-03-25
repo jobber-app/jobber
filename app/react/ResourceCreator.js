@@ -80,7 +80,7 @@ import Modal from "./Modal";
 @observer class JobCreator extends ResourceCreator {}
 JobCreator.defaultProps = {
     subject: "Job",
-    className: "w-100 d-flex justify-content-center",
+    className: "w-100 d-flex no-flex justify-content-center",
     children: (
         <input class="form-control" type="text" require="true"
                placeholder="Name for new job"/>
@@ -90,7 +90,7 @@ JobCreator.defaultProps = {
 @observer class CVCreator extends ResourceCreator {}
 CVCreator.defaultProps = {
     subject: "CV",
-    className: "w-100 d-flex justify-content-center",
+    className: "w-100 d-flex no-flex justify-content-center",
     children: (
         <div>
             <input class="form-control" type="text" require="true"

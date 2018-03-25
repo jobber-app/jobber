@@ -35,7 +35,7 @@ export default class Layout extends React.Component {
         </Link>
     </div>
     <div class="row" id="page">
-        <div class="col-3 p-1 h-100 list">
+        <div class="list">
             <Switch>
                 <Route path="/jobs/:id?" component={ JobCreator }/>
                 <Route path="/cvs" component={ CVCreator }/>

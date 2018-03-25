@@ -78,7 +78,7 @@ import store from "./store";
 
     render () {
         return (
-<div class="d-flex flex-column h-100">
+<div class="d-flex flex-column yes-flex">
     <div id="filter">
         <div class="input-group">
             <input type="text"
