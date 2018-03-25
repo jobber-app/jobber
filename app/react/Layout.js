@@ -12,18 +12,32 @@ import ResourceCreator from "./ResourceCreator";
 export default class Layout extends React.Component {
     get appsActive () { return this.props.location.pathname.match(/^\/jobs/); }
     get cvsActive () { return this.props.location.pathname.match(/^\/cvs/); }
+    toolbarDefault = "col-2 rounded-0 btn-themed btn btn-lg ml-2";
+    toolbarClass (isActive) { 
+        if (!isActive) return this.toolbarDefault;
+        return this.toolbarDefault + " active";
+    }
 
     render () {
         return (
 <div class="container-fluid no-gutters d-flex flex-column h-100">
     <Title />
     <div class="row no-flex" id="toolbar">
-        <Link to="/jobs" class={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.appsActive ? "font-weight-bold active" : "") } id="jobs">Jobs</Link>
-        <Link to="/cvs" class={ "col-2 rounded-0 btn-themed btn btn-lg ml-2 " + (this.cvsActive  ? "font-weight-bold active" : "") } id="cvs">CVs</Link>
+        <Link to="/jobs" 
+              class={ this.toolbarClass(this.appsActive) } 
+              id="jobs">
+            Jobs
+        </Link>
+        <Link to="/cvs" 
+              class={ this.toolbarClass(this.cvsActive) } 
+              id="cvs">
+            CVs
+        </Link>
     </div>
     <div class="row" id="page">
         <div class="col-3 p-1 h-100 list">
-            <ResourceCreator class="w-100 d-flex flex-direction-row justify-content-center" subject="Job" />
+            <ResourceCreator class="w-100 d-flex justify-content-center"
+                             subject="Job" />
             <Switch>
                 <Route path="/jobs/:id?" component={ JobsList }/>
                 <Route path="/cvs" component={ CVsList }/>

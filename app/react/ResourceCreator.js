@@ -13,9 +13,9 @@ export default @observer class ResourceCreator extends React.Component {
     }
 
     componentWillMount () {
-        this.onStartCreate = this.props.onStartCreate === undefined ? () => {console.log("undefined onStartCreate")} : this.props.onStartCreate; 
-        this.onCancelCreate = this.props.onCancelCreate === undefined ? () => {console.log("e");} : this.props.onCancelCreate; 
-        this.onFinishCreate = this.props.onFinishCreate === undefined ? () => {} : this.props.onFinishCreate; 
+        this.onStartCreate = this.props.onStartCreate || (() => {});
+        this.onCancelCreate = this.props.onCancelCreate || (() => {});
+        this.onFinishCreate = this.props.onFinishCreate || (() => {});
     }
 
     setCreating (value) {
@@ -40,26 +40,36 @@ export default @observer class ResourceCreator extends React.Component {
     }
 
     get form () { 
-        // With the state creating toggler, whenever we go to creating mode, all elements are rerendered without previous selections
+        // Whenever we go to creating mode, all elements are rerendered
+        // This clears previous input values
         if (this.state.creating === false) return null;
         
         // Otherwise, as expected, return the form for rendering.
         return (
-            <form onSubmit={ e => { e.preventDefault(); this.finishCreating() } }>
-                { this.props.children }
-                <div class="w-100 d-flex justify-content-center">
-                    <div class="btn btn-danger mr-2" onClick={ this.cancelCreating.bind(this) }>Cancel</div>
-                    <button type="submit" class="btn btn-success">Continue</button>
-                </div>
-            </form>
+<form onSubmit={ e => { e.preventDefault(); this.finishCreating() } }>
+    { this.props.children }
+    <div class="w-100 d-flex justify-content-center">
+        <div class="btn btn-danger mr-2"
+             onClick={ this.cancelCreating.bind(this) }>
+            Cancel
+        </div>
+        <button type="submit" class="btn btn-success">Continue</button>
+    </div>
+</form>
         )
     }
 
     render () {
         return (
 <span class={ this.props.className }>
-    <div class={ "btn btn-success m-1 " + (this.props.small ? "btn-sm" : "") } onClick={ this.startCreating.bind(this) }>Create New { this.props.subject }</div>
-    <Modal title={ "Create a New " + this.props.subject } name={ "creator-" + this.props.subject.toLowerCase() } showing={ this.state.creating } onClose={ this.cancelCreating.bind(this) }>
+    <div class={ "btn btn-success m-1 " + (this.props.small ? "btn-sm" : "") }
+         onClick={ this.startCreating.bind(this) }>
+        Create New { this.props.subject }
+    </div>
+    <Modal title={ "Create a New " + this.props.subject }
+           name={ "creator-" + this.props.subject.toLowerCase() }
+           showing={ this.state.creating } 
+           onClose={ this.cancelCreating.bind(this) }>
         { this.form }
     </Modal>
 </span>

@@ -49,7 +49,8 @@ class Store {
 
     /* User Settings */
     settings = observable({
-        splittable: false, // Whether or not job view has splittable tabs
+        // Whether or not job view has splittable tabs
+        splittable: false, 
     });
 }
 
@@ -87,15 +88,26 @@ class CV {
 
 var mockStoreData = {
     jobs: [
-        { id: 12, title: "Analyst",         status: 0, employer: "Beare's Boys",      cv: 13,   description: "Analyze for us!" },
-        { id: 93, title: "Central Manager", status: 1, employer: "Derek and Sons",    cv: 93,   description: "Manage things!" },
-        { id: 54, title: "Etherium Expert", status: 2, employer: "Fully Loaded Inc.", cv: 11,   description: "Give us blockchain." },
-        { id: 51, title: "Gardening Guru",  status: 1, employer: "Happy Records",     cv: null, description: "Demanding shrubberies!" },
+        { id: 12, title: "Analyst", status: 0, 
+          employer: "Beare's Boys", cv: 13,
+          description: "Analyze for us!" },
+        { id: 93, title: "Central Manager", status: 1,
+          employer: "Derek and Sons", cv: 93, 
+          description: "Manage things!" },
+        { id: 54, title: "Etherium Expert", status: 2, 
+          employer: "Fully Loaded Inc.", cv: 11, 
+          description: "Give us blockchain." },
+        { id: 51, title: "Gardening Guru",  status: 1, 
+          employer: "Happy Records", cv: null, 
+          description: "Demanding shrubberies!" },
     ],
     cvs: [
-        { id: 13, name: "Web Dev 1", description: "My first web dev cv." },
-        { id: 93, name: "Web Dev 2", description: "My second web dev cv, with React experience!" },
-        { id: 11, name: "Manager", description: "For applying to juicy management positions." },
+        { id: 13, name: "Web Dev 1", 
+          description: "My first web dev cv." },
+        { id: 93, name: "Web Dev 2", 
+          description: "My second web dev cv, with React experience!" },
+        { id: 11, name: "Manager", 
+          description: "For applying to juicy management positions." },
     ]
 }
 var store = new Store(mockStoreData);
