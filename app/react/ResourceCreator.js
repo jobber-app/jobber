@@ -48,7 +48,7 @@ export default @observer class ResourceCreator extends React.Component {
         return (
 <form onSubmit={ e => { e.preventDefault(); this.finishCreating() } }>
     { this.props.children }
-    <div class="w-100 d-flex justify-content-center">
+    <div class="w-100 d-flex justify-content-center mt-2">
         <div class="btn btn-danger mr-2"
              onClick={ this.cancelCreating.bind(this) }>
             Cancel
