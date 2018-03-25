@@ -3,7 +3,7 @@ import store from "./store";
 import { reaction } from "mobx";
 import { observer } from "mobx-react";
 import Modal from "./Modal";
-import ResourceCreator from "./ResourceCreator";
+import { CVCreator } from "./ResourceCreator";
 import { CVsList } from "./List";
 
 @observer class Editable extends React.Component {
@@ -18,8 +18,7 @@ import { CVsList } from "./List";
         this.inline = this.inline || this.props.inline;
         // Set up a reaction: When prop.data changes, setLocalData
         // IMPORTANT: Consider when props change but editing mode is on
-        reaction(() => this.props.data.get(),
-                 data => this.setLocalData(data));
+        reaction(() => this.props.data.get(), data => this.setLocalData(data));
     }
 
     setLocalData (newData, autoSave) {
@@ -218,15 +217,11 @@ import { CVsList } from "./List";
 
     editButtons () {
         return (
-<ResourceCreator small="true"
-                 subject="CV"
-                 onFinishCreate={ this.setNewId.bind(this) }
-                 parser={ _ => 93}>
-    <input class="form-control" type="text" require="true"
-           placeholder="CV Name"/>
-    <p class="mt-3 mb-1">Choose CV PDF to upload...</p>
-    <input class="w-100 mb-2" type="file" required="true"/>
-</ResourceCreator>
+            <CVCreator small="true"
+                       subject="CV"
+                       onFinishCreate={ this.setNewId.bind(this) }
+                       parser={ _ => 93}
+                       />
         )
     }
 

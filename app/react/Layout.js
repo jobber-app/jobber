@@ -7,7 +7,6 @@ import { JobsList, CVsList } from "./List";
 import Details from "./Details";
 import Summary from "./Summary";
 import Title from "./Title";
-import ResourceCreator from "./ResourceCreator";
 
 export default class Layout extends React.Component {
     get appsActive () { return this.props.location.pathname.match(/^\/jobs/); }
@@ -36,11 +35,6 @@ export default class Layout extends React.Component {
     </div>
     <div class="row" id="page">
         <div class="col-3 p-1 h-100 list">
-            <ResourceCreator class="w-100 d-flex justify-content-center"
-                             subject="Job">
-                <input class="form-control" type="text" require="true"
-                       placeholder="Name for new job"/>
-            </ResourceCreator>
             <Switch>
                 <Route path="/jobs/:id?" component={ JobsList }/>
                 <Route path="/cvs" component={ CVsList }/>
