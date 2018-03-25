@@ -15,7 +15,7 @@ import { CVsList } from "./List";
     }
 
     componentWillMount () {
-        this.inline = this.inline || this.props.inline;
+        this.inline = this.props.inline ? "inline" : "";
         // Set up a reaction: When prop.data changes, setLocalData
         // IMPORTANT: Consider when props change but editing mode is on
         reaction(() => this.props.data.get(), data => this.setLocalData(data));
@@ -113,7 +113,7 @@ import { CVsList } from "./List";
 
     render () {
         return (
-<div class={ "editableItem " + (this.inline ? "inline" : "") }>
+<div class={ "editableItem " + this.inline }>
     { this.title }
     { this.editor() }
     { this.editButtons() }
@@ -121,9 +121,11 @@ import { CVsList } from "./List";
         );
     }
 }
+Editable.defaultProps = {
+    inline: true,
+}
 
 @observer class EditableInput extends Editable {
-    inline = true;
     get largeClass () {
         if (!this.props.large) return "";
         return "form-control-lg";
@@ -155,7 +157,6 @@ import { CVsList } from "./List";
 }
 
 @observer class EditableTextarea extends Editable {
-    inline = false;
     enter (e) {
         if (e.keyCode === 13 && e.ctrlKey === true) {
             this.save();
@@ -188,6 +189,9 @@ import { CVsList } from "./List";
         }
     }
 }
+EditableTextarea.defaultProps = {
+    inline: false,
+}
 
 @observer class EditableCVPicker extends Editable {
     constructor () {
@@ -209,8 +213,6 @@ import { CVsList } from "./List";
     customCancel () { this.closeModal(); }
     customSave   () { this.closeModal(); }
 
-    inline = true;
-
     setNewId (newId) {
         this.setLocalData(newId, true);
     }
@@ -218,6 +220,7 @@ import { CVsList } from "./List";
     editButtons () {
         return (
             <CVCreator small="true"
+                       class=""
                        subject="CV"
                        onFinishCreate={ this.setNewId.bind(this) }
                        parser={ _ => 93}
