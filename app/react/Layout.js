@@ -4,6 +4,7 @@ import { Link, Switch, Route } from "react-router-dom";
 import store from "./store";
 
 import { JobsList, CVsList } from "./List";
+import { JobCreator, CVCreator } from "./ResourceCreator";
 import Details from "./Details";
 import Summary from "./Summary";
 import Title from "./Title";
@@ -35,6 +36,10 @@ export default class Layout extends React.Component {
     </div>
     <div class="row" id="page">
         <div class="col-3 p-1 h-100 list">
+            <Switch>
+                <Route path="/jobs/:id?" component={ JobCreator }/>
+                <Route path="/cvs" component={ CVCreator }/>
+            </Switch>
             <Switch>
                 <Route path="/jobs/:id?" component={ JobsList }/>
                 <Route path="/cvs" component={ CVsList }/>
