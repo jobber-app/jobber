@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180316095951) do
 
   create_table "jobs", force: :cascade do |t|
     t.string "title"
+    t.string "employer"
     t.text "postlink"
     t.text "posttext"
     t.datetime "applydate"
