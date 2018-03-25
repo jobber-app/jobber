@@ -57,8 +57,9 @@ export default @observer class Details extends React.Component {
 
     // Reset all editing properties to false, thereby clearing unfinished edits
     resetEditing () {
-        this.state.editing = {}
-        this.setState(this.state);
+        var newState = Object.assign({}, this.state);
+        newState.editing = {}
+        this.setState(newState);
     }
 
     // Set editing to true, enabling edits for an Editable of the page. 
