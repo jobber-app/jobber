@@ -15,6 +15,8 @@ This app aims to simplify the process, offering a one-stop shop for a job seeker
 
 We (Dylan and Mikey) started developing Jobber at HackTheBurgh 2018, and development is still ongoing.
 
+## License
+This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ## Technical architecture
 The backend is written in Ruby + Ruby on Rails, with SQLite as the database.
@@ -53,8 +55,8 @@ Then, start the server:
 The app can then be accessed at 0.0.0.0:3000/app
 
 ## Current state of development
-The backend is mostly finished.
-
+The backend is mostly finished, excepting a few minor model changes and some controller upgrades for the API.
+The frontend requires a couple more UI components and communication (model & REST) with the server has yet to be configured.
 
 ## Future development plans
 Planned improvements include:
@@ -62,9 +64,3 @@ Planned improvements include:
 - Support for emailing applications directly with a cover letter and a CV.
 - Native desktop app.
 - Offline mode.
-
-## License
-This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
-
-
-
