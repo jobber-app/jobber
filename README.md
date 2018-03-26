@@ -17,9 +17,7 @@ The backend is written in Ruby + Ruby on Rails, with SQLite as the database.
 
 The frontend is written in React.js.
 
-The entity-relationship model can be seen in the ER diagram below:
-![Jobber ER diagram](./info/Jobber.svg)
-<img src="./info/Jobber.svg">
+The entity-relationship model can be seen in the [Jobber ER diagram](./info/Jobber.svg).
 
 We consider the job entity to have various stages:
 1. **Application**: preliminary information about the job, before you apply: includes items such as a cover letter, the title and description of the position, and the date which an application should be sent by.
