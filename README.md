@@ -1,3 +1,4 @@
+<img src="./info/logo.png" align="right" />
 # Jobber: a job application tracker
 ## What is this?
 An application tracking app for job seekers.
