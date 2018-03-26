@@ -11,7 +11,7 @@ When you're a student applying for many jobs and internships at the same time, i
 
 This app aims to simplify the process, offering a one-stop shop for a job seeker to track their job applications, interviews, and offers. 
 
-We started developing this at HackTheBurgh 2018, and development is still ongoing.
+We (Dylan and Mikey) started developing Jobber at HackTheBurgh 2018, and development is still ongoing.
 
 
 ## Technical architecture
