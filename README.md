@@ -1,4 +1,4 @@
-<img src="./info/logo.png" align="right" width="100"/>
+<img src="./info/logo.png" align="right" width="150"/>
 
 # Jobber: a job application tracker
 ## What is this?
