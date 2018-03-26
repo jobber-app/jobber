@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./info/logo_long.png" width="150"/>
+  <img src="./info/logo_long.svg" width="150"/>
 </div>
 
 # Jobber: a job application tracker
