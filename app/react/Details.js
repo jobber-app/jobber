@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { autorun } from "mobx";
 import store from "./store";
-import { EditableCVPicker, EditableInput, EditableTextarea } from "./Editable";
+import { EditableCVPicker, EditableInput, EditableDate, EditableTextarea } from "./Editable";
 
 // Details component handles viewing and editing details of a given Job.
 export default @observer class Details extends React.Component {
@@ -77,28 +77,15 @@ export default @observer class Details extends React.Component {
 
     // Creates an editable for a job property with the specific type and size
     // then automatically binds correct props
-    createEditable (property, type, title, large = false, editor) {
-        var Type;
-        switch (type) {
-            case "cv-picker":
-                Type = EditableCVPicker;
-                break;
-            case "textarea":
-                Type = EditableTextarea;
-                break;
-            default:
-                Type = EditableInput;
-                break;
-        }
+    bindEditable (property, type, additionalProps) {
+        var Type = type;
 
         return (
-            <Type title={ title }
-                  large={ large }
+            <Type { ...additionalProps }
                   data={ this.job[property] }
                   editing={ this.state.editing[property] }
                   changeEditing={ this.setEditing.bind(this, property) }
                   onSave={ newValue => this.job[property].set(newValue) }
-                  editor={ editor }
             />
         );
     }
@@ -129,20 +116,25 @@ export default @observer class Details extends React.Component {
             </p>
 
             { /* Editable for title (large and inline input) */ }
-            { this.createEditable("title",       
-                                  "input",
-                                  "Position:",
-                                  true ) }
+            { this.bindEditable("title",       
+                                EditableInput,
+                                { title: "Position: " } 
+                               ) }
             { /* Editable for employer (small and inline input) */ }
-            { this.createEditable("employer",
-                                  "input",
-                                  "Employer:",
-                                  false) }
+            { this.bindEditable("employer",
+                                EditableInput,
+                                { title: "Employer: " }
+                               ) }
             { /* Editable for description (large and block textarea) */ }
-            { this.createEditable("description", 
-                                  "textarea",
-                                  "Description:",
-                                  false) }
+            { this.bindEditable("description", 
+                                EditableTextarea,
+                                { title: "Description: " }
+                               ) }
+            { /* Editable for apply by date */ }
+            { this.bindEditable("date",
+                                EditableDate,
+                                { title: "Date: " }
+                               ) }
         </Section>
         <Section open={ this.state.sections[1] }>
             <p class="text-center">
@@ -151,10 +143,10 @@ export default @observer class Details extends React.Component {
             </p>
 
             { /* Picker for CV. */ }
-            { this.createEditable("cv",
-                                  "cv-picker",
-                                  "CV:",
-                                  false) }
+            { this.bindEditable("cv",
+                                EditableCVPicker,
+                                { title: "CV: " }
+                               ) }
         </Section>
         <Section open={ this.state.sections[2] }>
             <p class="text-center">

@@ -35,8 +35,7 @@ export default @observer class Modal extends React.Component {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body d-flex flex-column" 
-                 style={{ "height": "60vh", "overflowY": "scroll" }}>
+            <div class="modal-body">
                 { this.props.children }
             </div>
         </div>

@@ -51,6 +51,7 @@ class Store {
     settings = observable({
         // Whether or not job view has splittable tabs
         splittable: false, 
+        yankeeDates: false,
     });
 }
 
@@ -89,15 +90,19 @@ class CV {
 var mockStoreData = {
     jobs: [
         { id: 12, title: "Analyst", status: 0, 
+          date: "2018-03-02 17:02:01",
           employer: "Beare's Boys", cv: 13,
           description: "Analyze for us!" },
         { id: 93, title: "Central Manager", status: 1,
+          date: "2018-03-02 17:02:01",
           employer: "Derek and Sons", cv: 93, 
           description: "Manage things!" },
         { id: 54, title: "Etherium Expert", status: 2, 
+          date: "2018-03-02 17:02:01",
           employer: "Fully Loaded Inc.", cv: 11, 
           description: "Give us blockchain." },
         { id: 51, title: "Gardening Guru",  status: 1, 
+          date: "2018-03-02 17:02:01",
           employer: "Happy Records", cv: null, 
           description: "Demanding shrubberies!" },
     ],
