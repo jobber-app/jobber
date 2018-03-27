@@ -77,9 +77,7 @@ export default @observer class Details extends React.Component {
 
     // Creates an editable for a job property with the specific type and size
     // then automatically binds correct props
-    bindEditable (property, type, additionalProps) {
-        var Type = type;
-
+    bindEditable (property, Type, additionalProps) {
         return (
             <Type { ...additionalProps }
                   data={ this.job[property] }
