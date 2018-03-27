@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1000"
+   width="4000"
    height="1000"
-   viewBox="0 0 264.58333 264.58333"
+   viewBox="0 0 1058.3333 264.58333"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   inkscape:version="0.92.2 (unknown)"
    sodipodi:docname="logo_long.svg"
    inkscape:export-filename="/home/deejaytee/data/programming/projects/180310-jobber/logo.png"
    inkscape:export-xdpi="96"
@@ -28,18 +28,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="2575.3999"
-     inkscape:cy="645.81166"
+     inkscape:zoom="0.25"
+     inkscape:cx="2038.0031"
+     inkscape:cy="321.25405"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
      inkscape:object-nodes="false"
      inkscape:window-width="1920"
-     inkscape:window-height="983"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1037"
+     inkscape:window-x="1366"
+     inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -64,28 +64,28 @@
        width="1058.3334"
        height="264.58334"
        x="0"
-       y="33.475006" />
+       y="32.416656" />
     <rect
        style="fill:#3f51b5;fill-opacity:1;stroke-width:0.55316973"
        id="rect3707"
        width="1040.8708"
        height="105.83333"
        x="8.7312498"
-       y="111.79166"
+       y="110.73331"
        rx="7.9375"
        ry="7.9375" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot4514"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:monospace;font-style:normal;font-weight:bold;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'monospace Bold';font-stretch:normal;font-variant:normal;"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion4516"
-         style="-inkscape-font-specification:'monospace Bold';font-family:monospace;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"><rect
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:monospace;-inkscape-font-specification:'monospace Bold'"><rect
            id="rect4518"
            width="737.14288"
            height="277.14285"
            x="120"
            y="360"
-           style="-inkscape-font-specification:'monospace Bold';font-family:monospace;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:monospace;-inkscape-font-specification:'monospace Bold'" /></flowRegion><flowPara
          id="flowPara4520" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -113,7 +113,7 @@
        xml:space="preserve"
        id="flowRoot4542"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.66667175px;line-height:1.25;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#e8eaf6;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,387.61451,56.22918)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,387.61451,55.170831)"><flowRegion
          id="flowRegion4544"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.66667175px;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono Bold';text-align:center;text-anchor:middle;fill:#e8eaf6;fill-opacity:1"><rect
            id="rect4546"
@@ -129,7 +129,7 @@
        width="1023.9375"
        height="26.458332"
        x="17.4625"
-       y="226.62083"
+       y="225.56248"
        rx="7.9375"
        ry="7.9375" />
     <rect
@@ -138,7 +138,7 @@
        width="1023.9375"
        height="26.458332"
        x="17.4625"
-       y="261.81042"
+       y="260.75208"
        rx="7.9375"
        ry="7.9375" />
     <rect
@@ -147,7 +147,7 @@
        width="1023.9375"
        height="26.458332"
        x="17.4625"
-       y="76.602081"
+       y="75.543732"
        rx="7.9375"
        ry="7.9375" />
     <rect
@@ -156,7 +156,7 @@
        width="1023.9375"
        height="26.458332"
        x="17.4625"
-       y="41.412498"
+       y="40.354149"
        ry="7.9375"
        rx="7.9375" />
   </g>
