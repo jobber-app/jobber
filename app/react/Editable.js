@@ -416,7 +416,7 @@ MDate.defaultProps = {
         } else {
             var cv = store.getCVById(this.props.data.get());
         }
-        var text = "yes-flex h-100 form-control form-control-plaintext " +
+        var text = "yes-flex-horizontal h-100 form-control form-control-plaintext " +
                    (this.props.large ? "form-control-lg" : "");
         return (
 <div class="w-100 d-flex align-items-center">
