@@ -64,3 +64,5 @@ Planned improvements include:
 - Support for emailing applications directly with a cover letter and a CV.
 - Native desktop app.
 - Offline mode.
+- App usage guide
+- Job searching guide
