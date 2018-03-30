@@ -60,8 +60,9 @@ body {
 }
 
 /* Quick flexing and sizing utilities */
-.no-flex { flex: 0 0 auto; }
-.yes-flex { height: 0px; flex: 1 1 auto; }
+.no-flex { flex: 0 0 auto !important; }
+.yes-flex { height: 0px !important; flex: 1 1 auto !important; }
+.yes-flex-horizontal { width: 0px !important; flex: 1 1 auto !important; }
 .hide-overflow   { overflow: hidden; }
 .auto-overflow { overflow: auto; }
 
@@ -147,5 +148,10 @@ body {
             transition: height 0.25s;
             &.editing { height: 200px; }
         }
+    }
+    .date-editor {
+        .lg { width: 5ch; }
+        .md  { width: 3ch; }
+        .sm  { width: 2.5ch; }
     }
 }
