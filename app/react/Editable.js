@@ -217,79 +217,9 @@ Textarea.defaultProps = {
 }
 
 @observer class MDate extends EditableModal {
-    // Figure out which data source is the one needed, create new Date
-    get date () {
-        var rawDate;
-        if (this.props.editing) rawDate = this.state.data;
-        else rawDate = this.props.data.get();
-
-        return new Date(rawDate);
-    }
-
-    get formattedDay () {
-        var date = this.date;
-        var YYYY = date.getFullYear().toString();
-        var MM = (date.getMonth() + 1).toString().padStart(2, "0");
-        var DD = date.getDate().toString().padStart(2, "0");
-
-        return `${YYYY}-${MM}-${DD}`;
-    }
-
-    get prettyDay () {
-        var date = this.date;
-        var year = date.getFullYear().toString();
-        var months = ["January", "February", "March", 
-                      "April", "May", "June", "July", 
-                      "August", "September", "October", 
-                      "November", "December"];
-        var month = months[date.getMonth()];
-        var rawDay = date.getDate();
-        // Pick a day suffix, th as default and override for 1st, 2nd, 3rd
-        var daySuffix = "th";
-        if (rawDay <= 3) daySuffix = (["st","nd","rd"])[rawDay-1];
-        var day = rawDay.toString() + daySuffix;
-        
-        if (store.settings.yankeeDates) return `${month} ${day}, ${year}`;
-        else                            return `${day} ${month}, ${year}`;
-    }
-
-    get formattedTime () {
-        var date = this.date;
-        var HH = date.getHours().toString().padStart(2, "0");
-        var MM = date.getMinutes().toString().padStart(2, "0");
-        var SS = date.getSeconds().toString().padStart(2, "0");
-
-        return `${HH}:${MM}:${SS}`;
-    }
-
-    get prettyTime () { return this.formattedTime; }
-
-    get prettyDate () {
-        return this.prettyTime + ", " + this.prettyDay;
-    }
-
     get editor () {
-        var text = "yes-flex h-100 form-control form-control-plaintext " +
-                   (this.props.large ? "form-control-lg" : "");
         return (
-<div class="w-100 d-flex align-items-center">
-    <div class={ text } onClick={ this.edit.bind(this) }>
-        { this.prettyDate }
-    </div>
-    <Modal name="date-picker" title="Set a Date"
-           showing={ this.state.modalOpen } 
-           onClose={ this.cancel.bind(this) }>
-        <div class="d-flex">
-            <div class="w-50 d-flex justify-content-center">
-                <Calendar onClickDay={ console.log }/>
-            </div>
-            <div class="w-50 d-flex flex-column">
-                <div>Your current day: { this.prettyDay }</div>
-                <div>Your current time: { this.prettyTime }</div>
-            </div>
-        </div>
-    </Modal>
-</div>
+null
         )
     }
 }
