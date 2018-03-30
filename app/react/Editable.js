@@ -140,7 +140,7 @@ Editable.defaultProps = {
        type="text"
        class={ "form-control " + this.props.className } 
        value={ this.state.data } 
-       onBlur={ e => this.props.child ? null : this.cancel(e) }
+       onBlur={ this.save.bind(this) }
        onKeyDown={ this.escapeOrEnter.bind(this) }
        onChange={ e => this.setLocalData(e.target.value) }
        />
@@ -180,7 +180,7 @@ Editable.defaultProps = {
 <textarea ref={ input => this.input = input } 
           type="text" 
           class="form-control editor editing" 
-          onBlur={ this.cancel.bind(this) } 
+          onBlur={ this.save.bind(this) } 
           onKeyDown={ this.escapeOrEnter.bind(this) } 
           onChange={ e => this.setLocalData(e.target.value) } 
           value={ this.state.data }
