@@ -359,9 +359,18 @@ Textarea.defaultProps = {
         if (this.anyFocused() === false) this.focusFirst();
     }
 
+    checkFullBlur (e) {
+        // Set a delay, then check if the focused element is still an input
+        setTimeout(() => {
+            if (this.anyFocused() === false) this.save();
+        }, 100)
+    }
+
     get editor () {
         return (
-<div class="date-editor yes-flex-horizontal input-group">
+<div class="date-editor yes-flex-horizontal input-group"
+     onBlur={ this.checkFullBlur.bind(this) }
+     >
     { this.boundInput("year", "lg", { placeholder: "YYYY" }) }
     <span>/</span>
     { this.boundInput("month", "md", { placeholder: "MM" }) }
