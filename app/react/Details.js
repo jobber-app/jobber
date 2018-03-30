@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { autorun } from "mobx";
 import store from "./store";
-import { EditableCVPicker, EditableInput, EditableDate, EditableTextarea } from "./Editable";
+import Editable from "./Editable";
 
 // Details component handles viewing and editing details of a given Job.
 export default @observer class Details extends React.Component {
@@ -115,22 +115,22 @@ export default @observer class Details extends React.Component {
 
             { /* Editable for title (large and inline input) */ }
             { this.bindEditable("title",       
-                                EditableInput,
+                                Editable.Input,
                                 { title: "Position: " } 
                                ) }
             { /* Editable for employer (small and inline input) */ }
             { this.bindEditable("employer",
-                                EditableInput,
+                                Editable.Input,
                                 { title: "Employer: " }
                                ) }
             { /* Editable for description (large and block textarea) */ }
             { this.bindEditable("description", 
-                                EditableTextarea,
+                                Editable.Textarea,
                                 { title: "Description: " }
                                ) }
             { /* Editable for apply by date */ }
             { this.bindEditable("date",
-                                EditableDate,
+                                Editable.MDate,
                                 { title: "Date: " }
                                ) }
         </Section>
@@ -142,7 +142,7 @@ export default @observer class Details extends React.Component {
 
             { /* Picker for CV. */ }
             { this.bindEditable("cv",
-                                EditableCVPicker,
+                                Editable.CVPicker,
                                 { title: "CV: " }
                                ) }
         </Section>

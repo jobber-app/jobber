@@ -127,7 +127,7 @@ Editable.defaultProps = {
     inline: true,
 }
 
-@observer class EditableInput extends Editable {
+@observer class Input extends Editable {
     get largeClass () {
         if (!this.props.large) return "";
         return "form-control-lg";
@@ -158,7 +158,7 @@ Editable.defaultProps = {
     }
 }
 
-@observer class EditableTextarea extends Editable {
+@observer class Textarea extends Editable {
     enter (e) {
         if (e.keyCode === 13 && e.ctrlKey === true) {
             this.save();
@@ -191,7 +191,7 @@ Editable.defaultProps = {
         }
     }
 }
-EditableTextarea.defaultProps = {
+Textarea.defaultProps = {
     inline: false,
 }
 
@@ -216,7 +216,7 @@ EditableTextarea.defaultProps = {
     customSave   () { this.closeModal(); }
 }
 
-@observer class EditableDate extends EditableModal {
+@observer class MDate extends EditableModal {
     // Figure out which data source is the one needed, create new Date
     get date () {
         var rawDate;
@@ -294,7 +294,7 @@ EditableTextarea.defaultProps = {
     }
 }
 
-@observer class EditableCVPicker extends EditableModal {
+@observer class CVPicker extends EditableModal {
     setNewId (newId) {
         this.setLocalData(newId, true);
     }
@@ -340,4 +340,4 @@ EditableTextarea.defaultProps = {
         )
     }
 }
-export { EditableInput, EditableTextarea, EditableDate, EditableCVPicker };
+export default { Input, Textarea, MDate, CVPicker };
