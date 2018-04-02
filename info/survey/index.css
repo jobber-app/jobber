@@ -1,0 +1,23 @@
+body {
+    background-color: ghostwhite;
+    color: #222;
+    max-width: 40em;
+    padding: 2em;
+    margin: 0 auto 0 auto;
+}
+.form-group > label {
+    font-size: 18px;
+    font-weight: bold;
+}
+.custom {
+    display: flex;
+    align-items: center;
+}
+.remove {
+    height: 14px;
+    width: 14px;
+    padding: 0;
+    margin-right: 6px;
+    line-height: 12px;
+    flex: 0 0 auto;
+}

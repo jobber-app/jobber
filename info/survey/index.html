@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="./index.css"/>
+    </head>
+    <body>
+        <h3>Welcome to our Survey</h3>
+        <small class="text-muted">Completion Time: 3-6 minutes.</small>
+        <ul>
+            <li>This survey is designed to understand a few aspects of how people manage the job application process, in order to guide a project we've been working on.</li>
+            <li>The survey data is completely anonymously collected, which is why the survey isn't a Google Form. We consider privacy to be a fundamental human right, and couldn't guarantee that right to you unless we wrote the survey entirely by ourselves.</li>
+            <li>Please complete the survey to the best of your abilities.</li>
+        </ul>
+        <form>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="consent" required/>
+                <label class="form-check-label">
+                    By checking this box, you consent to the use of this anonymously collected data for any purposes.
+                </label>
+            </div>
+            <div class="py-2 dropdown-divider"></div>
+            <div class="form-group">
+                <label>When searching for a job, how many separate job applications do you tend to manage at any one time?</label>
+                <input required="true" type="number" class="form-control" max="100" min="1"/>
+            </div>
+            <div class="form-group" id="how-tracking">
+                <label>How do you normally keep track of your applications and their documents as you apply to them?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Spreadsheets (Excel, Gnumeric, etc.)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Word documents / Typed up files (.doc, .txt, etc.)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Pen and Paper (Post-it-notes, etc.)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" id="extra-documents">
+                <label>What documents have been requested from you in past applications, aside from CVs?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Cover letter
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Letter of recommendation
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Work philosophy
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" id="document-creation-softwares">
+                <label>What programs or softwares do you use to create documents for applications?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        Word / Google Docs / Other Office Suite Software
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        LaTeX
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        InDesign / GIMP / Other Design and Artwork Software
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>How many different CVs do you generally maintain at a given time?</label>
+                <input required="true" type="number" class="form-control" max="100" min="1" value="1"/>
+            </div>
+            <div class="form-group">
+                <label>How often do you update or change your CV's contents or layout?<br/>
+                    <small class="text-muted text-normal">(Pick the first that applies.)</small>
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update-frequency" value="">
+                    <label class="form-check-label">
+                        For every job application
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update-frequency" value="">
+                    <label class="form-check-label">
+                        Every time I acquire a new skill
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update-frequency" value="">
+                    <label class="form-check-label">
+                        More than once a month
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update-frequency" value="">
+                    <label class="form-check-label">
+                        More than once every 3 months
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update-frequency" value="">
+                    <label class="form-check-label">
+                        More than once a year
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update-frequency" value="">
+                    <label class="form-check-label">
+                        Less than once a year
+                    </label>
+                </div>
+            </div>
+            <div class="py-2 dropdown-divider"></div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Submit Responses</div>
+            </div>
+        </form>
+        <script src="./index.js"></script>
+    </body>
+</html>
