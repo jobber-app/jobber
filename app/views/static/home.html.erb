@@ -1,2 +1,31 @@
 <% provide(:title, "Home") %>
-This is home!
+<style>
+#home-body {
+    width: 40em;
+    margin: 0 auto 0 auto;
+}
+</style>
+<div id="home-body" class="d-flex-inline flex-column">
+    <div class="d-flex justify-content-center">
+        <img src="/assets/master_favicon.png" height="200" class="m-2 rounded"/>
+    </div>
+    <h3>Welcome to Jobber!</h3>
+    <p>Jobber is a job application tracker, intended for job seekers who need a bit of help keeping track of all of their applications.</p>
+    <div class="d-flex justify-content-center mb-3">
+        <a class="btn-themed btn-lg" href="/app">Start Using Jobber</a>
+    </div>
+    <h4>What can I do with it?</h4>
+    <p>With it, you can create an entry for each job you apply to. These entries are populated by you with information about the job initially, but later expand to encompass the document you will assemble (CVs, cover letters, etc.), the interviews you have (technical, behavioural, etc.), and finally any offers you may receive.</p>
+    <p>You can upload relevant documents onto the Jobber website and tag them, thereby storing all of your documents right alongside where you build your applications.</p>
+    <p>Jobber also allows you to inspect and compare many job entries at a glance in specialized listing panels. Such panels are:
+    <ul>
+        <li>Offer Panel: See all offers you have and sort them for salary, geography, and other traits.</li>
+        <li>Interview Calendar: See upcoming interviews and notes you have on what the interview is for, simplifying both timetabling and pre-interview revision.</li>
+        <li>Statistics Panel: See how many jobs you have in each given stage, how many you have archived, and offer rates for specific subsections of jobs.</li>
+    </ul>
+    </p>
+    <h4>What do I have to do for you?</h4>
+    <p>This software is Free and Open Source, developed under the GPLv3 license. It is as such free to use and free to run. The core program, Jobber, which we are offering, is free with no paywalls, and we hope to keep it that way forever.</p>
+    <p>However, hosting this site is not free and does cost us monthly. If you really like the software and would like to support it, please consider donating.</p>
+    <p>Furthermore, saving documents and data, such as CVs, is especially costly. If you plan to store many documents for many different applications using Jobber, please consider donating to support the extra load.</p>
+</div>
