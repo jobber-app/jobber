@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
+  get '/blog', to: 'static#blog'
+  get '/survey', to: 'static#survey'
   get '/app', to: 'react#index'
 
   root 'static#home'

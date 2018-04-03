@@ -3,4 +3,8 @@ class StaticController < ApplicationController
     end
     def about
     end
+    def blog
+    end
+    def survey
+    end
 end

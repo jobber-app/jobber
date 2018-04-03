@@ -1,70 +1,10 @@
-@import "bootstrap";
+@import "./base";
 @import "react-calendar/dist/Calendar.css";
-/*
-$primary: #FF9800;
-$primary-hover: #EF6C00;
-$primary-active: #F57C00;
-$secondary: #0091EA;
-*/
-/*
-$primary: #4CAF50;
-$primary-hover: #2E7D32;
-$primary-active: #388E3C;
-$secondary: #0091EA;
-            case 0:  return "#dc3545";  break;
-            case 1:  return "#ffc107";  break;
-            case 2:  return "#17a2b8";  break;
-            case 3:  return "#28a745";  break;
-*/
-/* $bg: #F8F8FF; */
-$primary: #3F51B5;
-$primary-font: rgba(255,255,255,0.87);
-$secondary: #8C9EFF;
-$bg: #E8EAF6;
 
-/* override the btn styling to remove outlines and shadows */
-.btn {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-/* create global themed button style, btn-themed */
-.btn-themed {
-    @extend .btn;
-    @include button-variant($primary, $primary);
-    border-width: 0;
-    border-bottom-width: 5px;
-    color: $primary-font !important;
-    &.active {
-        border-color: $secondary !important;
-        font-weight: bold;
-    }
-}
-
-/* minibutton for those small things */
-.btn-mini {
-    @extend .p-1, .text-center;
-    font-size: 10px;
-    font-family: monospace;
-    cursor: pointer;
-    &:hover  { background-color: rgba(0,0,0,0.1); }
-    &:active { background-color: rgba(0,0,0,0.2); }
-    &.active { background-color: rgba(0,0,0,0.25); }
-}
-
-/* basic body theming and sizing for SPA feel */
 body {
-    background-color: $bg;
     height: 100vh;
     overflow: hidden;
 }
-
-/* Quick flexing and sizing utilities */
-.no-flex { flex: 0 0 auto !important; }
-.yes-flex { height: 0px !important; flex: 1 1 auto !important; }
-.yes-flex-horizontal { width: 0px !important; flex: 1 1 auto !important; }
-.hide-overflow   { overflow: hidden; }
-.auto-overflow { overflow: auto; }
 
 /* Arrows in Icon Fonts */
 .arrow-down, .arrow-up {
@@ -83,8 +23,8 @@ body {
 #react-app {
     height: 100%;
     #toolbar {
+        @extend .bg-themed;
         flex: 0 0 auto;
-        background-color: $primary;
     }
     #page {
         height: 0;

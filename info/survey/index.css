@@ -1,6 +1,4 @@
-body {
-    background-color: ghostwhite;
-    color: #222;
+.survey-body {
     max-width: 40em;
     padding: 2em;
     margin: 0 auto 0 auto;

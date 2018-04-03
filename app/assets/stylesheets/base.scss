@@ -1,0 +1,54 @@
+@import "bootstrap";
+
+/* base styles */
+$primary: #3F51B5;
+$primary-font: rgba(255,255,255,0.87);
+$secondary: #8C9EFF;
+$bg: #E8EAF6;
+
+/* override the btn styling to remove outlines and shadows */
+.btn {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.bg-themed {
+    background-color: $primary;
+}
+
+/* create global themed button style, btn-themed */
+.btn-themed {
+    @extend .btn;
+    @include button-variant($primary, $primary);
+    border-width: 0;
+    border-bottom-width: 5px;
+    color: $primary-font !important;
+    &.active {
+        border-color: $secondary !important;
+        font-weight: bold;
+    }
+}
+
+/* minibutton for those small things */
+.btn-mini {
+    @extend .p-1, .text-center;
+    font-size: 10px;
+    font-family: monospace;
+    cursor: pointer;
+    &:hover  { background-color: rgba(0,0,0,0.1); }
+    &:active { background-color: rgba(0,0,0,0.2); }
+    &.active { background-color: rgba(0,0,0,0.25); }
+}
+
+/* basic body theming and sizing for SPA feel */
+body {
+    background-color: $bg;
+}
+
+/* Quick flexing and sizing utilities */
+.no-flex { flex: 0 0 auto !important; }
+.yes-flex { height: 0px !important; flex: 1 1 auto !important; }
+.yes-flex-horizontal { width: 0px !important; flex: 1 1 auto !important; }
+.hide-overflow   { overflow: hidden; }
+.auto-overflow { overflow: auto; }
+
+

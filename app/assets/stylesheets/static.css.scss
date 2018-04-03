@@ -1,0 +1,31 @@
+@import "./base";
+
+body {
+    @extend .d-flex, .flex-column;
+    background-color: $bg;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#navbar {
+    @extend .no-flex, .w-100, .bg-themed, .d-flex;
+    align-items: center;
+    > .brand {
+        @extend .mx-2;
+        background-image: url("/assets/brand.svg");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 3.3em;
+        width: 7em;
+    }
+    > .navtab {
+        @extend .mr-2, .btn-themed;
+        border-bottom: 0 !important;
+        font-size: 1.2em;
+    }
+}
+
+#main {
+    @extend .yes-flex, .auto-overflow;
+}
