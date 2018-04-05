@@ -34,4 +34,20 @@ class UserTest < ActiveSupport::TestCase
     @user.password_confirmation = "foo"
     assert_not @user.valid?
   end
+
+  test "Valid email addresses are valid" do
+    valid_addresses = %w[foo@bar.com a+b@boo.org thing.other-thing@x.y.z]
+    valid_addresses.each do |valid_address|
+      @user.email = valid_address
+      assert @user.valid?, "#{valid_address.inspect} should be valid"
+    end
+  end
+
+  test "Not valid email addresses are not valid" do
+    invalid_addresses = %w[@bar.com org x.com a@]
+    invalid_addresses.each do |invalid_address|
+      @user.email = invalid_address
+      assert_not @user.valid?, "#{invalid_address.inspect} should not be valid"
+    end
+  end
 end
