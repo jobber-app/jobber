@@ -28,6 +28,11 @@ body {
 
 #main {
     @extend .yes-flex, .auto-overflow;
+    #main-center {
+        @extend .d-flex, .flex-column, .pt-2;
+        width: 40em;
+        margin: 0 auto 0 auto;
+    }
 }
 
 #footer {
