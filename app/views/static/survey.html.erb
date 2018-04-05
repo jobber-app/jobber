@@ -33,7 +33,7 @@
 }
 </style>
 <div id="survey-body" class="h-100 pager p-2 d-flex flex-column">
-    <div class="auto-overflow yes-flex mb-2 ">
+    <div class="auto-overflow yes-flex mb-2 " id="survey-scroller">
         <form>
             <div class="page">
                 <h3 class="text-center">Welcome to our Survey</h3>
@@ -174,6 +174,9 @@ function Pager (id) {
     this.id = id;
     this.node = document.getElementById(this.id);
     this.pages = document.getElementsByClassName("page");
+    
+    this.scroller = document.getElementById("survey-scroller");
+    
     this.prev = this.node.getElementsByClassName("prev")[0];
     this.prev.addEventListener("click", this.prevPage.bind(this));
     this.next = this.node.getElementsByClassName("next")[0];
@@ -183,9 +186,10 @@ function Pager (id) {
 }
 Pager.prototype.setIndex = function (index) {
     if (this.index != undefined) {
-        console.log(this.pages, this.index);
         this.pages[this.index].classList.remove("showing");
     }
+    if (this.index == index) return;
+
     this.index = index;
 
     this.pages[this.index].classList.add("showing");
@@ -200,6 +204,9 @@ Pager.prototype.setIndex = function (index) {
     } else if (this.index === this.pages.length - 1) {
         this.next.innerHTML = "Submit Responses";
     }
+    
+    // scroll the form back to the top
+    this.scroller.scrollTop = 0;
 }
 Pager.prototype.nextPage = function () {
     if (this.index === this.pages.length - 1) return;
