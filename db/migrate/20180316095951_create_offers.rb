@@ -3,7 +3,7 @@ class CreateOffers < ActiveRecord::Migration[5.1]
     create_table :offers do |t|
       t.string :salary
       t.text :benefits
-      t.datetime :acceptby
+      t.timestamp :acceptby
 
       t.timestamps
     end

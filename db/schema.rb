@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20180316095951) do
 
   create_table "interviews", force: :cascade do |t|
-    t.datetime "date"
+    t.timestamp "date"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180316095951) do
     t.string "employer"
     t.text "postlink"
     t.text "posttext"
-    t.datetime "applydate"
+    t.timestamp "applydate"
     t.string "location"
     t.string "status"
     t.text "coverletter"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180316095951) do
   create_table "offers", force: :cascade do |t|
     t.string "salary"
     t.text "benefits"
-    t.datetime "acceptby"
+    t.timestamp "acceptby"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

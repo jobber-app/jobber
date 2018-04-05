@@ -5,7 +5,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :employer
       t.text :postlink
       t.text :posttext
-      t.datetime :applydate
+      t.timestamp :applydate
       t.string :location
       t.string :status
       t.text :coverletter
