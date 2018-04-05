@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get '/app', to: 'react#index'
 
   root 'static#home'
-  resources :users
-  resources :jobs
+
+  namespace :v1 do
+    resources :users
+    resources :jobs
+  end
+  
 end
