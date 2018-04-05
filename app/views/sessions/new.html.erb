@@ -1,3 +1,5 @@
-<h1>Sign In</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h3>Log In to Your Account</h3>
+<div class="mb-1">
+    <%= link_to "Don't have account? Create one here.", controller: "users", action: "new" %>
+</div>
 <%= render 'form', session: @session %>

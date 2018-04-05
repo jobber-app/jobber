@@ -27,6 +27,11 @@ $bg: #E8EAF6;
         font-weight: bold;
     }
 }
+/* no border */
+.btn-themed-clean {
+    @extend .btn-themed;
+    border: 0;
+}
 
 /* minibutton for those small things */
 .btn-mini {
@@ -51,4 +56,6 @@ body {
 .hide-overflow   { overflow: hidden; }
 .auto-overflow { overflow: auto; }
 
-
+.auto-margins {
+    margin: 0 auto 0 auto;
+}
