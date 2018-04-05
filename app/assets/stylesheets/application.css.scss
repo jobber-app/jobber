@@ -29,3 +29,8 @@ body {
 #main {
     @extend .yes-flex, .auto-overflow;
 }
+
+#footer {
+    @extend .text-muted, .text-center, .pb-1;
+    border-top: 1px solid #888;
+}
