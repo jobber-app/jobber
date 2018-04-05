@@ -12,10 +12,12 @@ Rails.application.routes.draw do
   get '/survey', to: 'static#survey'
   get '/app', to: 'react#index'
 
+  resources :users
+  
   root 'static#home'
   namespace :api do
     namespace :v1 do
-      resources :users
+
       resources :jobs
     end
   end
