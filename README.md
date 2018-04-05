@@ -54,6 +54,10 @@ Then, start the server:
 
 The app can then be accessed at 0.0.0.0:3000/app
 
+## Running tests
+To run tests for models:
+``` bin/rails test:models```
+
 ## Current state of development
 The backend is mostly finished, excepting a few minor model changes and some controller upgrades for the API.
 The frontend requires a couple more UI components and communication (model & REST) with the server has yet to be configured.
