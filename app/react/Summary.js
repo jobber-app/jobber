@@ -4,17 +4,27 @@ import { Route, Switch } from "react-router-dom";
 import store from "./store";
 
 export default @observer class Summary extends React.Component {
+    jobsWithStatus (status) {
+        var jobs = store.jobs.filter(job => job.status.get() === status);
+        var c = jobs.length;
+        return c;
+    }
+
     render () {
         return (
 <div>
     <h4>Your Overview:</h4>
-    <p>You have { store.jobs.filter(job => job.status.get() === 0).length } 
+    <p>You have 
+       { " " + this.jobsWithStatus(0).toString() + " " } 
        jobs that are in the info stage.</p>
-    <p>You have { store.jobs.filter(job => job.status.get() === 1).length } 
+    <p>You have
+       { " " + this.jobsWithStatus(1).toString() + " " } 
        jobs that are in the application stage.</p>
-    <p>You have { store.jobs.filter(job => job.status.get() === 2).length } 
+    <p>You have
+       { " " + this.jobsWithStatus(2).toString() + " " } 
        jobs that are in the interview stage.</p>
-    <p>You have { store.jobs.filter(job => job.status.get() === 3).length } 
+    <p>You have
+       { " " + this.jobsWithStatus(3).toString() + " " } 
        jobs that are completed.</p>
 </div>
         );
