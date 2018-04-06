@@ -74,34 +74,10 @@
                     <label>How many different CVs do you generally maintain at a given time?</label>
                     <input required="true" type="number" class="form-control" max="100" min="1" value="1"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="update-frequency">
                     <label>How often do you update or change your CV's contents or layout?<br/>
                         <small class="text-muted text-normal">(Pick the first that applies.)</small>
                     </label>
-                    <div class="form-check btn btn-light">
-                        <input  type="radio" name="update-frequency" value="">
-                        For every job application
-                    </div>
-                    <div class="form-check btn btn-light">
-                        <input  type="radio" name="update-frequency" value="">
-                        Every time I acquire a new skill
-                    </div>
-                    <div class="form-check btn btn-light">
-                        <input  type="radio" name="update-frequency" value="">
-                        More than once a month
-                    </div>
-                    <div class="form-check btn btn-light">
-                        <input  type="radio" name="update-frequency" value="">
-                        More than once every 3 months
-                    </div>
-                    <div class="form-check btn btn-light">
-                        <input  type="radio" name="update-frequency" value="">
-                        More than once a year
-                    </div>
-                    <div class="form-check btn btn-light">
-                        <input  type="radio" name="update-frequency" value="">
-                        Less than once a year
-                    </div>
                 </div>
             </div>
         </form>
@@ -164,33 +140,45 @@ Pager.prototype.prevPage = function () {
     this.setIndex(this.index - 1);
 }
 
-function Checklist (id, checkboxNames) {
+function Checklist (id, inputs, radio, unmodifiable) {
     this.id = id;
     this.node = document.getElementById(this.id);
+    this.type = radio ? "radio" : "checkbox";
 
-    for (var name of checkboxNames) {
-        var c = this.createCheckbox(name);
+    // If radio mode is set, use same name for all boxes
+    for (var input of inputs) {
+        var name = input[0]; 
+        var text = input[1];
+        var c = this.createCheckbox(name, text);
         this.node.appendChild(c);
     }
 
-    var addButton = document.createElement("div");
-    addButton.innerHTML = "Don't see your option? Click to add another.";
-    addButton.className = "btn btn-themed btn-sm mt-2 w-100 border-0";
-    addButton.addEventListener("click", this.newCustomInput.bind(this));
-    this.addButton = addButton;
-    this.node.appendChild(addButton);
+    if (unmodifiable !== true) {
+        var addButton = document.createElement("div");
+        addButton.innerHTML = "Don't see your option? Click to add another.";
+        addButton.className = "btn btn-themed btn-sm mt-2 w-100 border-0";
+        addButton.addEventListener("click", this.newCustomInput.bind(this));
+        this.addButton = addButton;
+        this.node.appendChild(addButton);
+    }
 }
 Checklist.prototype.removeChild = function (child) {
     this.node.removeChild(child);
 }
-Checklist.prototype.createCheckbox = function (text, checkbox, textNode) {
+Checklist.prototype.createCheckbox = function (name, text, checkbox, textNode) {
     var container = document.createElement("div");
     container.className = "form-check btn btn-light";
 
     if (textNode == undefined && checkbox == undefined) {
         checkbox = document.createElement("input");
+        if (this.type === "radio") {
+            checkbox.name = this.id;
+            checkbox.value = name;
+        } else {
+            checkbox.name = name;
+        }
+        checkbox.type = this.type;
         checkbox.checked = false;
-        checkbox.type = "checkbox";
 
         container.addEventListener("click", function () {
             checkbox.checked = !checkbox.checked;
@@ -214,7 +202,7 @@ Checklist.prototype.newCustomInput = function () {
     input.className = "form-control form-control-sm";
     input.placeholder = "Enter new option here...";
 
-    var container = this.createCheckbox("", remove, input);
+    var container = this.createCheckbox("", "", remove, input);
     container.classList.add("d-flex", "align-items-center");
     remove.addEventListener("click", this.removeChild.bind(this, container));
 
@@ -226,22 +214,31 @@ Checklist.prototype.newCustomInput = function () {
 new Pager("survey-body");
 
 new Checklist("how-tracking"
-             ,["Word Documents / Typed Up Files (.doc, .txt, .etc)"
-              ,"Spreadsheets (Excel, Gnumeric, etc.)"
-              ,"Pen and Paper (Notebook, Post-Its, etc.)"
+             ,[["docs", "Word Documents / Typed Up Files (.doc, .txt, .etc)"]
+              ,["spread", "Spreadsheets (Excel, Gnumeric, etc.)"]
+              ,["paper", "Pen and Paper (Notebook, Post-Its, etc.)"]
               ]
              );
 new Checklist("extra-documents"
-             ,["Cover Letter"
-              ,"Letter of Reference / Recommendation"
-              ,"Work Philosophy"
+             ,[["cover", "Cover Letter"]
+              ,["reference", "Letter of Reference / Recommendation"]
+              ,["philosophy", "Work Philosophy"]
               ]
              );
 new Checklist("document-creation-softwares"
-             ,["Word / Google Docs / Other Office Suite Software" 
-              ,"LaTeX"
-              ,"InDesign / GIMP / Other Design and Artwork Software"
+             ,[["word", "Word / Google Docs / Other Office Suite Software"]
+              ,["latex", "LaTeX"]
+              ,["indesign", "InDesign / GIMP / Other Design and Artwork Software"]
               ]
              );
+new Checklist("update-frequency"
+             ,[["job", "For every job application"]
+              ,["skill", "Every time I acquite a new skill"]
+              ,[">1pmo", "More than once a month"]
+              ,[">3pmo", "More than once every 3 months"]
+              ,[">1pyr", "More than once a year"]
+              ,["<1pyr", "Less than once a year"]
+              ]
+             ,true,true);
 </script>
 
