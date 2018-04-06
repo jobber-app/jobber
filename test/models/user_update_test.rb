@@ -15,6 +15,11 @@ class UserUpdateTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "Name over 50 chars is not valid" do
+    @user.name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    assert_not @user.valid?
+  end
+
   test "Empty email is not valid" do
     @user.email = "   "
     assert_not @user.valid?
@@ -51,4 +56,5 @@ class UserUpdateTest < ActiveSupport::TestCase
       assert_not @user.valid?, "#{invalid_address.inspect} should not be valid"
     end
   end
+
 end
