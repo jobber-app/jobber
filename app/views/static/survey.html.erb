@@ -31,6 +31,14 @@
 .pager .page.showing {
     display: block;
 }
+.form-check {
+    width: 100%;
+    text-align: left;
+    cursor: default !important;
+    border-radius: 0;
+    background-color: transparent;
+    border: 0;
+}
 </style>
 <div id="survey-body" class="h-100 pager p-2 d-flex flex-column">
     <div class="auto-overflow yes-flex mb-2 " id="survey-scroller">
@@ -49,69 +57,15 @@
                 </div>
                 <div class="form-group" id="how-tracking">
                     <label>How do you normally keep track of your applications and their documents as you apply to them?</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Spreadsheets (Excel, Gnumeric, etc.)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Word documents / Typed up files (.doc, .txt, etc.)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Pen and Paper (Post-it-notes, etc.)
-                        </label>
-                    </div>
                 </div>
             </div>
             <div class="page">
                 <h3 class="text-center">Section 2</h3>
                 <div class="form-group" id="extra-documents">
                     <label>What documents have been requested from you in past applications, aside from CVs?</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Cover letter
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Letter of recommendation
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Work philosophy
-                        </label>
-                    </div>
                 </div>
                 <div class="form-group" id="document-creation-softwares">
                     <label>What programs or softwares do you use to create documents for applications?</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            Word / Google Docs / Other Office Suite Software
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            LaTeX
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                        <label class="form-check-label">
-                            InDesign / GIMP / Other Design and Artwork Software
-                        </label>
-                    </div>
                 </div>
             </div>
             <div class="page">
@@ -124,53 +78,42 @@
                     <label>How often do you update or change your CV's contents or layout?<br/>
                         <small class="text-muted text-normal">(Pick the first that applies.)</small>
                     </label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="update-frequency" value="">
-                        <label class="form-check-label">
-                            For every job application
-                        </label>
+                    <div class="form-check btn btn-light">
+                        <input  type="radio" name="update-frequency" value="">
+                        For every job application
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="update-frequency" value="">
-                        <label class="form-check-label">
-                            Every time I acquire a new skill
-                        </label>
+                    <div class="form-check btn btn-light">
+                        <input  type="radio" name="update-frequency" value="">
+                        Every time I acquire a new skill
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="update-frequency" value="">
-                        <label class="form-check-label">
-                            More than once a month
-                        </label>
+                    <div class="form-check btn btn-light">
+                        <input  type="radio" name="update-frequency" value="">
+                        More than once a month
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="update-frequency" value="">
-                        <label class="form-check-label">
-                            More than once every 3 months
-                        </label>
+                    <div class="form-check btn btn-light">
+                        <input  type="radio" name="update-frequency" value="">
+                        More than once every 3 months
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="update-frequency" value="">
-                        <label class="form-check-label">
-                            More than once a year
-                        </label>
+                    <div class="form-check btn btn-light">
+                        <input  type="radio" name="update-frequency" value="">
+                        More than once a year
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="update-frequency" value="">
-                        <label class="form-check-label">
-                            Less than once a year
-                        </label>
+                    <div class="form-check btn btn-light">
+                        <input  type="radio" name="update-frequency" value="">
+                        Less than once a year
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="no-flex d-flex justify-content-center">
-        <div class="btn btn-themed border-0 mr-2 prev">&lt; Prev Section</div>
-        <div class="btn btn-themed border-0 next">Next Section &gt;</div>
+        <div class="btn btn-themed border-0 mr-2 prev">Prev Section</div>
+        <div class="btn btn-themed border-0 next">Next Section</div>
+        <button class="btn btn-themed border-0" type="submit" id="survey-submitter">Submit Responses</div>
     </div>
 </div>
 <script>
-function Pager (id) {
+function Pager (id, onSubmit) {
     this.id = id;
     this.node = document.getElementById(this.id);
     this.pages = document.getElementsByClassName("page");
@@ -181,6 +124,8 @@ function Pager (id) {
     this.prev.addEventListener("click", this.prevPage.bind(this));
     this.next = this.node.getElementsByClassName("next")[0];
     this.next.addEventListener("click", this.nextPage.bind(this));
+
+    this.submit = document.getElementById("survey-submitter");
 
     this.setIndex(0);
 }
@@ -196,13 +141,15 @@ Pager.prototype.setIndex = function (index) {
 
     this.prev.style.display = null;
     this.next.style.display = null;
+    this.submit.style.display = "none";
     this.prev.innerHTML = "Prev Section";
     this.next.innerHTML = "Next Section";
     if (this.index === 0) {
         this.prev.style.display = "none";
         this.next.innerHTML = "Start the Survey";
     } else if (this.index === this.pages.length - 1) {
-        this.next.innerHTML = "Submit Responses";
+        this.next.style.display = "none";
+        this.submit.style.display = null;
     }
     
     // scroll the form back to the top
@@ -217,9 +164,14 @@ Pager.prototype.prevPage = function () {
     this.setIndex(this.index - 1);
 }
 
-function Section (id) {
+function Checklist (id, checkboxNames) {
     this.id = id;
     this.node = document.getElementById(this.id);
+
+    for (var name of checkboxNames) {
+        var c = this.createCheckbox(name);
+        this.node.appendChild(c);
+    }
 
     var addButton = document.createElement("div");
     addButton.innerHTML = "Don't see your option? Click to add another.";
@@ -228,25 +180,44 @@ function Section (id) {
     this.addButton = addButton;
     this.node.appendChild(addButton);
 }
-Section.prototype.removeChild = function (child) {
+Checklist.prototype.removeChild = function (child) {
     this.node.removeChild(child);
 }
-Section.prototype.newCustomInput = function () {
+Checklist.prototype.createCheckbox = function (text, checkbox, textNode) {
     var container = document.createElement("div");
-    container.className = "custom mt-2";
+    container.className = "form-check btn btn-light";
 
+    if (textNode == undefined && checkbox == undefined) {
+        checkbox = document.createElement("input");
+        checkbox.checked = false;
+        checkbox.type = "checkbox";
+
+        container.addEventListener("click", function () {
+            checkbox.checked = !checkbox.checked;
+        });
+        
+        textNode = document.createTextNode(" " + text);
+    }
+    
+    container.appendChild(checkbox);
+    container.appendChild(textNode);
+    return container;
+}
+Checklist.prototype.newCustomInput = function () {
     var remove = document.createElement("div");
     remove.className = "remove btn btn-outline-danger";
-    remove.addEventListener("click", this.removeChild.bind(this, container));
     remove.innerHTML = "&times;";
+    remove.style.paddingLeft = "1px";
 
     var input = document.createElement("input");
     input.type = "text";
     input.className = "form-control form-control-sm";
     input.placeholder = "Enter new option here...";
 
-    container.appendChild(remove);
-    container.appendChild(input);
+    var container = this.createCheckbox("", remove, input);
+    container.classList.add("d-flex", "align-items-center");
+    remove.addEventListener("click", this.removeChild.bind(this, container));
+
     this.node.insertBefore(container, this.addButton);
 
     input.focus();
@@ -254,8 +225,23 @@ Section.prototype.newCustomInput = function () {
 
 new Pager("survey-body");
 
-new Section("how-tracking");
-new Section("extra-documents");
-new Section("document-creation-softwares");
+new Checklist("how-tracking"
+             ,["Word Documents / Typed Up Files (.doc, .txt, .etc)"
+              ,"Spreadsheets (Excel, Gnumeric, etc.)"
+              ,"Pen and Paper (Notebook, Post-Its, etc.)"
+              ]
+             );
+new Checklist("extra-documents"
+             ,["Cover Letter"
+              ,"Letter of Reference / Recommendation"
+              ,"Work Philosophy"
+              ]
+             );
+new Checklist("document-creation-softwares"
+             ,["Word / Google Docs / Other Office Suite Software" 
+              ,"LaTeX"
+              ,"InDesign / GIMP / Other Design and Artwork Software"
+              ]
+             );
 </script>
 
