@@ -81,5 +81,18 @@ class UserCreateTest < ActiveSupport::TestCase
     assert_not @user2.valid?
 
   end
-  
+
+  test "User with duplicate uppercase email is not valid" do
+    @user1 = User.create!(name: @name, email: @email,
+                     password: @password,
+                     password_confirmation: @password)
+
+    @user2 = User.new(name: 'foo', email: @email.upcase,
+                      password: @password,
+                      password_confirmation: @password)
+    
+    assert_not @user2.valid?
+
+  end
+
 end
