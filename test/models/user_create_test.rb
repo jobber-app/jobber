@@ -23,14 +23,21 @@ class UserCreateTest < ActiveSupport::TestCase
 
   test "User with empty password is not valid" do
     @user = User.new(name: @name, email: @email,
-                         password: ' ',
-                         password_confirmation: ' ')
+                         password: '',
+                         password_confirmation: '')
     assert_not @user.valid?
   end
 
   test "User with incorrect password confirmation is not valid" do
     @user = User.new(name: @name, email: @email,
                          password: @password,
+                         password_confirmation: 'foo')
+    assert_not @user.valid?
+  end
+
+  test "User with too short password is not valid" do
+    @user = User.new(name: @name, email: @email,
+                         password: 'foo',
                          password_confirmation: 'foo')
     assert_not @user.valid?
   end
