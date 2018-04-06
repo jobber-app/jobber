@@ -68,4 +68,18 @@ class UserCreateTest < ActiveSupport::TestCase
       assert_not @user.valid?, "#{invalid_address.inspect} should not be valid"
     end
   end
+
+  test "User with duplicate email is not valid" do
+    @user1 = User.create!(name: @name, email: @email,
+                     password: @password,
+                     password_confirmation: @password)
+
+    @user2 = User.new(name: 'foo', email: @email,
+                      password: @password,
+                      password_confirmation: @password)
+    
+    assert_not @user2.valid?
+
+  end
+  
 end
