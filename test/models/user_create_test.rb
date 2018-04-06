@@ -48,4 +48,24 @@ class UserCreateTest < ActiveSupport::TestCase
                          password_confirmation: @password)
     assert @user.valid?
   end
+
+  test "User with valid email is valid" do
+    valid_addresses = %w[foo@bar.com a+b@boo.org thing.other-thing@x.y.z]
+    valid_addresses.each do |valid_address|
+      @user = User.new(name: @name, email: valid_address,
+                         password: @password,
+                         password_confirmation: @password)
+      assert @user.valid?, "#{valid_address.inspect} should be valid"
+    end
+  end
+
+  test "User with invalid email is not valid" do
+    invalid_addresses = %w[@bar.com org x.com a@]
+    invalid_addresses.each do |invalid_address|
+      @user = User.new(name: @name, email: invalid_address,
+                         password: @password,
+                         password_confirmation: @password)
+      assert_not @user.valid?, "#{invalid_address.inspect} should not be valid"
+    end
+  end
 end

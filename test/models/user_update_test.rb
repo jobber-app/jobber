@@ -2,7 +2,8 @@ require 'test_helper'
 
 class UserUpdateTest < ActiveSupport::TestCase
   def setup
-    @user = User.create!(name: 'djt', email: 'djt@djt.com', password: 'deejaytee', password_confirmation: 'deejaytee')
+    @user = User.create!(name: 'djt', email: 'djt@djt.com',
+                         password: 'deejaytee', password_confirmation: 'deejaytee')
   end
   
   test "User with valid credentials should be valid" do
