@@ -90,9 +90,17 @@ class UserCreateTest < ActiveSupport::TestCase
     @user2 = User.new(name: 'foo', email: @email.upcase,
                       password: @password,
                       password_confirmation: @password)
-    
+    @user2.save
     assert_not @user2.valid?
-
   end
+
+  test "Email is saved as lowercase" do
+    @user1 = User.create!(name: @name, email: @email.upcase,
+                          password: @password,
+                          password_confirmation: @password)
+
+    assert_equal @email, @user1.reload.email
+  end
+  
 
 end

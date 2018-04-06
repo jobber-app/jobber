@@ -16,7 +16,7 @@ class UserUpdateTest < ActiveSupport::TestCase
   end
 
   test "Name over 50 chars is not valid" do
-    @user.name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    @user.name = "a" * 51
     assert_not @user.valid?
   end
 
