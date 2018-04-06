@@ -1,27 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  employer: MyString
-  postlink: MyText
-  posttext: MyText
-  applydate: 2018-03-10 16:28:33
-  location: MyString
-  status: MyString
-  coverletter: MyText
-  contactdetails: MyText
-  additionalinfo: MyText
-  user: one
+# one:
+#   title: MyString
+#   employer: MyString
+#   postlink: MyText
+#   posttext: MyText
+#   applydate: 2018-03-10 16:28:33
+#   location: MyString
+#   status: MyString
+#   coverletter: MyText
+#   contactdetails: MyText
+#   additionalinfo: MyText
+#   user: one
 
-two:
-  title: MyString
-  employer: MyString
-  postlink: MyText
-  posttext: MyText
-  applydate: 2018-03-10 16:28:33
-  location: MyString
-  status: MyString
-  coverletter: MyText
-  contactdetails: MyText
-  additionalinfo: MyText
-  user: two
+# two:
+#   title: MyString
+#   employer: MyString
+#   postlink: MyText
+#   posttext: MyText
+#   applydate: 2018-03-10 16:28:33
+#   location: MyString
+#   status: MyString
+#   coverletter: MyText
+#   contactdetails: MyText
+#   additionalinfo: MyText
+#   user: two
