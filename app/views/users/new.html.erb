@@ -1,5 +1,52 @@
-<h1>New User</h1>
-
+<h3>Create an Account</h3>
+<div class="mb-1">
+    <%= link_to "Already have an account? Login here.", controller: "sessions", action: "new" %>
+</div>
 <%= render 'form', user: @user %>
+<script>
+(function() {
+  var showStrength = function (password) {
+    if (password.length === 0) {
+        passwordStrength.innerHTML = "Password not yet entered.";
+        return;
+    }
+    if (password.length < 8) {
+        passwordStrength.innerHTML = "Password too short.";
+        return;
+    }
+    z = zxcvbn(password);
+    passwordStrength.innerHTML = "To crack this password with simple, online methods would need " 
+                               + z.crack_times_display.online_no_throttling_10_per_second 
+                               + ".<br/>A homemade high-end cracker, offline, would need "
+                               + z.crack_times_display.offline_fast_hashing_1e10_per_second
+                               + "."
+                               ;
+  }
+  var parseEvent = function (e) { showStrength(e.target.value); }
+  var password = document.getElementById("password");
+  var passwordStrength = document.getElementById("password-strength");
+  password.addEventListener("input", parseEvent);
 
-<%= link_to 'Back', users_path %>
+  // cross-browser asynchronous script loading for zxcvbn.
+  // adapted from http://friendlybit.com/js/lazy-loading-asyncronous-javascript/
+  var ZXCVBN_SRC = '/assets/zxcvbn.js';
+
+  var async_load = function() {
+    console.log("ZXCVBN loaded.");
+    var first, s;
+    s = document.createElement('script');
+    s.src = ZXCVBN_SRC;
+    s.type = 'text/javascript';
+    s.async = true;
+    first = document.getElementsByTagName('script')[0];
+    var el = first.parentNode.insertBefore(s, first);
+    return el;
+  };
+
+  if (window.attachEvent != null) {
+    window.attachEvent('onload', async_load);
+  } else {
+    window.addEventListener('load', async_load, false);
+  }
+}).call(this);
+</script>

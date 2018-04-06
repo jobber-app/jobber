@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with(model: user, local: true, class: "d-flex flex-column") do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,17 +11,42 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :user_name %>
+    <%= form.text_field :name, id: :user_name,
+        class: "form-control"
+    %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :email %>
-    <%= form.text_field :email, id: :user_email %>
+    <%= form.text_field :email, id: :user_email,
+        class: "form-control"
+    %>
+    <small class="text-muted">We will never disclose your username, account data, or email to anyone.</small>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :user_password,
+        placeholder: "Password",
+        id: "password",
+        class: "form-control"
+    %>
+    <small class="text-muted">Password must be at least 8 characters long. We recommend a password at least 12 characters long.</small><br/>
+    <small>
+        <div class="d-flex" style="height: 3em;">
+            <div class="no-flex-horizontal pr-1">Password Strength:</div>
+            <div id="password-strength">Not yet entered.</div>
+        </div>
+    </small>
+    <%= form.password_field :password_confirmation, id: :user_password_confirmation,
+        placeholder: "Confirm your password",
+        class: "form-control mt-1"
+    %>
   </div>
+
+  <button type="submit" class="btn-themed-clean align-self-center" style="width: 10em;">
+    Sign Up
+  </button>
 <% end %>
