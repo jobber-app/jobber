@@ -107,6 +107,20 @@ class Question {
     }
 }
 
+class Integer extends Question {
+    constructor (id, text, max, min) {
+        super(...arguments);
+        var input = document.createElement("input");
+        input.className = "form-control";
+        input.type = "number";
+        input.placeholder = "Input a number from 1 to 100.";
+        input.max = max ? max : 100;
+        input.min = min ? min : 1;
+
+        this.answer.appendChild(input);
+    }
+}
+
 class Checklist extends Question {
     constructor (id, text, inputs, radio, unmodifiable) {
         super(...arguments);
@@ -182,6 +196,9 @@ class Checklist extends Question {
 var pager = new Pager("survey-body");
 
 new Form("survey", [
+    ,new   Integer("simultaneous-applications"
+                  ,"When searching for a job, roughly how many separate job applications do you tend to manage at any one time?"
+                  )
     ,new Checklist("how-tracking"
                   ,"How do you normally keep track of your applications and their documents as you apply to them?"
                   ,[["docs", "Word Documents / Typed Up Files (.doc, .txt, .etc)"]
@@ -202,6 +219,9 @@ new Form("survey", [
                    ,["latex", "LaTeX"]
                    ,["indesign", "InDesign / GIMP / Other Design and Artwork Software"]
                    ]
+                  )
+    ,new   Integer("different-cvs"
+                  ,"How many different CVs do you generally maintain at a given time?"
                   )
     ,new Checklist("update-frequency"
                   ,"How often do you update or change your CV's contents or layout?<br/><small class='text-muted text-normal'>(Pick the first that applies.)</small>"
