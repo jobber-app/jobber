@@ -47,7 +47,7 @@
 </style>
 <div id="survey-body" class="h-100 pager p-2 d-flex flex-column">
     <div class="auto-overflow yes-flex mb-2 " id="survey-scroller">
-        <form>
+        <form id="survey">
             <div class="page">
                 <h3 class="text-center">Welcome to our Survey</h3>
                 <p>This survey is composed of three parts, each about 40 seconds in length. Total time of completion is 1&#189; to 3 minutes.</p>
@@ -60,15 +60,11 @@
                     <label>When searching for a job, roughly how many separate job applications do you tend to manage at any one time?</label>
                     <input required="true" type="number" class="form-control" max="100" min="1" value="1"/>
                 </div>
-                <div class="form-group" id="how-tracking">
-                    <label>How do you normally keep track of your applications and their documents as you apply to them?</label>
-                </div>
+                <div class="form-group" id="how-tracking"></div>
             </div>
             <div class="page">
                 <h3 class="text-center">Section 2</h3>
-                <div class="form-group" id="extra-documents">
-                    <label>What documents have been requested from you in past applications, aside from CVs?</label>
-                </div>
+                <div class="form-group" id="extra-documents"></div>
                 <div class="form-group" id="document-creation-softwares">
                     <label>What programs or softwares do you use to create documents for applications?</label>
                 </div>
@@ -79,11 +75,7 @@
                     <label>How many different CVs do you generally maintain at a given time?</label>
                     <input required="true" type="number" class="form-control" max="100" min="1" value="1"/>
                 </div>
-                <div class="form-group" id="update-frequency">
-                    <label>How often do you update or change your CV's contents or layout?<br/>
-                        <small class="text-muted text-normal">(Pick the first that applies.)</small>
-                    </label>
-                </div>
+                <div class="form-group" id="update-frequency"></div>
             </div>
         </form>
     </div>
