@@ -66,7 +66,7 @@ class Form {
         var validities = this.questions.map(q => q.showAdvice());
         var allValid = validities.every(x => x == true);
         if (!allValid) {
-            var index = Math.floor(validities.indexOf(true) / 2);
+            var index = Math.floor(validities.indexOf(false) / 2) + 1;
             console.log("setting page to index", index, validities);
             this.setPage(index);
         }
@@ -87,13 +87,11 @@ class Question {
         this.answerEl.className = "answer";
         this.node.appendChild(this.answerEl);
 
-        var adviceEls = this.node.getElementsByClassName("advice");
-        this.adviceEl = adviceEls[0];
-        if (this.adviceEl == undefined) this.adviceEl = { style: {} }
+        this.adviceEl = document.createElement("div");
+        this.node.appendChild(this.adviceEl);
     }
     
     get answer () { 
-        console.log("getting answer for raw question....");
         return undefined; 
     }
     get isValid () {
@@ -137,11 +135,11 @@ class Integer extends Question {
     }
     
     get answer () {
-        console.log("getting answer for integer");
         return parseInt(this.inputEl.value);
     }
     get isValid () {
         var answer = this.answer;
+        if (isNaN(answer)) return false;
         return answer < this.max && answer > this.min;
     }
     errorMessage = "Make sure you've entered a number between " 
@@ -174,13 +172,13 @@ class Checklist extends Question {
     }
 
     extractCustomValue (el) {
-        var i = el.getElementsByTagName("input");
+        var i = el.getElementsByTagName("input")[0];
         return i.value;
     }
 
     extractCheckboxValue (el) {
-        var i = el.getElementsByTagName("input");
-        if (i.checked) return el.name;
+        var i = el.getElementsByTagName("input")[0];
+        if (i.checked) return i.name;
     }
 
     get answer () {
@@ -188,9 +186,10 @@ class Checklist extends Question {
         customItems = [...customItems];
         var customValues = customItems.map(this.extractCustomValue, this);
 
-        var checkboxItems = this.node.getElementsByClassName("checklist-items");
+        var checkboxItems = this.node.getElementsByClassName("checklist-item");
         checkboxItems = [...checkboxItems];
         var checkboxValues = checkboxItems.map(this.extractCheckboxValue, this);
+        checkboxValues = checkboxValues.filter(v => v != undefined);
 
         var values = customValues.concat(checkboxValues);
         return values.join("\n");
@@ -198,7 +197,8 @@ class Checklist extends Question {
 
     errorMessage = "Make sure to check at least one box, or add at least one custom value";
     get isValid () {
-        return this.answer === "";
+        console.log(this.answer);
+        return this.answer !== "";
     }
 
     removeChild (child) {
@@ -242,7 +242,7 @@ class Checklist extends Question {
         input.placeholder = "Enter new option here...";
 
         var container = this.createCheckbox("", "", remove, input);
-        container.classList.add("d-flex", "align-items-center");
+        container.classList.add("checklist-custom", "d-flex", "align-items-center");
         remove.addEventListener("click", this.removeChild.bind(this, container));
 
         this.answerEl.insertBefore(container, this.addButton);
@@ -254,7 +254,7 @@ class Checklist extends Question {
 window.pager = new Pager("survey-body");
 
 window.form = new Form("survey", [
-    ,new   Integer("simultaneous-applications"
+     new   Integer("simultaneous-applications"
                   ,"When searching for a job, roughly how many separate job applications do you tend to manage at any one time?"
                   )
     ,new Checklist("how-tracking"
