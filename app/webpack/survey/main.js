@@ -17,10 +17,10 @@ class Pager {
     }
 
     setPage (index) {
+        if (this.index == index) return;
         if (this.index != undefined) {
             this.pages[this.index].classList.remove("showing");
         }
-        if (this.index == index) return;
 
         this.index = index;
 
@@ -67,6 +67,7 @@ class Form {
         var allValid = validities.every(x => x == true);
         if (!allValid) {
             var index = Math.floor(validities.indexOf(true) / 2);
+            console.log("setting page to index", index, validities);
             this.setPage(index);
         }
     }
@@ -250,7 +251,7 @@ class Checklist extends Question {
     }
 }
 
-var pager = new Pager("survey-body");
+window.pager = new Pager("survey-body");
 
 window.form = new Form("survey", [
     ,new   Integer("simultaneous-applications"
