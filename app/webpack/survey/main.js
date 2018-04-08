@@ -69,6 +69,8 @@ class Form {
             var index = Math.floor(validities.indexOf(false) / 2) + 1;
             console.log("setting page to index", index, validities);
             this.setPage(index);
+        } else {
+            console.log("All is well");
         }
     }
 }
@@ -82,13 +84,14 @@ class Question {
         var label = document.createElement("label");
         label.innerHTML = text;
         this.node.appendChild(label);
+
+        this.adviceEl = document.createElement("div");
+        this.adviceEl.className = "advice alert-danger p-2 m-2";
+        this.node.appendChild(this.adviceEl);
         
         this.answerEl = document.createElement("div");
         this.answerEl.className = "answer";
         this.node.appendChild(this.answerEl);
-
-        this.adviceEl = document.createElement("div");
-        this.node.appendChild(this.adviceEl);
     }
     
     get answer () { 
@@ -97,16 +100,16 @@ class Question {
     get isValid () {
         return true;
     }
-    errorMessage = "";
+    get advice () { return ""; }
 
     showAdvice () {
         var isValid = this.isValid;
         if (isValid) {
-            this.adviceEl.style.display = null;
-            this.adviceEl.innerHTML = this.advice;
-        } else {
-            this.adviceEl.style.display = "none";
+            this.adviceEl.classList.remove("showing");
             this.adviceEl.innerHTML = "";
+        } else {
+            this.adviceEl.classList.add("showing");
+            this.adviceEl.innerHTML = this.advice;
         }
         return isValid;
     }
@@ -142,10 +145,12 @@ class Integer extends Question {
         if (isNaN(answer)) return false;
         return answer < this.max && answer > this.min;
     }
-    errorMessage = "Make sure you've entered a number between " 
-                 + this.min 
-                 + " and " 
-                 + this.max;
+    get advice () {
+        return "Make sure you've entered a number between " 
+               + this.min 
+               + " and " 
+               + this.max;
+    }
 }
 
 class Checklist extends Question {
@@ -195,9 +200,10 @@ class Checklist extends Question {
         return values.join("\n");
     }
 
-    errorMessage = "Make sure to check at least one box, or add at least one custom value";
+    get advice () {
+        return "Make sure to check at least one box, or add at least one custom value";
+    }
     get isValid () {
-        console.log(this.answer);
         return this.answer !== "";
     }
 
