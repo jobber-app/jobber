@@ -86,7 +86,7 @@ class Question {
         this.node.appendChild(label);
 
         this.adviceEl = document.createElement("div");
-        this.adviceEl.className = "advice alert-danger p-2 m-2";
+        this.adviceEl.className = "advice alert-danger p-2 mb-2 rounded";
         this.node.appendChild(this.adviceEl);
         
         this.answerEl = document.createElement("div");
