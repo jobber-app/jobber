@@ -226,7 +226,7 @@ new Form("survey", [
     ,new Checklist("update-frequency"
                   ,"How often do you update or change your CV's contents or layout?<br/><small class='text-muted text-normal'>(Pick the first that applies.)</small>"
                   ,[["job", "For every job application"]
-                   ,["skill", "Every time I acquite a new skill"]
+                   ,["skill", "Every time I acquire a new skill"]
                    ,[">1pmo", "More than once a month"]
                    ,[">3pmo", "More than once every 3 months"]
                    ,[">1pyr", "More than once a year"]
