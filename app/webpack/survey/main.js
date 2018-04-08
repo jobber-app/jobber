@@ -82,18 +82,24 @@ class Question {
         label.innerHTML = text;
         this.node.appendChild(label);
         
-        this.answer = document.createElement("div");
-        this.answer.className = "answer";
-        this.node.appendChild(this.answer);
+        this.answerEl = document.createElement("div");
+        this.answerEl.className = "answer";
+        this.node.appendChild(this.answerEl);
 
         var adviceEls = this.node.getElementsByClassName("advice");
-        if (adviceEls == undefined) this.adviceEl = {}
-        else this.adviceEls = adviceEls[0];
+        this.adviceEl = adviceEls[0];
+        if (this.adviceEl == undefined) this.adviceEl = { style: {} }
+    }
+    
+    get answer () { 
+        console.log("getting answer for raw question....");
+        return undefined; 
     }
     get isValid () {
         return true;
     }
     errorMessage = "";
+
     showAdvice () {
         var isValid = this.isValid;
         if (isValid) {
@@ -110,15 +116,37 @@ class Question {
 class Integer extends Question {
     constructor (id, text, max, min) {
         super(...arguments);
+
+        this.min = min ? min : 1;
+        this.max = max ? max : 100;
+
         var input = document.createElement("input");
         input.className = "form-control";
         input.type = "number";
-        input.placeholder = "Input a number from 1 to 100.";
-        input.max = max ? max : 100;
-        input.min = min ? min : 1;
+        input.max = this.max;
+        input.min = this.min;
+        input.placeholder = "Enter a number from " 
+                          + this.min 
+                          + " to " 
+                          + this.max 
+                          + ".";
+        this.inputEl = input;
 
-        this.answer.appendChild(input);
+        this.answerEl.appendChild(this.inputEl);
     }
+    
+    get answer () {
+        console.log("getting answer for integer");
+        return parseInt(this.inputEl.value);
+    }
+    get isValid () {
+        var answer = this.answer;
+        return answer < this.max && answer > this.min;
+    }
+    errorMessage = "Make sure you've entered a number between " 
+                 + this.min 
+                 + " and " 
+                 + this.max;
 }
 
 class Checklist extends Question {
@@ -131,7 +159,7 @@ class Checklist extends Question {
             var name = input[0]; 
             var text = input[1];
             var c = this.createCheckbox(name, text);
-            this.answer.appendChild(c);
+            this.answerEl.appendChild(c);
         }
 
         if (unmodifiable !== true) {
@@ -140,15 +168,44 @@ class Checklist extends Question {
             addButton.className = "btn btn-themed btn-sm mt-2 w-100 border-0";
             addButton.addEventListener("click", this.newCustomInput.bind(this));
             this.addButton = addButton;
-            this.answer.appendChild(addButton);
+            this.answerEl.appendChild(addButton);
         }
     }
+
+    extractCustomValue (el) {
+        var i = el.getElementsByTagName("input");
+        return i.value;
+    }
+
+    extractCheckboxValue (el) {
+        var i = el.getElementsByTagName("input");
+        if (i.checked) return el.name;
+    }
+
+    get answer () {
+        var customItems = this.node.getElementsByClassName("checklist-custom");
+        customItems = [...customItems];
+        var customValues = customItems.map(this.extractCustomValue, this);
+
+        var checkboxItems = this.node.getElementsByClassName("checklist-items");
+        checkboxItems = [...checkboxItems];
+        var checkboxValues = checkboxItems.map(this.extractCheckboxValue, this);
+
+        var values = customValues.concat(checkboxValues);
+        return values.join("\n");
+    }
+
+    errorMessage = "Make sure to check at least one box, or add at least one custom value";
+    get isValid () {
+        return this.answer === "";
+    }
+
     removeChild (child) {
-        this.answer.removeChild(child);
+        this.answerEl.removeChild(child);
     }
     createCheckbox (name, text, checkbox, textNode) {
         var container = document.createElement("div");
-        container.className = "form-check btn btn-light";
+        container.className = "checklist-item form-check btn btn-light";
 
         if (textNode == undefined && checkbox == undefined) {
             checkbox = document.createElement("input");
@@ -187,7 +244,7 @@ class Checklist extends Question {
         container.classList.add("d-flex", "align-items-center");
         remove.addEventListener("click", this.removeChild.bind(this, container));
 
-        this.answer.insertBefore(container, this.addButton);
+        this.answerEl.insertBefore(container, this.addButton);
 
         input.focus();
     }
@@ -195,7 +252,7 @@ class Checklist extends Question {
 
 var pager = new Pager("survey-body");
 
-new Form("survey", [
+window.form = new Form("survey", [
     ,new   Integer("simultaneous-applications"
                   ,"When searching for a job, roughly how many separate job applications do you tend to manage at any one time?"
                   )
