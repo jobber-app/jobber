@@ -143,7 +143,7 @@ class Integer extends Question {
     get isValid () {
         var answer = this.answer;
         if (isNaN(answer)) return false;
-        return answer < this.max && answer > this.min;
+        return answer <= this.max && answer >= this.min;
     }
     get advice () {
         return "Make sure you've entered a number between " 
