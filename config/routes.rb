@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :documents
         resources :jobs do
           resources :interviews
+          resources :offers
         end
       end
     end
