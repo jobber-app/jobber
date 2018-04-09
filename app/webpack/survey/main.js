@@ -1,7 +1,13 @@
-class Pager {
+class El {
     constructor (id) {
         this.id = id;
         this.node = document.getElementById(this.id);
+    }
+}
+
+class Pager extends El {
+    constructor (id) {
+        super(...arguments);
         this.pages = document.getElementsByClassName("page");
         
         this.scroller = document.getElementById("survey-scroller");
@@ -53,13 +59,12 @@ class Pager {
     }
 }
 
-class Form {
+class Form extends El {
     constructor (id, questions, setPage) {
+        super(...arguments);
         this.id = id;
         this.questions = questions;
         this.setPage = setPage;
-        
-        this.node = document.getElementById(this.id);
     }
 
     submit () {
@@ -75,10 +80,9 @@ class Form {
     }
 }
 
-class Question {
+class Question extends El {
     constructor (id, text) {
-        this.id = id;
-        this.node = document.getElementById(this.id);
+        super(...arguments);
         this.node.classList.add("form-group");
         
         var label = document.createElement("label");
