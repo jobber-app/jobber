@@ -14,6 +14,8 @@ export default @observer class Summary extends React.Component {
         return (
 <div>
     <h4>Your Overview:</h4>
+    <p>There are { " " + store.jobs.length + " " }
+       jobs currently in the queue.</p>
     <p>You have 
        { " " + this.jobsWithStatus(0).toString() + " " } 
        jobs that are in the info stage.</p>
