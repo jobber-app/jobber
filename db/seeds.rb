@@ -76,3 +76,21 @@ job11 = user1.jobs.create!({ title: "Gardening Guru",
                              contactdetails: "Email a cover letter and cv.",
                              additionalinfo: "Site gives me deja vu."
                            })
+
+# Throw some interviews under specific jobs
+int100 = job00.interviews.create!({ date: "2018-06-05 15:01",
+                                    notes: "Big Interview!"
+                                  })
+
+int101 = job01.interviews.create!({ date: "2018-06-05 15:01",
+                                    notes: "Smol Interview!"
+                                  })
+
+int110 = job10.interviews.create!({ date: "2018-06-05 15:01",
+                                    notes: "Not a great interview."
+                                  })
+
+int111 = job11.interviews.create!({ date: "2018-06-05 15:01",
+                                    notes: "Really good interview."
+                                  })
+
