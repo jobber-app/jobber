@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users do 
-        resources :jobs
         resources :documents
+        resources :jobs do
+          resources :interviews
+        end
       end
     end
   end
