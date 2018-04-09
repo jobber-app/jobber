@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409190530) do
+ActiveRecord::Schema.define(version: 20180409202405) do
 
   create_table "documents", force: :cascade do |t|
     t.string "title"
     t.text "link"
-    t.text "type"
+    t.text "mimetype"
     t.text "description"
     t.integer "user_id"
     t.datetime "created_at", null: false
