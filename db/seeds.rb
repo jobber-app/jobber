@@ -12,8 +12,27 @@
 user0 = User.create!(name: 'djt', email: 'djt@djt.com', password: 'deejaytee', password_confirmation: 'deejaytee')
 user1 = User.create!(name: 'ma', email: 'ma@ma.com', password: 'mamamama', password_confirmation: 'mamamama')
 
+# Add documents under users
+doc00 = user0.documents.create!({ title: "Dylan CV",
+                                  link: "https://dylant.org/cv.pdf",
+                                  mimetype: "CV",
+                                  description: "Dylan's latest CV"
+                                })
+
+doc01 = user0.documents.create!({ title: "Chicken PDF",
+                                  link: "https://isotropic.org/papers/chicken.pdf",
+                                  mimetype: "PDF",
+                                  description: "Chicken, chicken chicken."
+                                })
+
+doc10 = user1.documents.create!({ title: "Lorem CV",
+                                  link: "https://github.com/treyhunner/resume/blob/master/resume.pdf",
+                                  mimetype: "CV",
+                                  description: "The lorem CV"
+                                })
+
 # Fill out your jobs here
-job00 = user0.jobs.create!({ title: "Analyst",         
+job00 = user0.jobs.create!({ title: "Analyst",
                              employer: "Beare's Boys",
                              postlink: "https://www.google.com",
                              posttext: "Analyze for us!",
@@ -31,7 +50,7 @@ job01 = user0.jobs.create!({ title: "Central Manager",
                              applydate: "2018-05-06 12:01:01", 
                              location: "Edinburgh, United Kingdom",
                              status: "0", 
-                             coverletter: "...",
+                             coverletter: "I like Derek.",
                              contactdetails: "Email a cover letter and cv.",
                              additionalinfo: "Site gives me deja vu."
                            })
@@ -42,7 +61,7 @@ job10 = user1.jobs.create!({ title: "Etherium Expert",
                              applydate: "2018-05-09 12:01:01", 
                              location: "Edinburgh, United Kingdom",
                              status: "2", 
-                             coverletter: "...",
+                             coverletter: "All aboard the hype train, my motto",
                              contactdetails: "Email a cover letter and cv.",
                              additionalinfo: "Site gives me deja vu."
                            })
@@ -53,7 +72,7 @@ job11 = user1.jobs.create!({ title: "Gardening Guru",
                              applydate: "2018-05-30 12:01:01", 
                              location: "Edinburgh, United Kingdom",
                              status: "0", 
-                             coverletter: "...",
+                             coverletter: "I am Gerald, the shrubber.",
                              contactdetails: "Email a cover letter and cv.",
                              additionalinfo: "Site gives me deja vu."
                            })
