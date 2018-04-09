@@ -5,8 +5,8 @@ import store from "./store";
 
 import { JobsList, CVsList } from "./List";
 import { JobCreator, CVCreator } from "./ResourceCreator";
-import Details from "./Details";
-import Summary from "./Summary";
+import Job from "./Job";
+import JobSummary from "./JobSummary";
 import Title from "./Title";
 
 export default class Layout extends React.Component {
@@ -50,8 +50,8 @@ export default class Layout extends React.Component {
         <div class="col p-2 h-100" id="details">
             <div class="container-fluid no-gutters h-100">
                 <Switch>
-                    <Route path="/jobs/:id" component={ Details }/>
-                    <Route path="/jobs" component={ Summary }/>
+                    <Route path="/jobs/:id" component={ Job }/>
+                    <Route path="/jobs" component={ JobSummary }/>
                     <Route path="/" render={ _ => (
                         `Welcome to Jobber!
                         Click a tab above to start!`
