@@ -8,11 +8,11 @@
 
 # Run `rake db:seed`
 
+# Two test users
 user0 = User.create!(name: 'djt', email: 'djt@djt.com', password: 'deejaytee', password_confirmation: 'deejaytee')
-
 user1 = User.create!(name: 'ma', email: 'ma@ma.com', password: 'mamamama', password_confirmation: 'mamamama')
 
-# Fill out your jobs here....
+# Fill out your jobs here
 job00 = user0.jobs.create!({ title: "Analyst",         
                              employer: "Beare's Boys",
                              postlink: "https://www.google.com",
