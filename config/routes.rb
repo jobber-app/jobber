@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'documents/new'
+
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
