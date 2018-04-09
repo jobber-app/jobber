@@ -18,7 +18,7 @@ module Api
         if @user.save
           log_in @user
           flash[:success] = "Welcome to Jobber!"
-          redirect_to @user
+          redirect_to app_url
         else
           render 'new'
         end

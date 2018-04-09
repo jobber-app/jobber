@@ -1,6 +1,6 @@
 module Api
   module V1
-    class InterviewController < ApplicationController
+    class InterviewsController < ApplicationController
       before_action :logged_in_user, only: [:create, :edit, :update, :show, :destroy]
       before_action :correct_user, only: [:edit, :update, :show, :destroy]
 
@@ -53,8 +53,9 @@ module Api
       end
 
       def correct_user
-        @interview = current_user.interviews.find_by(id: params[:id])
-        redirect_to root_url if @interview.nil?
+        @interview = Interview.find(params[:id])
+        @job = current_user.jobs.find_by(id: @interview.job_id)
+        render html: "Your account does not have access to this resource.", status: 403 if @job.nil?
       end
     end
   end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/about', to: 'static#about'
   get '/blog', to: 'static#blog'
   get '/survey', to: 'static#survey'
-  get '/app', to: 'react#index'
+  get '/app', to: 'react#index', as: 'app'
   
   root 'static#home'
   namespace :api do
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :documents
         resources :jobs do
           resources :interviews
+          resources :offers
         end
       end
     end
