@@ -35,21 +35,27 @@ export default class Layout extends React.Component {
         </Link>
     </div>
     <div class="row" id="page">
-        <div class="list">
-            <Switch>
-                <Route path="/jobs/:id?" component={ JobCreator }/>
-                <Route path="/cvs" component={ CVCreator }/>
-            </Switch>
-            <Switch>
-                <Route path="/jobs/:id?" component={ JobsList }/>
-                <Route path="/cvs" component={ CVsList }/>
-            </Switch>
-        </div>
+        <Route path={ /[^\/]/ } render={ _ => (
+            <div class="list">
+                <Switch>
+                    <Route path="/jobs/:id?" component={ JobCreator }/>
+                    <Route path="/cvs" component={ CVCreator }/>
+                </Switch>
+                <Switch>
+                    <Route path="/jobs/:id?" component={ JobsList }/>
+                    <Route path="/cvs" component={ CVsList }/>
+                </Switch>
+            </div>
+        ) }/>
         <div class="col p-2 h-100" id="details">
             <div class="container-fluid no-gutters h-100">
                 <Switch>
                     <Route path="/jobs/:id" component={ Details }/>
                     <Route path="/jobs" component={ Summary }/>
+                    <Route path="/" render={ _ => (
+                        `Welcome to Jobber!
+                        Click a tab above to start!`
+                    ) }/>
                 </Switch>
             </div>
         </div>
