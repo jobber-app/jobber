@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  q1: MyText
+  q2: MyText
+  q3: MyText
+  q4: MyText
+  q5: MyText
+  q6: MyText
+
+two:
+  q1: MyText
+  q2: MyText
+  q3: MyText
+  q4: MyText
+  q5: MyText
+  q6: MyText
