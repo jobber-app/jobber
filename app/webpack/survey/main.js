@@ -316,7 +316,7 @@ window.form = new Form("survey", "survey-submitter", [
                   ,"How many different CVs do you generally maintain at a given time?"
                   )
     ,new Checklist("what_update_frequency"
-                  ,"How often do you update or change your CV's contents or layout?<br/><small class='text-muted text-normal'>(Pick the first that applies.)</small>"
+                  ,"How often do you update or change your CV's contents or layout?"
                   ,[["job", "For every job application"]
                    ,["skill", "Every time I acquire a new skill"]
                    ,[">1pmo", "More than once a month"]
