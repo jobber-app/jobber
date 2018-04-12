@@ -309,6 +309,9 @@ Textarea.defaultProps = {
     setProp (name, e) {
         var prop = this.propMap[name];
         var newValue = parseInt(e.target.value);
+
+        // If no meaningful value can be discerned, abort setting prop
+        if (isNaN(newValue)) return;
         
         if (name === "month") newValue -= 1;
         
