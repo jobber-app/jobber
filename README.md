@@ -13,7 +13,7 @@ When you're a student applying for many jobs and internships at the same time, i
 
 This app aims to simplify the process, offering a one-stop shop for a job seeker to track their job applications, interviews, and offers. 
 
-We (Dylan and Mikey) started developing Jobber at HackTheBurgh 2018, and development is still ongoing.
+We (Dylan and Mikey) started developing Jobber at [Hack the Burgh 2018](https://2018.hacktheburgh.com), and development is still ongoing.
 
 ## License
 This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
