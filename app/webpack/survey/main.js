@@ -79,8 +79,7 @@ class Form extends El {
             console.log("setting page to index", index, validities);
             this.setPage(index);
         } else {
-            console.log("All is well");
-            console.log(this.node);
+            console.log("Submitting form:");
             this.node.submit();
         }
     }
@@ -96,7 +95,7 @@ class Question extends El {
         this.node.appendChild(label);
 
         // this.output store the final output 
-        this.output = document.createElement("input");
+        this.output = document.createElement("textarea");
         this.output.name = "response[" + id + "]";
         this.output.hidden = true;
         this.output.style.display = "none";
@@ -120,7 +119,9 @@ class Question extends El {
     get advice () { return ""; }
     writeAnswer () {
         var answer = this.answer;
-        this.output.value = answer;
+        var sanitizedAnswer = document.createTextNode(answer);
+        this.output.innerHTML = "";
+        this.output.appendChild(sanitizedAnswer);
         return answer;
     }
 
@@ -222,7 +223,8 @@ class Checklist extends Question {
         checkboxValues = checkboxValues.filter(v => v != undefined);
 
         var values = customValues.concat(checkboxValues);
-        return values.join("\n");
+        var answer = values.join("\n");
+        return answer;
     }
 
     get advice () {
