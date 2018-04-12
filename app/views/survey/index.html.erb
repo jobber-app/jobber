@@ -1,0 +1,90 @@
+<% provide(:title, "Survey") %>
+<style>
+#main-center {
+    width: 100%;
+    height: 100%;
+}
+#survey-body {
+    max-width: 40em;
+    margin: 0 auto 0 auto;
+    box-sizing: border-box;
+}
+#survey-scroller {
+    overflow-x: visible;
+    overflow-y: auto;
+}
+.form-group > label {
+    font-size: 18px;
+    font-weight: bold;
+}
+.custom {
+    display: flex;
+    align-items: center;
+}
+.remove {
+    height: 14px;
+    width: 14px;
+    padding: 0;
+    margin-right: 6px;
+    line-height: 12px;
+    flex: 0 0 auto;
+}
+.pager .page {
+    display: none;
+}
+.pager .page.showing {
+    display: block;
+}
+.form-check {
+    width: 100%;
+    text-align: left;
+    cursor: default !important;
+    border-radius: 0;
+    background-color: transparent;
+    border: 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.advice {
+    display: none;
+}
+.advice.showing {
+    display: block;
+}
+input[type="number"] {
+    box-shadow: none !important;
+}
+</style>
+<div id="survey-body" class="h-100 pager p-2 d-flex flex-column">
+    <div class="yes-flex mb-2 " id="survey-scroller">
+        <%= form_with(local: true, id: "survey", class: "d-flex flex-column") do |form| %>
+            <div class="page">
+                <h3 class="text-center">Welcome to our Survey</h3>
+                <p>This survey is composed of three parts, each about 40 seconds in length. Total time of completion is 1&#189; to 3 minutes.</p>
+                <p>This survey is designed to help us understand a few aspects of how people manage the job application process, in order to guide Jobber's development so that it actually meets your needs and wants.</p>
+                <p>The survey data is completely anonymously collected and will be shared with no one, which is why the survey isn't a Google Form. We consider privacy to be a fundamental human right, and couldn't guarantee that right to you unless we wrote the survey entirely by ourselves.</p>
+            </div>
+            <div class="page">
+                <h3 class="text-center">Section 1</h3>
+                <div id="count_simultaneous_applications"></div>
+                <div id="how_tracking"></div>
+            </div>
+            <div class="page">
+                <h3 class="text-center">Section 2</h3>
+                <div id="what_extra_documents"></div>
+                <div id="what_document_creation_softwares"></div>
+            </div>
+            <div class="page">
+                <h3 class="text-center">Section 3</h3>
+                <div id="count_different_cvs"></div>
+                <div id="what_update_frequency"></div>
+            </div>
+        <% end %>
+    </div>
+    <div class="no-flex d-flex justify-content-center">
+        <div class="btn btn-themed border-0 mr-2 prev">Prev Section</div>
+        <div class="btn btn-themed border-0 next">Next Section</div>
+        <button class="btn btn-themed border-0" type="submit" id="survey-submitter">Submit Responses</div>
+    </div>
+</div>
+<script src="/assets/survey.js"></script>

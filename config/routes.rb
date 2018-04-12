@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
   get '/blog', to: 'static#blog'
-  get '/survey', to: 'static#survey'
   get '/app', to: 'react#index', as: 'app'
+
+  get '/survey', to: 'survey#index'
+  post '/survey', to: 'survey#respond'
+  get '/thanks', to: 'survey#thanks'
   
   root 'static#home'
   namespace :api do

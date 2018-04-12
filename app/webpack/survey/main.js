@@ -60,11 +60,15 @@ class Pager extends El {
 }
 
 class Form extends El {
-    constructor (id, questions, setPage) {
+    constructor (id, submitId, questions, setPage) {
         super(...arguments);
+
         this.id = id;
         this.questions = questions;
         this.setPage = setPage;
+
+        var submitEl = document.getElementById(submitId);
+        submitEl.addEventListener("click", this.submit.bind(this));
     }
 
     submit () {
@@ -76,6 +80,8 @@ class Form extends El {
             this.setPage(index);
         } else {
             console.log("All is well");
+            console.log(this.node);
+            this.node.submit();
         }
     }
 }
@@ -89,13 +95,20 @@ class Question extends El {
         label.innerHTML = text;
         this.node.appendChild(label);
 
+        // this.output store the final output 
+        this.output = document.createElement("input");
+        this.output.name = "response[" + id + "]";
+        this.output.hidden = true;
+        this.output.style.display = "none";
+        this.node.appendChild(this.output);
+
         this.adviceEl = document.createElement("div");
         this.adviceEl.className = "advice alert-danger p-2 mb-2 rounded";
         this.node.appendChild(this.adviceEl);
         
-        this.answerEl = document.createElement("div");
-        this.answerEl.className = "answer";
-        this.node.appendChild(this.answerEl);
+        this.userInputs = document.createElement("div");
+        this.userInputs.className = "answer";
+        this.node.appendChild(this.userInputs);
     }
     
     get answer () { 
@@ -105,6 +118,11 @@ class Question extends El {
         return true;
     }
     get advice () { return ""; }
+    writeAnswer () {
+        var answer = this.answer;
+        this.output.value = answer;
+        return answer;
+    }
 
     showAdvice () {
         var isValid = this.isValid;
@@ -138,14 +156,14 @@ class Integer extends Question {
                           + ".";
         this.inputEl = input;
 
-        this.answerEl.appendChild(this.inputEl);
+        this.userInputs.appendChild(this.inputEl);
     }
     
     get answer () {
         return parseInt(this.inputEl.value);
     }
     get isValid () {
-        var answer = this.answer;
+        var answer = this.writeAnswer();
         if (isNaN(answer)) return false;
         return answer <= this.max && answer >= this.min;
     }
@@ -167,7 +185,7 @@ class Checklist extends Question {
             var name = input[0]; 
             var text = input[1];
             var c = this.createCheckbox(name, text);
-            this.answerEl.appendChild(c);
+            this.userInputs.appendChild(c);
         }
 
         if (unmodifiable !== true) {
@@ -176,7 +194,7 @@ class Checklist extends Question {
             addButton.className = "btn btn-themed btn-sm mt-2 w-100 border-0";
             addButton.addEventListener("click", this.newCustomInput.bind(this));
             this.addButton = addButton;
-            this.answerEl.appendChild(addButton);
+            this.userInputs.appendChild(addButton);
         }
     }
 
@@ -187,7 +205,7 @@ class Checklist extends Question {
 
     extractCheckboxValue (el) {
         var i = el.getElementsByTagName("input")[0];
-        if (i.checked) return i.name;
+        if (i.checked) return i.id;
     }
 
     get answer () {
@@ -208,11 +226,11 @@ class Checklist extends Question {
         return "Make sure to check at least one box, or add at least one custom value";
     }
     get isValid () {
-        return this.answer !== "";
+        return this.writeAnswer() !== "";
     }
 
     removeChild (child) {
-        this.answerEl.removeChild(child);
+        this.userInputs.removeChild(child);
     }
     createCheckbox (name, text, checkbox, textNode) {
         var container = document.createElement("div");
@@ -221,10 +239,10 @@ class Checklist extends Question {
         if (textNode == undefined && checkbox == undefined) {
             checkbox = document.createElement("input");
             if (this.type === "radio") {
-                checkbox.name = this.id;
+                checkbox.id = this.id;
                 checkbox.value = name;
             } else {
-                checkbox.name = name;
+                checkbox.id = name;
             }
             checkbox.type = this.type;
             checkbox.checked = false;
@@ -255,7 +273,7 @@ class Checklist extends Question {
         container.classList.add("checklist-custom", "d-flex", "align-items-center");
         remove.addEventListener("click", this.removeChild.bind(this, container));
 
-        this.answerEl.insertBefore(container, this.addButton);
+        this.userInputs.insertBefore(container, this.addButton);
 
         input.focus();
     }
@@ -263,35 +281,35 @@ class Checklist extends Question {
 
 window.pager = new Pager("survey-body");
 
-window.form = new Form("survey", [
-     new   Integer("simultaneous-applications"
+window.form = new Form("survey", "survey-submitter", [
+     new   Integer("count_simultaneous_applications"
                   ,"When searching for a job, roughly how many separate job applications do you tend to manage at any one time?"
                   )
-    ,new Checklist("how-tracking"
+    ,new Checklist("how_tracking"
                   ,"How do you normally keep track of your applications and their documents as you apply to them?"
                   ,[["docs", "Word Documents / Typed Up Files (.doc, .txt, .etc)"]
                    ,["spread", "Spreadsheets (Excel, Gnumeric, etc.)"]
                    ,["paper", "Pen and Paper (Notebook, Post-Its, etc.)"]
                    ]
                   )
-    ,new Checklist("extra-documents"
+    ,new Checklist("what_extra_documents"
                   ,"What documents have been requested from you in past applications, aside from CVs?"
                   ,[["cover", "Cover Letter"]
                    ,["reference", "Letter of Reference / Recommendation"]
                    ,["philosophy", "Work Philosophy"]
                    ]
                   )
-    ,new Checklist("document-creation-softwares"
+    ,new Checklist("what_document_creation_softwares"
                   ,"What programs or softwares do you use to create documents for applications?"
                   ,[["word", "Word / Google Docs / Other Office Suite Software"]
                    ,["latex", "LaTeX"]
                    ,["indesign", "InDesign / GIMP / Other Design and Artwork Software"]
                    ]
                   )
-    ,new   Integer("different-cvs"
+    ,new   Integer("count_different_cvs"
                   ,"How many different CVs do you generally maintain at a given time?"
                   )
-    ,new Checklist("update-frequency"
+    ,new Checklist("what_update_frequency"
                   ,"How often do you update or change your CV's contents or layout?<br/><small class='text-muted text-normal'>(Pick the first that applies.)</small>"
                   ,[["job", "For every job application"]
                    ,["skill", "Every time I acquire a new skill"]
