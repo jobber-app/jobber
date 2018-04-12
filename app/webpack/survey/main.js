@@ -205,7 +205,10 @@ class Checklist extends Question {
 
     extractCheckboxValue (el) {
         var i = el.getElementsByTagName("input")[0];
-        if (i.checked) return i.id;
+        if (i.checked) {
+            if (this.type === "radio") return i.value;
+            else return i.id;
+        }
     }
 
     get answer () {
