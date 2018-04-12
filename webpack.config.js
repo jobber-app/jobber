@@ -1,6 +1,7 @@
 var debug = process.env.NODE_ENV !== "production";
 if (!debug) console.log("production mode enabled.");
 var webpack = require("webpack");
+var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 var path = require("path");
 
 react = {
@@ -27,7 +28,8 @@ react = {
     },
     plugins: debug ? [] : [
         new UglifyJsPlugin()
-    ]
+    ],
+    mode: process.env.NODE_ENV
 };
 
 survey = {
@@ -54,7 +56,8 @@ survey = {
     },
     plugins: debug ? [] : [
         new UglifyJsPlugin()
-    ]
+    ],
+    mode: process.env.NODE_ENV
 };
 
 module.exports = [react, survey];
