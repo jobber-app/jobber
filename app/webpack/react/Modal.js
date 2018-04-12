@@ -1,8 +1,6 @@
 import React from "react";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
-import $ from "jquery";
-import bootstrap from "bootstrap";
 
 export default @observer class Modal extends React.Component {
     componentWillMount () {
@@ -13,19 +11,40 @@ export default @observer class Modal extends React.Component {
     }
 
     open () {
-        $("#" + this.props.name).modal("show");
+        if (this.el == undefined) return console.log(this.el, "undefined");
+        //$("#" + this.props.name).modal("show");
+        document.body.classList.add("modal-open");
+        this.el.style.display = "block";
+        this.el.classList.add("show");
+        this.el.hidden = null;
+
+        if (this.backdrop == undefined) {
+            this.backdrop = document.createElement("div");
+            this.backdrop.className = "modal-backdrop fade show";
+            document.body.appendChild(this.backdrop);
+        }
     }
     close  () {
-        $("#" + this.props.name).modal("hide");
+        if (this.el == undefined) return console.log(this.el, "undefined");
+        //$("#" + this.props.name).modal("hide");
+        document.body.classList.remove("modal-open");
+        this.el.classList.remove("show");
+        this.el.style.display = null;
+        this.el.hidden = "true";
+
+        if (this.backdrop != undefined) {
+            console.log(this.backdrop);
+            document.body.removeChild(this.backdrop);
+        }
     }
 
     render () {
         return (
 <div id={ this.props.name } 
+     ref={ el => this.el = el }
      class="modal fade" 
-     tabIndex="-1" 
-     data-keyboard="false" 
-     data-backdrop="static">
+     tabIndex="-1"
+     >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
