@@ -189,7 +189,7 @@ class Checklist extends Question {
             this.userInputs.appendChild(c);
         }
 
-        if (unmodifiable !== true) {
+        if (this.type !== "radio" && unmodifiable !== true) {
             var addButton = document.createElement("div");
             addButton.innerHTML = "Don't see your option? Click to add another.";
             addButton.className = "btn btn-themed btn-sm mt-2 w-100 border-0";
