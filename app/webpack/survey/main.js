@@ -1,3 +1,4 @@
+'use strict';
 class El {
     constructor (id) {
         this.id = id;
