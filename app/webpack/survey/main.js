@@ -92,7 +92,7 @@ class Question extends El {
         this.node.classList.add("form-group");
         
         var label = document.createElement("label");
-        label.innerHTML = text;
+        label.appendChild(document.createTextNode(text));
         this.node.appendChild(label);
 
         // this.output store the final output 
@@ -131,7 +131,7 @@ class Question extends El {
             this.adviceEl.innerHTML = "";
         } else {
             this.adviceEl.classList.add("showing");
-            this.adviceEl.innerHTML = this.advice;
+            this.adviceEl.appendChild(document.createTextNode(this.advice));
         }
         return isValid;
     }
