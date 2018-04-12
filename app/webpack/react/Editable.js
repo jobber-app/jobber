@@ -5,7 +5,6 @@ import { observer } from "mobx-react";
 import Modal from "./Modal";
 import { CVCreator } from "./ResourceCreator";
 import { CVsList } from "./List";
-import Calendar from "react-calendar/dist/entry.nostyle";
 
 @observer class Editable extends React.Component {
     constructor () {
