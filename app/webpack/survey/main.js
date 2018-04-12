@@ -245,6 +245,7 @@ class Checklist extends Question {
             checkbox = document.createElement("input");
             if (this.type === "radio") {
                 checkbox.id = this.id;
+                checkbox.name = this.id;
                 checkbox.value = name;
             } else {
                 checkbox.id = name;
