@@ -370,7 +370,7 @@ Textarea.defaultProps = {
 
     get editor () {
         return (
-<div class="date-editor yes-flex-horizontal input-group"
+<div class="date-editor yes-flex-horizontal input-group m-1"
      onBlur={ this.checkFullBlur.bind(this) }
      >
     { this.boundInput("year", "lg", { placeholder: "YYYY" }) }
@@ -385,8 +385,8 @@ Textarea.defaultProps = {
     <span>:</span>
     { this.boundInput("second", "sm", { placeholder: "ss" }) }
     <span class="mr-4"></span>
-    <div class="yes-flex" onClick={ this.edit.bind(this) }>
-        ({ this.prettyDate })
+    <div style={{ "cursor": "default" }} class="pl-1">
+        { this.prettyDate }
     </div>
 </div>
         )
