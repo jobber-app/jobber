@@ -35,7 +35,7 @@ We consider the job entity to have various stages:
 In order to run this project locally, you will need Ruby and Ruby on Rails, along with npm and bundler.
 
 First, clone into the development directory:
-``` git clone https://github.com/andmikey/jobber.git ```
+``` git clone https://github.com/jobber-app/jobber.git ```
 
 Then, install dependencies:
 
