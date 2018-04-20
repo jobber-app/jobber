@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module V0
     class JobsController < ApplicationController
       before_action :logged_in_user, only: [:create, :edit, :update, :show, :destroy]
       before_action :correct_user, only: [:edit, :update, :show, :destroy]

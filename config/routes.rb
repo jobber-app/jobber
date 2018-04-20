@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   
   root 'static#home'
   namespace :api do
-    namespace :v1 do
+    namespace :v0 do
       resources :users do 
         resources :documents
         resources :jobs do

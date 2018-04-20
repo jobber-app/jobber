@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module V0
     class UsersController < ApplicationController
       before_action :logged_in_user, only: [:edit, :update, :show]
       before_action :correct_user, only: [:edit, :update, :show]
