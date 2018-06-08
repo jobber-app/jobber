@@ -11,43 +11,17 @@ export default @observer class Details extends React.Component {
         this.state = {
             // "editing" maps what elements are currently being edited.
             editing: {}, 
-            //list of sections that are currently open
-            sections: (new Array(this.sectionNames.length)).fill(false), 
+            //section that is currently focused
+            section: 0
         };
-        this.state.sections[0] = true;
     }
     sectionNames = ["Information", "Application", "Interviews", "Offers"]
 
-    openSection (sectionIndex) {
+    setSection (newIndex) {
+        if (newIndex === this.state.section) return;
         var newState = Object.assign({}, this.state);
-
-        // If splittable mode is active, keep other sections open
-        if (store.settings.splittable === true) {
-            newState.sections[sectionIndex] = true;
-        } else {
-            newState.sections = (new Array(this.sectionNames.length));
-            newState.sections.fill(false);
-            newState.sections[sectionIndex] = true;
-        }
-
+        newState.section = newIndex;
         this.setState(newState);
-    }
-
-    closeSection (sectionIndex) {
-        var newState = Object.assign({}, this.state);
-        newState.sections[sectionIndex] = false;
-        // If there are no active sections after deactivation, revert
-        if (newState.sections.every(a => !a)) return;
-        // Otherwise, commit changes with setState
-        this.setState(newState);
-    }
-
-    toggleSection (sectionIndex) {
-        if (this.state.sections[sectionIndex] === true) {
-            return this.closeSection(sectionIndex);
-        } else {
-            return this.openSection(sectionIndex);
-        }
     }
 
     componentWillMount () {
@@ -91,10 +65,11 @@ export default @observer class Details extends React.Component {
     // Create tabs for selecting sections
     createTabs () {
         var tabs = [];
-        for (var ii in this.sectionNames) {
-            var isActive = this.state.sections[ii] ? "active" : "";
+        for (var index in this.sectionNames) {
+            let ii = parseInt(index);
+            var isActive = this.state.section === ii ? "active" : "";
             tabs[ii] = <a class={ "col-3 rounded-0 btn-themed " + isActive } 
-                          onClick={ this.toggleSection.bind(this, ii) }
+                          onClick={ this.setSection.bind(this, ii) }
                           key={ ii }>
                            { this.sectionNames[ii] }
                        </a>
@@ -107,7 +82,7 @@ export default @observer class Details extends React.Component {
 <div class="d-flex flex-column h-100">
     <div class="row rounded-top hide-overflow">{ this.createTabs() }</div>
     <div class="row d-flex flex-column yes-flex">
-        <Section open={ this.state.sections[0] }>
+        <Section open={ this.state.section === 0 }>
             <p class="text-center">
                 Preliminary information about the job obtained from its listing
                 before you apply.
@@ -134,7 +109,7 @@ export default @observer class Details extends React.Component {
                                 { title: "Date: " }
                                ) }
         </Section>
-        <Section open={ this.state.sections[1] }>
+        <Section open={ this.state.section === 1 }>
             <p class="text-center">
                 Items relevant to the initial application process, such as your
                 CV and cover letter.
@@ -146,14 +121,14 @@ export default @observer class Details extends React.Component {
                                 { title: "CV: " }
                                ) }
         </Section>
-        <Section open={ this.state.sections[2] }>
+        <Section open={ this.state.section === 2 }>
             <p class="text-center">
                 Interviews for the position, such as date/time and subject
                 matter.
             </p>
             Int
         </Section>
-        <Section open={ this.state.sections[3] }>
+        <Section open={ this.state.section === 3 }>
             <p class="text-center">
                 The offer(s) you received for the application, and whether or 
                 not you took them.
