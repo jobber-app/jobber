@@ -24,3 +24,6 @@
 
 # Ignore hot updates from webpack
 *hot-update*
+
+# Ignore root reactjs output
+/app/assets/javascripts/react.js
