@@ -35,6 +35,7 @@ export default @observer class Modal extends React.Component {
         if (this.backdrop != undefined) {
             console.log(this.backdrop);
             document.body.removeChild(this.backdrop);
+            this.backdrop = undefined;
         }
     }
 
