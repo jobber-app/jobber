@@ -1,27 +1,26 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { autorun } from "mobx";
+import { autorun, observable } from "mobx";
 import store from "./store";
 import Editable from "./Editable";
 
 // Details component handles viewing and editing details of a given Job.
 export default @observer class Details extends React.Component {
+    // "editing" shows what element is currently being edited.
+    @observable editing = null;
+    //section that is currently focused
+    @observable section = null;
+
     constructor () {
         super()
-        this.state = {
-            // "editing" maps what elements are currently being edited.
-            editing: {}, 
-            //section that is currently focused
-            section: 0
-        };
+        this.section = 0;
     }
+
     sectionNames = ["Information", "Application", "Interviews", "Offers"]
 
     setSection (newIndex) {
-        if (newIndex === this.state.section) return;
-        var newState = Object.assign({}, this.state);
-        newState.section = newIndex;
-        this.setState(newState);
+        if (newIndex === this.section) return;
+        this.section = newIndex;
     }
 
     componentWillMount () {
@@ -31,15 +30,14 @@ export default @observer class Details extends React.Component {
 
     // Reset all editing properties to false, thereby clearing unfinished edits
     resetEditing () {
-        this.state.editing = {}
-        this.setState(this.state);
+        this.editing = null;
     }
 
     // Set editing to true, enabling edits for an Editable of the page. 
     // Used for Editable upwards communication
     setEditing (inputName, editState = true) {
-        this.state.editing[inputName] = editState;
-        this.setState(this.state);
+        if (editState === true) this.editing = inputName;
+        else this.editing = null;
     }
 
     // gets the current job. 
@@ -55,7 +53,7 @@ export default @observer class Details extends React.Component {
         return (
             <Type { ...additionalProps }
                   data={ this.job[property] }
-                  editing={ this.state.editing[property] }
+                  editing={ property === this.editing }
                   changeEditing={ this.setEditing.bind(this, property) }
                   onSave={ newValue => this.job[property].set(newValue) }
             />
@@ -67,7 +65,7 @@ export default @observer class Details extends React.Component {
         var tabs = [];
         for (var index in this.sectionNames) {
             let ii = parseInt(index);
-            var isActive = this.state.section === ii ? "active" : "";
+            var isActive = this.section === ii ? "active" : "";
             tabs[ii] = <a class={ "col-3 rounded-0 btn-themed " + isActive } 
                           onClick={ this.setSection.bind(this, ii) }
                           key={ ii }>
@@ -82,7 +80,7 @@ export default @observer class Details extends React.Component {
 <div class="d-flex flex-column h-100">
     <div class="row rounded-top hide-overflow">{ this.createTabs() }</div>
     <div class="row d-flex flex-column yes-flex">
-        <Section open={ this.state.section === 0 }>
+        <Section open={ this.section === 0 }>
             <p class="text-center">
                 Preliminary information about the job obtained from its listing
                 before you apply.
@@ -109,7 +107,7 @@ export default @observer class Details extends React.Component {
                                 { title: "Date: " }
                                ) }
         </Section>
-        <Section open={ this.state.section === 1 }>
+        <Section open={ this.section === 1 }>
             <p class="text-center">
                 Items relevant to the initial application process, such as your
                 CV and cover letter.
@@ -121,14 +119,14 @@ export default @observer class Details extends React.Component {
                                 { title: "CV: " }
                                ) }
         </Section>
-        <Section open={ this.state.section === 2 }>
+        <Section open={ this.section === 2 }>
             <p class="text-center">
                 Interviews for the position, such as date/time and subject
                 matter.
             </p>
             Int
         </Section>
-        <Section open={ this.state.section === 3 }>
+        <Section open={ this.section === 3 }>
             <p class="text-center">
                 The offer(s) you received for the application, and whether or 
                 not you took them.
