@@ -11,7 +11,7 @@ export default @observer class Modal extends React.Component {
     }
 
     open () {
-        if (this.el == undefined) return console.log(this.el, "undefined");
+        if (this.el == undefined) return;
         //$("#" + this.props.name).modal("show");
         document.body.classList.add("modal-open");
         this.el.style.display = "block";
@@ -25,7 +25,7 @@ export default @observer class Modal extends React.Component {
         }
     }
     close  () {
-        if (this.el == undefined) return console.log(this.el, "undefined");
+        if (this.el == undefined) return;
         //$("#" + this.props.name).modal("hide");
         document.body.classList.remove("modal-open");
         this.el.classList.remove("show");
@@ -33,7 +33,6 @@ export default @observer class Modal extends React.Component {
         this.el.hidden = "true";
 
         if (this.backdrop != undefined) {
-            console.log(this.backdrop);
             document.body.removeChild(this.backdrop);
             this.backdrop = undefined;
         }
