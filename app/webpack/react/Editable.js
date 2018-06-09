@@ -7,12 +7,7 @@ import { CVCreator } from "./ResourceCreator";
 import { CVsList } from "./List";
 
 @observer class Editable extends React.Component {
-    constructor () {
-        super();
-        this.state = {
-            data: ""
-        }
-    }
+    @observable data = "";
 
     componentWillMount () {
         this.inline = this.props.inline ? "inline" : "";
@@ -23,10 +18,9 @@ import { CVsList } from "./List";
     }
 
     setLocalData (newData, autoSave) {
-        var newState = Object.assign({}, this.state);
-        newState.data = newData;
-        // If the autoSave flag is set, call save as a callback on setState
-        this.setState(newState, autoSave ? this.save : () => {});
+        this.data = newData;
+        // If the autoSave flag is set, call save
+        if (autoSave) this.save();
     }
 
     edit () {
@@ -37,7 +31,7 @@ import { CVsList } from "./List";
     }
 
     save () {
-        this.props.onSave(this.state.data);
+        this.props.onSave(this.data);
         if (this.input) this.input.blur();
         if (this.customSave) this.customSave();
         this.props.changeEditing(false);
@@ -138,7 +132,7 @@ Editable.defaultProps = {
 <input ref={ input => this.input = input } 
        type="text"
        class={ "form-control " + this.props.className } 
-       value={ this.state.data } 
+       value={ this.data } 
        onBlur={ this.save.bind(this) }
        onKeyDown={ this.escapeOrEnter.bind(this) }
        onChange={ e => this.setLocalData(e.target.value) }
@@ -182,7 +176,7 @@ Editable.defaultProps = {
           onBlur={ this.save.bind(this) } 
           onKeyDown={ this.escapeOrEnter.bind(this) } 
           onChange={ e => this.setLocalData(e.target.value) } 
-          value={ this.state.data }
+          value={ this.data }
           ></textarea>
             )
         } else {
@@ -203,20 +197,15 @@ Textarea.defaultProps = {
 }
 
 @observer class EditableModal extends Editable {
-    constructor () {
-        super();
-        this.state.modalOpen = false;
-    }
+    @observable modalOpen = false;
 
     setModalOpen (value) {
-        var newState = Object.assign({}, this.state);
-        newState.modalOpen = value;
-        this.setState(newState);
+        this.modalOpen = value;
     }
 
     openModal   () { this.setModalOpen(true); }
     closeModal  () { this.setModalOpen(false); }
-    toggleModal () { this.setModalOpen(!this.state.modalOpen); }
+    toggleModal () { this.setModalOpen(!this.modalOpen); }
 
     customEdit   () { this.openModal(); }
     customCancel () { this.closeModal(); }
@@ -226,7 +215,7 @@ Textarea.defaultProps = {
 @observer class MDate extends EditableModal {
     // For formatting the date into a pretty readable format
     get prettyDay () {
-        var date = this.state.data;
+        var date = this.data;
         var year = date.getFullYear().toString();
         var months = ["January", "February", "March", 
                       "April", "May", "June", "July", 
@@ -244,7 +233,7 @@ Textarea.defaultProps = {
     }
 
     get prettyTime () {
-        var date = this.state.data;
+        var date = this.data;
         var HH = date.getHours().toString().padStart(2, "0");
         var MM = date.getMinutes().toString().padStart(2, "0");
         var SS = date.getSeconds().toString().padStart(2, "0");
@@ -253,7 +242,7 @@ Textarea.defaultProps = {
     }
 
     get prettyDayOfWeek () {
-        var date = this.state.data;
+        var date = this.data;
         var daysOfWeek = [
             "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "Sunday"
@@ -298,7 +287,7 @@ Textarea.defaultProps = {
     //sanitizes and pads it correctly
     getProp (name, length = 2) {
         var prop = this.propMap[name];
-        var no = this.state.data["get" + prop]();
+        var no = this.data["get" + prop]();
 
         if (name === "month") no += 1;
 
@@ -315,7 +304,7 @@ Textarea.defaultProps = {
         
         if (name === "month") newValue -= 1;
         
-        var newDate = new Date(this.state.data.getTime());
+        var newDate = new Date(this.data.getTime());
         newDate["set" + prop](newValue);
         this.setLocalData(newDate);
     }
@@ -414,7 +403,7 @@ MDate.defaultProps = {
 
     get editor () {
         if (this.props.editing) {
-            var cv = store.getCVById(this.state.data);
+            var cv = store.getCVById(this.data);
         } else {
             var cv = store.getCVById(this.props.data.get());
         }
@@ -432,7 +421,7 @@ MDate.defaultProps = {
         </button>
     </div>
     <Modal name="cv-picker" title="Pick a CV"
-           showing={ this.state.modalOpen } 
+           showing={ this.modalOpen } 
            onClose={ this.cancel.bind(this) }>
         <div class="h-100 d-flex flex-column" style={{ "minHeight": "60vh" }}>
             <CVsList onSelect={ newId => this.setLocalData(newId, true) }/>
