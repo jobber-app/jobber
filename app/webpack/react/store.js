@@ -22,7 +22,7 @@ class Store {
     }
 
     /* User Jobs */
-    focusedJobId = observable(-1);
+    focusedJobId = observable.box(-1);
     @computed get focusedJob () {
         return this.getJobById(this.focusedJobId.get());
     }
@@ -48,7 +48,7 @@ class Store {
     @action.bound deleteJob () {}
 
     /* User Settings */
-    settings = observable({
+    settings = observable.box({
         // Whether or not job view has splittable tabs
         splittable: false, 
         yankeeDates: false,
@@ -57,7 +57,7 @@ class Store {
 
 class Job {
     constructor (fields) {
-        for (var index in fields) this[index] = observable(fields[index]);
+        for (var index in fields) this[index] = observable.box(fields[index]);
         this.key = this.id.get();
     }
     @computed get colour () {
@@ -82,7 +82,7 @@ class Job {
 
 class CV {
     constructor (fields) {
-        for (var index in fields) this[index] = observable(fields[index]);
+        for (var index in fields) this[index] = observable.box(fields[index]);
         this.key = this.id.get();
     }
 }
@@ -116,5 +116,4 @@ var mockStoreData = {
     ]
 }
 var store = new Store(mockStoreData);
-window.store = store;
 export default store;
