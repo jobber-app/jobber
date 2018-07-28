@@ -21,7 +21,10 @@ react = {
                 loader: "babel-loader",
                 query: {
                     presets: ["react", "es2015", "stage-0"],
-                    plugins: ["react-html-attrs", "transform-decorators-legacy"]
+                    plugins: [
+                        "react-html-attrs", 
+                        "transform-decorators-legacy", 
+                    ]
                 }
             },
         ]
@@ -29,7 +32,13 @@ react = {
     plugins: debug ? [] : [
         new UglifyJsPlugin()
     ],
-    mode: process.env.NODE_ENV
+    mode: process.env.NODE_ENV,
+    resolve: {
+        alias: {
+            "react": "preact-compat",
+            "react-dom": "preact-compat"
+        }
+    }
 };
 
 survey = {
