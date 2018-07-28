@@ -133,6 +133,7 @@ class Question extends El {
             this.adviceEl.innerHTML = "";
         } else {
             this.adviceEl.classList.add("showing");
+            this.adviceEl.innerHTML = "";
             this.adviceEl.appendChild(document.createTextNode(this.advice));
         }
         return isValid;
