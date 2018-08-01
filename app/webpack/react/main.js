@@ -7,7 +7,5 @@ import store from "./store";
 
 var root = document.getElementById("react-app");
 ReactDOM.render(
-    <HashRouter>
-        <Route path="/" component={ Layout }/>
-    </HashRouter>
+    <Layout />
 , root);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "preact-router/match";
 import { observer } from "mobx-react";
 import Modal from "./Modal";
 import store from "./store";
@@ -121,7 +121,7 @@ import store from "./store";
     itemToEl (data) {
         var active = this.matchId === data.id.get() ? " active " : "";
         return (
-<Link to={ "/jobs/" + data.id.get() } 
+<Link href={ "/app/jobs/" + data.id.get() } 
       class={ "text-left list-item list-item-" + data.colour + active }
       key={ data.id.get() }
       onClick={ this.onSelect.bind(this, data.id.get()) }
@@ -186,7 +186,7 @@ import store from "./store";
     get items () { return store.cvs; }
     itemToEl (cv) {
         return (
-        <Link to={ "/cvs/" + cv.id.get() }
+        <Link href={ "/app/cvs/" + cv.id.get() }
               class="list-item"
               key={ cv.key }
               onClick={ this.onSelect.bind(this, cv.id.get()) }>

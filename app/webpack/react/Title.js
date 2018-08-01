@@ -15,7 +15,8 @@ var setTitleFromId = function (id) {
 
 export default class Title extends React.Component {
     render () {
-        return (
+        return (null);
+            /*
 <div>
     <Route path="/" render={ () => setTitle("Jobber") }/>
     <Switch>
@@ -30,5 +31,6 @@ export default class Title extends React.Component {
     </Switch>
 </div>
         );
+            */
     }
 }

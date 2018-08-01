@@ -19,6 +19,7 @@
     "popper.js": "^1.14.1",
     "preact": "^8.2.9",
     "preact-compat": "^3.18.0",
+    "preact-router": "^2.6.1",
     "react": "^16.2.0",
     "react-calendar": "^2.13.5",
     "react-datetime-picker": "^1.2.1",

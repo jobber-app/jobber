@@ -25,7 +25,7 @@ export default @observer class Details extends React.Component {
 
     componentWillMount () {
         // When id changes, autorun detects it due to MobX observable wrapping
-        autorun(() => this.resetEditing(this.props.match.params.id)); 
+        autorun(() => this.resetEditing(this.props.id)); 
     }
 
     // Reset all editing properties to false, thereby clearing unfinished edits
@@ -43,7 +43,7 @@ export default @observer class Details extends React.Component {
     // gets the current job. 
     // Due to MobX observable, id will update with this.props.match.params.id
     get job () {
-        var id = parseInt(this.props.match.params.id);
+        var id = parseInt(this.props.id);
         return store.getJobById(id);
     }
 
