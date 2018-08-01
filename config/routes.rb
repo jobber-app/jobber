@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get '/home', to: 'static#home'
   get '/about', to: 'static#about'
   get '/blog', to: 'static#blog'
-  get '/app', to: 'react#index', as: 'app'
+  get '/app/*all', :all => /.*/, to: 'react#index'
+  get '/app',                    to: 'react#index'
 
   get '/survey', to: 'survey#index'
   post '/survey', to: 'survey#respond'
