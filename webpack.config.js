@@ -10,8 +10,8 @@ react = {
     target: "web",
     entry: ["./main.js"],
     output: {
-        filename: "react.js",
-        path: path.join(__dirname, "app/assets/javascripts/")
+        filename: "main.js",
+        path: path.join(__dirname, "public/app/")
     },
     module: {
         rules: [

@@ -8,6 +8,9 @@
     </head>
     <body>
         <%= yield %>
-        <%= javascript_include_tag 'application', 'react' %>
+        <%#
+            <%= javascript_include_tag 'application' %>
+        %>
+        <script src="/app/main.js"></script>
     </body>
 </html>
